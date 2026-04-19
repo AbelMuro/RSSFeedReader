@@ -1,0 +1,69 @@
+<script setup>
+    import NavigationBar from './Common/Components/NavigationBar';
+
+    /*
+        this is where i left off, i need to continue working on the SearchBar component
+    */
+</script>
+
+<template>
+    <NavigationBar/>
+</template>
+
+<style>
+    body{
+        margin: 0px;
+        background-color: var(--preset-color-white-1);
+    }
+
+    * {
+        box-sizing: border-box;
+        transition: all 0.2s linear, opacity 0s, transform 0s;
+    }
+
+    @font-face {
+        color: #d0d0d0;
+        font-family: 'roboto';
+        src: url('../public/Roboto.ttf') format('truetype');
+    }
+
+    :root{
+
+        --preset-color-grey-1: #b6b6b6;
+        --preset-color-grey-2: #dfdfdf;
+        --preset-color-white-1: #eeeeee;
+        --preset-color-white-2: #e6e6e6;
+        --preset-color-white-3: #d6d6d6;
+
+        --preset-text-1-font-family: 'roboto';
+        --preset-text-1-font-size: 3rem;
+        --preset-text-1-font-weight: 800;
+        --preset-text-1-line-height: 3rem;
+        --preset-text-1-letter-spacing: 0px;
+
+        --preset-text-2-font-family: 'roboto';
+        --preset-text-2-font-size: 2.5rem;
+        --preset-text-2-font-weight: 600;
+        --preset-text-2-line-height: 2.7rem;
+        --preset-text-2-letter-spacing: 0px;
+
+        --preset-text-3-font-family: 'roboto';
+        --preset-text-3-font-size: 2rem;
+        --preset-text-3-font-weight: 400;
+        --preset-text-3-line-height: 2.5rem;
+        --preset-text-3-letter-spacing: 0px;
+
+        --preset-text-4-font-family: 'roboto';
+        --preset-text-4-font-size: 1.3rem;
+        --preset-text-4-font-weight: 300;
+        --preset-text-4-line-height: 2.2rem;
+        --preset-text-4-letter-spacing: 0px;
+
+        --preset-text-5-font-family: 'roboto';
+        --preset-text-5-font-size: 1rem;
+        --preset-text-5-font-weight: 400;
+        --preset-text-5-line-height: 1.5rem;
+        --preset-text-5-letter-spacing: 0px;
+        
+    }
+</style>
