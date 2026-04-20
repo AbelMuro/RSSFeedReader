@@ -1,15 +1,22 @@
-<script setup>
+<script setup lang="ts">
+    import {ref} from 'vue';
     import icons from './icons';
+
+    const query = ref<string>('');
+
+    const handleClear = () => {
+        query.value = '';
+    }
 </script>
 
 <template>
-    <search class="search">
+    <div class="search">
         <img class="search_icon" :src="icons['magnifying']"/>
-        <input class="search_input" placeholder="Search articles..."/>
-        <button class="search_clear">
+        <input class="search_input" placeholder="Search articles..." v-model="query"/>
+        <button class="search_clear" @click="handleClear">
             /
         </button>
-    </search>
+    </div>
 </template>
 
 <style scoped>

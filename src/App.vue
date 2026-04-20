@@ -2,7 +2,7 @@
     import NavigationBar from './Common/Components/NavigationBar';
 
     /*
-        this is where i left off, i need to continue working on the SearchBar component
+        this is where i left off, i need to continue implementing the input elements for the Form inside the AddArticleButton dialog component
     */
 </script>
 
@@ -29,11 +29,15 @@
 
     :root{
 
+        --preset-color-black-1: #101010;
+        --preset-color-black-2: #00000080;
         --preset-color-grey-1: #b6b6b6;
         --preset-color-grey-2: #dfdfdf;
+        --preset-color-grey-3: #d7d7d7;
         --preset-color-white-1: #eeeeee;
         --preset-color-white-2: #e6e6e6;
         --preset-color-white-3: #d6d6d6;
+        --preset-linear-gradient-purple-black: linear-gradient(265deg,rgba(0, 29, 196, 1) 0%, rgba(0, 8, 53, 1) 96%);
 
         --preset-text-1-font-family: 'roboto';
         --preset-text-1-font-size: 3rem;

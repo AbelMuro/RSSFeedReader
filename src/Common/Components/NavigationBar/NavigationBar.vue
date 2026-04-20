@@ -1,13 +1,19 @@
 <script setup lang="ts">
     import Links from './Links';
     import SearchBar from './SearchBar';
+    import AddArticleButton from './AddArticleButton';
+    import ProfileButton from './ProfileButton';
 
 </script>
 
 <template>
     <nav class="nav">
         <Links/>
-        <SearchBar/>
+        <section class="nav_account">
+            <SearchBar/>
+            <AddArticleButton/>
+            <ProfileButton/>
+        </section>
     </nav>
 </template>
 
@@ -22,4 +28,10 @@
         align-items: center;
     }
 
+    .nav_account{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
 </style>
