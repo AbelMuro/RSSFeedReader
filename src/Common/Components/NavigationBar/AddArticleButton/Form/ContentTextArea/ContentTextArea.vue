@@ -1,31 +1,29 @@
 <script setup lang="ts">
     import {ref} from 'vue';
 
-    const title = ref<string>('');
-    const error = ref<boolean>(false);
-
-
+    const content = ref<string>('');
 </script>
 
 <template>
     <fieldset class="fieldset">
-        <label class="label" for="title">
-            Enter Title
+        <label for="content" class="label">
+            Enter Content
         </label>
-        <input id='title' type="text" class="input" v-model="title" name="title" required>
+        <textarea id="content" class="textarea" v-model="content" name="content" />
     </fieldset>
 </template>
 
 <style scoped>
     .fieldset{
-        border: none;
+        width: 100%;
         padding: 0px;
         margin: 0px;
         display: flex;
         flex-direction: column;
         gap: 5px;
-    }
-
+        border: none;
+    }  
+    
     .label{
         color: var(--preset-text-color-black-1);
         font-family: var(--preset-text-5-font-family);
@@ -35,20 +33,21 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
-    .input{
+    .textarea{
         width: 100%;
-        height: 40px;
+        height: 150px;
         border-radius: 5px;
         border: 1px solid var(--preset-color-grey-1);
-        padding: 0px 10px;
+        padding: 10px;
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
+        resize: none;
     }
 
-    .input:focus{
+    .textarea:focus{
         outline: none;
         border: 1px solid var(--preset-color-black-1);
     }

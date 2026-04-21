@@ -2,7 +2,7 @@
     import NavigationBar from './Common/Components/NavigationBar';
 
     /*
-        this is where i left off, i need to continue implementing the input elements for the Form inside the AddArticleButton dialog component
+        this is where i left off, i need to continue implementing the error state for the input elements
     */
 </script>
 
