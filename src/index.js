@@ -1,4 +1,15 @@
 import {createApp} from 'vue';
+import {createWebHistory, createRouter} from 'vue-router';
 import App from './App.vue';
+import Login from './Pages/Authorization/Login';
 
-createApp(App).mount('#root');
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        {path: '/', component: Login}
+    ]
+})
+
+const app = createApp(App);
+app.use(router);
+app.mount('#root');

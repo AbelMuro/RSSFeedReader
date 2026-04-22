@@ -82,7 +82,7 @@
 
     .dialog{
         width: 400px;
-        height: 500px;
+        height: fit-content;
         padding: 25px;
         border-radius: 10px;
         background-color: var(--preset-color-white-1);

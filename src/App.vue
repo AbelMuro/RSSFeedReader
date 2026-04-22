@@ -1,13 +1,15 @@
 <script setup>
+    import {RouterView} from 'vue-router';
     import NavigationBar from './Common/Components/NavigationBar';
 
     /*
-        this is where i left off, i need to continue implementing the error state for the input elements
+        this is where i left off, i need to define and design the form component for the login page
     */
 </script>
 
 <template>
     <NavigationBar/>
+    <RouterView/>
 </template>
 
 <style>
@@ -37,12 +39,13 @@
         --preset-color-white-1: #eeeeee;
         --preset-color-white-2: #e6e6e6;
         --preset-color-white-3: #d6d6d6;
+        --preset-color-red-1: rgb(183, 0, 0);
         --preset-linear-gradient-purple-black: linear-gradient(265deg,rgba(0, 29, 196, 1) 0%, rgba(0, 8, 53, 1) 96%);
 
         --preset-text-1-font-family: 'roboto';
         --preset-text-1-font-size: 3rem;
         --preset-text-1-font-weight: 800;
-        --preset-text-1-line-height: 3rem;
+        --preset-text-1-line-height: 3.8rem;
         --preset-text-1-letter-spacing: 0px;
 
         --preset-text-2-font-family: 'roboto';
@@ -60,7 +63,7 @@
         --preset-text-4-font-family: 'roboto';
         --preset-text-4-font-size: 1.3rem;
         --preset-text-4-font-weight: 300;
-        --preset-text-4-line-height: 2.2rem;
+        --preset-text-4-line-height: 1.8rem;
         --preset-text-4-letter-spacing: 0px;
 
         --preset-text-5-font-family: 'roboto';
