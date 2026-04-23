@@ -22,7 +22,7 @@
         width: 100%;
         height: 70px;
         padding: 0px 15px;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid var(--preset-color-grey-1);
         display: flex;
         justify-content: space-between;
         align-items: center;

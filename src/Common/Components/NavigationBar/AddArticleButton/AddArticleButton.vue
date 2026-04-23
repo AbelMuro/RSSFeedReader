@@ -72,6 +72,7 @@
         position: fixed;
         top: 0px;
         left: 0px;
+        z-index: var(--fourth-layer);
         display: flex;
         justify-content: center;
         align-items: center;

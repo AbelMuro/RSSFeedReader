@@ -24,6 +24,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
+        z-index: var(--third-layer);
         transform: translate(-50%, -50%);
         display: flex;
         flex-direction: column;

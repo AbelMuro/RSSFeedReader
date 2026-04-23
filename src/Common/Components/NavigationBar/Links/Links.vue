@@ -52,6 +52,7 @@
         display: flex;
         align-items: center;
         gap: 5px;
+        color: var(--preset-color-black-1);
         font-family: var(--preset-text-4-font-family);
         font-size: var(--preset-text-4-font-size);
         font-weight: 800;

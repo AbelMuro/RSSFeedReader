@@ -32,6 +32,10 @@
         padding: 0px 10px;
     }
 
+    .search:focus-within{
+        border-color: var(--preset-color-black-1);
+    }
+
     .search:hover{
         background-color: var(--preset-color-grey-2);
     }
@@ -46,6 +50,7 @@
         height: 100%;
         border: none;
         background-color: transparent;
+        color: var(--preset-color-black-1);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);

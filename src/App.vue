@@ -3,7 +3,7 @@
     import NavigationBar from './Common/Components/NavigationBar';
 
     /*
-        this is where i left off, i need to define and design the form component for the login page
+        this is where i left off, i need to define the submit button and the handleSubmit function.
     */
 </script>
 
@@ -31,7 +31,7 @@
 
     :root{
 
-        --preset-color-black-1: #101010;
+        --preset-color-black-1: #383838;
         --preset-color-black-2: #00000080;
         --preset-color-grey-1: #b6b6b6;
         --preset-color-grey-2: #dfdfdf;
@@ -41,6 +41,14 @@
         --preset-color-white-3: #d6d6d6;
         --preset-color-red-1: rgb(183, 0, 0);
         --preset-linear-gradient-purple-black: linear-gradient(265deg,rgba(0, 29, 196, 1) 0%, rgba(0, 8, 53, 1) 96%);
+
+        --fifth-layer: 100;
+        --fourth-layer: 75;
+        --third-layer: 50;
+        --second-layer: 25;
+        --first-layer: 1;
+        --under-layer: 0;
+
 
         --preset-text-1-font-family: 'roboto';
         --preset-text-1-font-size: 3rem;
