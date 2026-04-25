@@ -1,15 +1,17 @@
 <script setup>
     import {RouterView} from 'vue-router';
     import NavigationBar from './Common/Components/NavigationBar';
+    import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to define the submit button and the handleSubmit function.
+        this is where i left off, i need to continue defining the MobileNavigationBar Component
     */
 </script>
 
 <template>
     <NavigationBar/>
     <RouterView/>
+    <Toast/>
 </template>
 
 <style>
@@ -41,6 +43,8 @@
         --preset-color-white-3: #d6d6d6;
         --preset-color-red-1: rgb(183, 0, 0);
         --preset-linear-gradient-purple-black: linear-gradient(265deg,rgba(0, 29, 196, 1) 0%, rgba(0, 8, 53, 1) 96%);
+
+        --preset-box-shadow-1: 0px 0px 10px #00000080;
 
         --fifth-layer: 100;
         --fourth-layer: 75;

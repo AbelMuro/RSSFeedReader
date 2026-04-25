@@ -1,20 +1,30 @@
 <script setup lang="ts">
+    import {motion, AnimatePresence} from 'motion-v';
     import Links from './Links';
     import SearchBar from './SearchBar';
     import AddArticleButton from './AddArticleButton';
     import ProfileButton from './ProfileButton';
+    import MobileNavigationBar from './MobileNavigationBar';
+    import {useMediaQuery} from '../../../Common/Hooks';
 
+    const mobile = useMediaQuery('(max-width: 770px)');
 </script>
 
 <template>
-    <nav class="nav">
+    <motion.nav 
+        v-if="!mobile" 
+        class="nav"
+        :initial="{y: '-70px'}"
+        :animate="{y: '0px'}"
+        :exit="{y: '-70px'}">
         <Links/>
         <section class="nav_account">
             <SearchBar/>
             <AddArticleButton/>
             <ProfileButton/>
         </section>
-    </nav>
+    </motion.nav>
+    <MobileNavigationBar v-else/>
 </template>
 
 <style scoped>

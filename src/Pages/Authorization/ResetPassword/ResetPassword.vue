@@ -1,34 +1,30 @@
 <script setup lang="ts">
-    import Form from './Form';
     import {useRouter} from 'vue-router';
+    import Form from './Form';
 
     const router = useRouter();
 
-    const handleRouter = (route : string) => {
-        router.push(route);
+    const handleRouter = () => {
+        router.push('/');
     }
-
 </script>
 
 <template>
-    <article class="login">
-        <h1 class="login_title">Login</h1>
-        <p class="login_desc">
-            Enter your credentials to access your RSS feed reader account.
+    <article class="reset">
+        <h1 class="reset_title">Reset Password</h1>
+        <p class="reset_desc">
+            Enter your new password to reset your account password.
         </p>
         <Form/>
-        <p class="login_footer">
-            Don't have an account? <a @click="handleRouter('/register')">Sign up</a>
-        </p>
-        <p class="login_footer">
-            Forgot your password? <a @click="handleRouter('/forgot-password')">Reset it</a>
+        <p class="reset_footer">
+            Remember your password? <a @click="handleRouter()">Sign in</a>
         </p>
     </article>
 </template>
 
 <style scoped>
-    .login{
-        width: 400px;
+    .reset{
+        width: 410px;
         height: fit-content;
         padding: 25px;
         border-radius: 10px;
@@ -45,7 +41,7 @@
         gap: 15px;
     }
 
-    .login_title{
+    .reset_title{
         margin: 0px;
         color: var(--preset-color-black-1);
         font-family: var(--preset-text-1-font-family);
@@ -54,8 +50,9 @@
         line-height: var(--preset-text-1-line-height);
         letter-spacing: var(--preset-text-1-letter-spacing);
         text-align: center;
+        white-space: nowrap;
     }
-    .login_desc{
+    .reset_desc{
         margin: 0px;
         color: var(--preset-color-black-2);
         font-family: var(--preset-text-4-font-family);
@@ -66,7 +63,7 @@
         text-align: center;
     }
 
-    .login_footer{
+    .reset_footer{
         margin: 0px;
         color: var(--preset-color-black-1);
         font-family: var(--preset-text-5-font-family);
@@ -76,7 +73,7 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
-    .login_footer > a{
+    .reset_footer > a{
         cursor: pointer;
         color: transparent;
         background: var(--preset-linear-gradient-purple-black);
@@ -86,18 +83,18 @@
     }
 
     @media(max-width: 500px){
-        .login{
+        .reset{
             width: 300px;
             padding: 15px;
             gap: 13px;
         }
 
-        .login_title{
+        .reset_title{
             font-size: 2rem;
             line-height: 2.5rem;
         }
 
-        .login_desc{
+        .reset_desc{
             font-size: 1.2rem;
             line-height: 1.4rem;
         }

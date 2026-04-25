@@ -12,11 +12,15 @@
 
     const handleBlur = (e: BlurEvent<HTMLInputElement>) => {
         const input = e.target.value;
-        e.target.setCustomValidity(" ");
-        if(!input.length)
+        if(!input.length){
             error.value = "Can't be empty."
-        else
+            e.target.setCustomValidity(" ");
+        }
+        else{
             error.value = "";
+            e.target.setCustomValidity("")
+        }
+            
 
     }
 

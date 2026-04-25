@@ -1,20 +1,23 @@
 <script setup lang="ts">
     import EnterEmail from '../../../../Common/Components/EnterEmail';
-    import EnterPassword from '../../../../Common/Components/EnterPassword';
+    import {useToastStore} from '../../../../Store';
+
+    const toastStore = useToastStore();
+    const {showToast} = toastStore;
 
     const handleSubmit = (e : SubmitEvent) => {
-        console.log('submit');
         e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        const email = form.elements.namedItem('email') as HTMLInputElement;
+        showToast('Reset link sent to your email address');
     }
-
 </script>
 
 <template>
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
-        <EnterPassword/>
         <button class="submit">
-            Sign in
+            Send Reset Link
         </button>
     </form>
 </template>

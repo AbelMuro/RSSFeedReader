@@ -1,15 +1,24 @@
 import {createApp} from 'vue';
+import {createPinia} from 'pinia';
 import {createWebHistory, createRouter} from 'vue-router';
 import App from './App.vue';
 import Login from './Pages/Authorization/Login';
+import Register from './Pages/Authorization/Register';
+import ForgotPassword from './Pages/Authorization/ForgotPassword';
+import ResetPassword from './Pages/Authorization/ResetPassword';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/', component: Login}
+        {path: '/', component: Login},
+        {path: '/register', component: Register},
+        {path: '/forgot-password', component: ForgotPassword},
+        {path: '/reset-password', component: ResetPassword}
     ]
-})
+});
 
+const pinia = createPinia();
 const app = createApp(App);
+app.use(pinia);
 app.use(router);
 app.mount('#root');

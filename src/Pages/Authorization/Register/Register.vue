@@ -4,30 +4,26 @@
 
     const router = useRouter();
 
-    const handleRouter = (route : string) => {
-        router.push(route);
+    const handleRouter = () => {
+        router.push('/');
     }
-
 </script>
 
 <template>
-    <article class="login">
-        <h1 class="login_title">Login</h1>
-        <p class="login_desc">
-            Enter your credentials to access your RSS feed reader account.
+    <article class="register">
+        <h1 class="register_title">Register</h1>
+        <p class="register_desc">
+            Create an account to access your RSS feed reader.
         </p>
         <Form/>
-        <p class="login_footer">
-            Don't have an account? <a @click="handleRouter('/register')">Sign up</a>
-        </p>
-        <p class="login_footer">
-            Forgot your password? <a @click="handleRouter('/forgot-password')">Reset it</a>
+        <p class="register_footer">
+            Already have an account? <a @click="handleRouter">Login</a>
         </p>
     </article>
 </template>
 
 <style scoped>
-    .login{
+    .register{
         width: 400px;
         height: fit-content;
         padding: 25px;
@@ -45,7 +41,7 @@
         gap: 15px;
     }
 
-    .login_title{
+    .register_title{
         margin: 0px;
         color: var(--preset-color-black-1);
         font-family: var(--preset-text-1-font-family);
@@ -55,7 +51,7 @@
         letter-spacing: var(--preset-text-1-letter-spacing);
         text-align: center;
     }
-    .login_desc{
+    .register_desc{
         margin: 0px;
         color: var(--preset-color-black-2);
         font-family: var(--preset-text-4-font-family);
@@ -66,7 +62,7 @@
         text-align: center;
     }
 
-    .login_footer{
+    .register_footer{
         margin: 0px;
         color: var(--preset-color-black-1);
         font-family: var(--preset-text-5-font-family);
@@ -76,7 +72,7 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
-    .login_footer > a{
+    .register_footer > a{
         cursor: pointer;
         color: transparent;
         background: var(--preset-linear-gradient-purple-black);
@@ -86,18 +82,18 @@
     }
 
     @media(max-width: 500px){
-        .login{
+        .register{
             width: 300px;
             padding: 15px;
             gap: 13px;
         }
 
-        .login_title{
+        .register_title{
             font-size: 2rem;
             line-height: 2.5rem;
         }
 
-        .login_desc{
+        .register_desc{
             font-size: 1.2rem;
             line-height: 1.4rem;
         }
