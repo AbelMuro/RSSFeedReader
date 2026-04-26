@@ -1,5 +1,7 @@
 <script setup lang="ts">
     import {ref} from 'vue';
+    import AddArticleButton from './AddArticleButton';
+    import SearchButton from './SearchButton';
     import {motion, AnimatePresence} from 'motion-v';
     import icons from './icons';
 
@@ -16,6 +18,7 @@
             :initial="{y: '-60px'}"
             :animate="{y: '0px'}"
             :exit="{y: '-60px'}"
+            :transition="{duration: 0.5}"
             class="mobile-nav">
             <button class="mobile-nav_button" @click="handleOpen">
                 <img :src="icons['bars']"/>
@@ -26,12 +29,19 @@
             :initial="{opacity: 0}"
             :animate="{opacity: 1}"
             :exit="{opacity: 0}"
+            :transition="{duration: 0.5}"
             class="overlay">
                 <motion.ul 
                 :initial="{clipPath: 'circle(0% at 30px 30px)'}"   
                 :animate="{clipPath: 'circle(100%)'}" 
                 :exit="{clipPath: 'circle(0% at 30px 30px)'}"
+                :transition="{duration: 0.5}"
                 class="links">
+                    <li>
+                        <button class="close" @click="handleOpen">
+                            <img :src="icons['close']">
+                        </button>
+                    </li>
                     <li>
                         <button class="link">
                             Feed
@@ -48,15 +58,10 @@
                         </button>
                     </li>
                     <li>
-                        <button class="link">
-                            Add Article
-                        </button>
+                        <AddArticleButton/>
                     </li>
-
                     <li>
-                        <button class="link">
-                            Search
-                        </button>
+                        <SearchButton/>
                     </li>
                     <li>
                         <button class="link">
@@ -117,21 +122,34 @@
         gap: 15px;
     }
 
+    .links > li:nth-of-type(1){
+        align-self: end;
+    }
+
+    .close{
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: transparent;
+        border: 1px solid var(--preset-color-blue-1);
+        cursor: pointer;
+    }
+
     .link{
         cursor: pointer;
         width: 100%;
         height: 50px;
         padding: 0px 15px;
-        border: none;
         text-align: left;
         background-color: transparent;
+        border-radius: 10px;
+        border: 1px solid var(--preset-color-blue-1);
         cursor: pointer;
-        color: var(--preset-color-grey-1);
+        color: var(--preset-color-blue-1);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
-        border-radius: 5px;
     }
 </style>

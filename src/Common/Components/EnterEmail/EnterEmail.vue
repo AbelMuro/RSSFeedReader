@@ -44,7 +44,7 @@
 
 <template>
     <fieldset class="fieldset">
-        <label class='label' for="email">Email</label>
+        <label class='label' for="email">Enter Email</label>
         <input 
             type="email" 
             class="input"

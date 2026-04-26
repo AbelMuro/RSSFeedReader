@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import {motion, AnimatePresence} from 'motion-v';
+    import {motion} from 'motion-v';
     import Links from './Links';
-    import SearchBar from './SearchBar';
+    import SearchBar from '../SearchBar';
     import AddArticleButton from './AddArticleButton';
     import ProfileButton from './ProfileButton';
     import MobileNavigationBar from './MobileNavigationBar';

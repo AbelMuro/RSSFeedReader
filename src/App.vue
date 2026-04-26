@@ -4,7 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to continue defining the MobileNavigationBar Component
+        this is where i left off, i am currently on the back end, i need to continue setting up the mysql database with node,js
+        and im currently on the /register router
     */
 </script>
 
@@ -32,7 +33,7 @@
     }
 
     :root{
-
+        --preset-color-blue-1: #001dc4;
         --preset-color-black-1: #383838;
         --preset-color-black-2: #00000080;
         --preset-color-grey-1: #b6b6b6;
