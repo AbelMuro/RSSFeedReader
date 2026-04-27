@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am currently on the back end, i need to continue setting up the mysql database with node,js
-        and im currently on the /register router
+        this is where i left off, i am currently on the back end, i need to upload the binary data of the users image into a
+        separate table within the database
     */
 </script>
 
