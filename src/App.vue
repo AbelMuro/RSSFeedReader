@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am currently on the back end, i need to upload the binary data of the users image into a
-        separate table within the database
+        this is where i left off, i am currently on the back end. i am defining the /forgot-password route 
+        and i also need to make sure the resetToken columns are created in mysql
     */
 </script>
 
