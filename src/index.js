@@ -13,7 +13,7 @@ const router = createRouter({
         {path: '/', component: Login},
         {path: '/register', component: Register},
         {path: '/forgot-password', component: ForgotPassword},
-        {path: '/reset-password', component: ResetPassword}
+        {path: '/reset-password/:resetToken', component: ResetPassword}
     ]
 });
 

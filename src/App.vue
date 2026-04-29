@@ -4,8 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am currently on the back end. i am defining the /forgot-password route 
-        and i also need to make sure the resetToken columns are created in mysql
+        this is where i left off, i am done with the authorization, now i can work on designing the profile page
     */
 </script>
 

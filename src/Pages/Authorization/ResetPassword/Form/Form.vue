@@ -1,29 +1,55 @@
 <script setup lang="ts">
     import {ref} from 'vue';
-    import {useRouter} from 'vue-router';
+    import {useRouter, useRoute} from 'vue-router';
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
     import {useToastStore} from '../../../../Store';
 
     const error = ref<string>('')
     const router = useRouter();
+    const route = useRoute();
+    const resetToken = route.params.resetToken;
     const toastStore = useToastStore();
     const {showToast} = toastStore;
 
-    const handleSubmit = (e : SubmitEvent) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const password = form.elements.namedItem('password') as HTMLInputElement;
-        const reEnterPassword = form.elements.namedItem('reEnterPassword') as HTMLInputElement;
+    const handleSubmit = async (e : SubmitEvent) => {
+        try{
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const password = form.elements.namedItem('password') as HTMLInputElement;
+            const reEnterPassword = form.elements.namedItem('reEnterPassword') as HTMLInputElement;
 
-        if(password.value !== reEnterPassword.value){
-            error.value = 'Passwords do not match';
-            return;
+            if(password.value !== reEnterPassword.value){
+                error.value = 'Passwords do not match';
+                return;
+            }
+            else
+                error.value = '';
+
+            const response = await fetch('http://localhost:4000/reset-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    password: password.value,
+                    resetToken
+                })
+            });
+
+            if(response.status === 200){
+                const result = await response.text();
+                console.log(result);
+                showToast(result);
+                router.push('/')
+            }
+                    
         }
-        else
-            error.value = '';
-        showToast('Password reset successfully');
-        router.push('/');
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+            showToast(message);
+        }
     }
 </script>
 

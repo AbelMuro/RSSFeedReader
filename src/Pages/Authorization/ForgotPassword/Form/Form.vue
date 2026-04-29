@@ -5,11 +5,29 @@
     const toastStore = useToastStore();
     const {showToast} = toastStore;
 
-    const handleSubmit = (e : SubmitEvent) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const email = form.elements.namedItem('email') as HTMLInputElement;
-        showToast('Reset link sent to your email address');
+    const handleSubmit = async (e : SubmitEvent) => {
+        try{
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const email = form.elements.namedItem('email') as HTMLInputElement;
+
+            const response = await fetch('http://localhost:4000/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email: email.value})
+            });
+
+            const result = await response.text();
+            showToast(result);
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+            showToast(message);
+        }
+
     }
 </script>
 
