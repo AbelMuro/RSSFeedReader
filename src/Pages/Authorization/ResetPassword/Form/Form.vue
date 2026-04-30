@@ -4,7 +4,9 @@
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
     import {useToastStore} from '../../../../Store';
+    import {ClipLoader} from 'vue-spinner';
 
+    const loading = ref<boolean>(false);
     const error = ref<string>('')
     const router = useRouter();
     const route = useRoute();
@@ -15,6 +17,7 @@
     const handleSubmit = async (e : SubmitEvent) => {
         try{
             e.preventDefault();
+            loading.value = true;
             const form = e.target as HTMLFormElement;
             const password = form.elements.namedItem('password') as HTMLInputElement;
             const reEnterPassword = form.elements.namedItem('reEnterPassword') as HTMLInputElement;
@@ -50,6 +53,9 @@
             console.log(message);
             showToast(message);
         }
+        finally{
+            loading.value = false;
+        }
     }
 </script>
 
@@ -59,7 +65,8 @@
         <ReEnterPassword/>
         <p v-if="error" class="error">{{error}}</p>
         <button class="submit">
-            Reset Password
+            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
+            <span v-if="!loading"> Reset Password</span>
         </button>
     </form>
 </template>
@@ -76,7 +83,10 @@
         width: 100%;
         height: 60px;
         border-radius: 10px;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-2);
+        background-color: var(--preset-color-black-3);        
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
         border: none;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-4-font-family);
@@ -86,6 +96,15 @@
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
     }
+
+    .submit:hover{
+       background-position: -100px 0px;
+    }
+
+    .submit:active{
+        background-position: -150px 0px;
+    }
+    
     .error{
         margin: 0px;
         color: var(--preset-color-red-1);

@@ -17,7 +17,7 @@
         align-items: center;
         border-radius: 100%;
         border: none;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-1);
         cursor: pointer;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-5-font-family);

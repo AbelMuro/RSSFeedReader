@@ -6,6 +6,7 @@ import Login from './Pages/Authorization/Login';
 import Register from './Pages/Authorization/Register';
 import ForgotPassword from './Pages/Authorization/ForgotPassword';
 import ResetPassword from './Pages/Authorization/ResetPassword';
+import Profile from './Pages/Profile';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -13,7 +14,8 @@ const router = createRouter({
         {path: '/', component: Login},
         {path: '/register', component: Register},
         {path: '/forgot-password', component: ForgotPassword},
-        {path: '/reset-password/:resetToken', component: ResetPassword}
+        {path: '/reset-password/:resetToken', component: ResetPassword},
+        {path: '/profile', component: Profile}
     ]
 });
 

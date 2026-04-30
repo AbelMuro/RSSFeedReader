@@ -5,48 +5,60 @@
     import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
     import {useToastStore} from '../../../../Store';
     import {useRouter} from 'vue-router';
-    import UploadImage from './UploadImage'
+    import UploadImage from './UploadImage';
+    import {ClipLoader} from 'vue-spinner';
 
     const error = ref<string>('');
+    const loading = ref<boolean>(false);
     const router = useRouter();
     const store = useToastStore();
     const {showToast} = store;
 
     const handleSubmit = async (e : SubmitEvent) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;        
-        const password = form.elements.namedItem('password') as HTMLInputElement;
-        const reEnterPassword = form.elements.namedItem('reEnterPassword') as HTMLInputElement;
+        try{
+            e.preventDefault();
+            loading.value = true;
+            const form = e.target as HTMLFormElement;        
+            const password = form.elements.namedItem('password') as HTMLInputElement;
+            const reEnterPassword = form.elements.namedItem('reEnterPassword') as HTMLInputElement;
 
-        if(password.value !== reEnterPassword.value){
-            error.value = "Passwords don't match.";
-            return; 
+            if(password.value !== reEnterPassword.value){
+                error.value = "Passwords don't match.";
+                return; 
+            }
+            else
+                error.value = "";
+
+            const email = form.elements.namedItem('email') as HTMLInputElement;
+            const image = form.elements.namedItem('file') as HTMLInputElement;
+            const formData = new FormData();
+            formData.append('email', email.value);
+            formData.append('password', password.value);
+            formData.append('image', image.value);
+            
+            const response = await fetch('http://localhost:4000/register', {
+                method: 'POST',
+                body: formData
+            });
+
+            if(response.status === 200){
+                showToast('Account has been created');
+                router.push('/');
+            }
+            else{
+                const result = await response.text();
+                console.log(result);
+                showToast(result);
+            }            
         }
-        else
-            error.value = "";
-
-        const email = form.elements.namedItem('email') as HTMLInputElement;
-        const image = form.elements.namedItem('file') as HTMLInputElement;
-        const formData = new FormData();
-        formData.append('email', email.value);
-        formData.append('password', password.value);
-        formData.append('image', image.value);
-        
-        const response = await fetch('http://localhost:4000/register', {
-            method: 'POST',
-            body: formData
-        });
-
-        if(response.status === 200){
-            showToast('Account has been created');
-            router.push('/');
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+            showToast(message);
         }
-        else{
-            const result = await response.text();
-            console.log(result);
-            showToast(result);
+        finally{
+            loading.value = false;
         }
-
     }
 
 
@@ -62,7 +74,8 @@
             {{error}}
         </p>
         <button class="submit">
-            Sign in
+            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
+            <span v-if="!loading"> Sign Up</span>
         </button>
     </form>
 </template>
@@ -79,7 +92,10 @@
         width: 100%;
         height: 60px;
         border-radius: 10px;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-2);
+        background-color: var(--preset-color-black-3);        
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
         border: none;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-4-font-family);
@@ -88,6 +104,14 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+    }
+
+    .submit:hover{
+       background-position: -100px 0px;
+    }
+
+    .submit:active{
+        background-position: -150px 0px;
     }
 
     .error{

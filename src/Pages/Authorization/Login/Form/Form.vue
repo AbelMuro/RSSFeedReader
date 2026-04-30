@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import {ref} from 'vue';
+    import {ClipLoader} from 'vue-spinner';
     import EnterEmail from '../../../../Common/Components/EnterEmail';
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import {useToastStore} from '../../../../Store';
@@ -7,10 +9,12 @@
     const store = useToastStore();
     const {showToast} = store;
     const router = useRouter();
+    const loading = ref<boolean>(false);
 
     const handleSubmit = async (e : SubmitEvent) => {
         try{
             e.preventDefault();
+            loading.value = true;
             const form = e.target as HTMLFormElement;
             const email = form.elements.namedItem('email') as HTMLInputElement;
             const password = form.elements.namedItem('password') as HTMLInputElement;
@@ -26,12 +30,16 @@
             showToast(result);
 
             if(response.status === 200){
-                router.push('/');
+                router.push('/profile');
             }
-      
         }
         catch(error : any){
             const message = error.message;
+            console.log(message);
+            showToast(message);
+        }
+        finally{
+            loading.value = false;
         }
     }
 
@@ -42,7 +50,8 @@
         <EnterEmail/>
         <EnterPassword/>
         <button class="submit">
-            Sign in
+            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
+            <span v-if="!loading"> Sign In</span>
         </button>
     </form>
 </template>
@@ -59,7 +68,10 @@
         width: 100%;
         height: 60px;
         border-radius: 10px;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-2);
+        background-color: var(--preset-color-black-3);        
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
         border: none;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-4-font-family);
@@ -68,5 +80,16 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .submit:hover{
+       background-position: -100px 0px;
+    }
+
+    .submit:active{
+        background-position: -150px 0px;
     }
 </style>

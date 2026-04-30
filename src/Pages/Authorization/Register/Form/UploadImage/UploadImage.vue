@@ -51,7 +51,9 @@
     .input_container{
         width: 100%;
         height: 40px;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-2);
+        background-color: var(--preset-color-black-3);
+        background-repeat: no-repeat;
         border-radius: 5px;
         padding: 0px 10px;
         border: none;        
@@ -66,6 +68,14 @@
         align-items: center;
         cursor: pointer;
     }    
+
+    .input_container:hover{
+       background-position: -100px 0px;
+    }
+
+    .input_container:active{
+        background-position: -150px 0px;
+    }
 
     .file_uploaded{
         width: 80px;

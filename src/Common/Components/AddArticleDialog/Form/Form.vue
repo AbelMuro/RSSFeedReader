@@ -42,7 +42,9 @@
         height: 50px;
         border-radius: 10px;
         border: none;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-2);
+        background-color: var(--preset-color-black-3);
+        background-repeat: no-repeat;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
@@ -50,5 +52,13 @@
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
         cursor: pointer;
+    }
+    
+    .submit:hover{
+       background-position: -100px 0px;
+    }
+
+    .submit:active{
+        background-position: -150px 0px;
     }
 </style>

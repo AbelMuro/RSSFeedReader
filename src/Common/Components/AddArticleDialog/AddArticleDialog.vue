@@ -46,6 +46,7 @@
         position: fixed;
         top: 0px;
         left: 0px;
+        background-color: var(--preset-color-black-2);
         z-index: var(--fifth-layer);
         display: flex;
         justify-content: center;

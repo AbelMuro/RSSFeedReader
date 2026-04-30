@@ -79,10 +79,14 @@
     .login_footer > a{
         cursor: pointer;
         color: transparent;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-1);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    .login_footer > a:hover{
+        text-decoration: underline;
     }
 
     @media(max-width: 500px){

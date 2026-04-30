@@ -1,13 +1,17 @@
 <script setup lang="ts">
+    import {ref} from 'vue';
+    import {ClipLoader} from 'vue-spinner';
     import EnterEmail from '../../../../Common/Components/EnterEmail';
     import {useToastStore} from '../../../../Store';
 
+    const loading = ref<boolean>(false);
     const toastStore = useToastStore();
     const {showToast} = toastStore;
 
     const handleSubmit = async (e : SubmitEvent) => {
         try{
             e.preventDefault();
+            loading.value = true;
             const form = e.target as HTMLFormElement;
             const email = form.elements.namedItem('email') as HTMLInputElement;
 
@@ -27,6 +31,9 @@
             console.log(message);
             showToast(message);
         }
+        finally{
+            loading.value = false;
+        }
 
     }
 </script>
@@ -35,7 +42,8 @@
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
         <button class="submit">
-            Send Reset Link
+            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
+            <span v-if="!loading"> Send Reset Link</span>
         </button>
     </form>
 </template>
@@ -52,7 +60,10 @@
         width: 100%;
         height: 60px;
         border-radius: 10px;
-        background: var(--preset-linear-gradient-purple-black);
+        background: var(--preset-linear-gradient-purple-black-2);
+        background-color: var(--preset-color-black-3);        
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
         border: none;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-4-font-family);
@@ -61,5 +72,13 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+    }
+
+    .submit:hover{
+       background-position: -100px 0px;
+    }
+
+    .submit:active{
+        background-position: -150px 0px;
     }
 </style>
