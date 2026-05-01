@@ -15,7 +15,30 @@ const router = createRouter({
         {path: '/register', component: Register},
         {path: '/forgot-password', component: ForgotPassword},
         {path: '/reset-password/:resetToken', component: ResetPassword},
-        {path: '/profile', component: Profile}
+        {path: '/profile', component: Profile, 
+            children: [
+                {
+                    path: '/',
+                    component: null
+                },
+                {
+                    path: 'articles',
+                    component: Profile
+                },
+                {
+                    path: 'preferences',
+                    component: null
+                },
+                {
+                    path: 'notifications',
+                    component: null
+                },
+                {
+                    path: 'security',
+                    component: null
+                }
+        ]
+        }
     ]
 });
 

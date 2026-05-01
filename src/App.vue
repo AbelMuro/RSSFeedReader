@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am done with the authorization, now i can work on designing the profile page
+        this is where i left off, i need to start designing the Account settings page and the articles settings page
     */
 </script>
 
@@ -47,6 +47,7 @@
         --preset-linear-gradient-purple-black-2: linear-gradient(265deg,rgba(0, 8, 53, 1) 0%, rgba(0, 29, 196, 1) 36%, rgba(0, 29, 196, 1) 62%, rgba(0, 8, 53, 1) 100%);
 
         --preset-box-shadow-1: 0px 0px 10px #00000080;
+        --preset-box-shadow-2: 0px 5px 10px #00000080;
 
         --fifth-layer: 100;
         --fourth-layer: 75;
