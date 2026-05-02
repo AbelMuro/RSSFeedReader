@@ -7,6 +7,11 @@ import Register from './Pages/Authorization/Register';
 import ForgotPassword from './Pages/Authorization/ForgotPassword';
 import ResetPassword from './Pages/Authorization/ResetPassword';
 import Profile from './Pages/Profile';
+import Account from './Pages/Profile/SettingsBar/Account';
+import Articles from './Pages/Profile/SettingsBar/Articles';
+import Preferences from './Pages/Profile/SettingsBar/Preferences';
+import Notifications from './Pages/Profile/SettingsBar/Notifications';
+import Security from './Pages/Profile/SettingsBar/Security';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,24 +23,24 @@ const router = createRouter({
         {path: '/profile', component: Profile, 
             children: [
                 {
-                    path: '/',
-                    component: null
+                    path: '',
+                    component: Account
                 },
                 {
                     path: 'articles',
-                    component: Profile
+                    component: Articles
                 },
                 {
                     path: 'preferences',
-                    component: null
+                    component: Preferences
                 },
                 {
                     path: 'notifications',
-                    component: null
+                    component: Notifications
                 },
                 {
                     path: 'security',
-                    component: null
+                    component: Security
                 }
         ]
         }

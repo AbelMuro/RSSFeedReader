@@ -20,8 +20,7 @@
                 accept="image/png, image/jpeg, image/jpg"
                 id="file" 
                 name="file" 
-                @change="handleChange"
-                required/>
+                @change="handleChange"/>
         </label>
         <img class="file_uploaded" v-if="src" :src="src">
     </fieldset>
@@ -85,13 +84,6 @@
 
     .input{
         display: none;
-    }
-
-
-
-    .input:focus{
-        outline: none;
-        border: 1px solid var(--preset-color-black-1);
     }
 
     .error{

@@ -3,7 +3,7 @@
     import {motion} from 'motion-v';
     import { useRouter, useRoute } from 'vue-router';
 
-    const link = ref<string | undefined>('');
+    const link = ref<string | undefined>('/profile');
     const router = useRouter();
     const route = useRoute();
 
@@ -18,9 +18,10 @@
             return {};
     }
 
-    watch(() => route.path, (_, newPath) => {
+    watch(() => route.path, (newPath) => {
         link.value = newPath;
-    }, {immediate: true})
+    }, {flush: 'post', immediate: true});
+
 </script>
 
 <template>
@@ -86,16 +87,12 @@
 </template>
 
 <style scoped>
-    .container{
-        width: 100%;
-        height: 100vh;
-    }
-
     .menu{
         width: 300px;
-        height: 100vh;
+        height: calc(100vh - 70px);
         box-shadow: var(--preset-box-shadow-2);
         padding: 25px;
+        flex-shrink: 0;
     }
 
     .menu_links{
@@ -126,4 +123,5 @@
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
     }
+
 </style>

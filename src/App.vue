@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to start designing the Account settings page and the articles settings page
+        this is where i left off, i need to continue to design the MobileSettingsBar component with the icons that i imported
     */
 </script>
 

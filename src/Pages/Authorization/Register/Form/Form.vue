@@ -3,9 +3,9 @@
     import EnterEmail from '../../../../Common/Components/EnterEmail';
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
+    import UploadImage from '../../../../Common/Components/UploadImage';    
     import {useToastStore} from '../../../../Store';
     import {useRouter} from 'vue-router';
-    import UploadImage from './UploadImage';
     import {ClipLoader} from 'vue-spinner';
 
     const error = ref<string>('');

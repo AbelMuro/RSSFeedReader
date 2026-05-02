@@ -1,68 +1,62 @@
 <script setup lang="ts">
     import {ref} from 'vue';
-    import {ClipLoader} from 'vue-spinner';
-    import EnterEmail from '../../../../Common/Components/EnterEmail';
-    import EnterPassword from '../../../../Common/Components/EnterPassword';
-    import {useToastStore} from '../../../../Store';
-    import {useRouter} from 'vue-router';
+    import { ClipLoader } from 'vue-spinner';
+    import EnterEmail from '../../../../../Common/Components/EnterEmail';
+    import UploadImage from '../../../../../Common/Components/UploadImage';
+    import {useToastStore} from '../../../../../Store';
 
+    const loading = ref<boolean>(false);
     const store = useToastStore();
     const {showToast} = store;
-    const router = useRouter();
-    const loading = ref<boolean>(false);
 
-    const handleSubmit = async (e : SubmitEvent) => {
+    const handleSubmit = async (e: SubmitEvent) => {
         try{
             e.preventDefault();
             loading.value = true;
             const form = e.target as HTMLFormElement;
             const email = form.elements.namedItem('email') as HTMLInputElement;
-            const password = form.elements.namedItem('password') as HTMLInputElement;
+            const file = form.elements.namedItem('file') as HTMLInputElement;
+            const formData = new FormData();
+            formData.append('email', email.value);
+            formData.append('image', file.value);
 
-            const response = await fetch('http://localhost:4000/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({email : email.value, password: password.value}),
+            const response = await fetch('http://localhost:4000/update-account', {
+                method: 'PUT',
+                body: formData,
                 credentials: 'include'
             });
+            
             const result = await response.text();
             showToast(result);
-
-            if(response.status === 200){
-                router.push('/profile');
-            }
         }
-        catch(error : any){
+        catch(error: any){
             const message = error.message;
             console.log(message);
             showToast(message);
-        }
+        }   
         finally{
             loading.value = false;
         }
     }
-
 </script>
 
 <template>
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
-        <EnterPassword/>
+        <UploadImage/>
         <button class="submit">
-            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
-            <span v-if="!loading"> Sign In</span>
+            <ClipLoader :loading="loading" color="white" size="30px"/>
+            <span v-if="!loading">Update</span>
         </button>
     </form>
 </template>
 
 <style scoped>
     .form{
-        width: 100%;
+        width: 400px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 15px
     }
 
     .submit{
