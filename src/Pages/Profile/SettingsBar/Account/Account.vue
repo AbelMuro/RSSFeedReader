@@ -36,6 +36,11 @@
     @media(max-width: 770px){
         .account{
             height: calc(100vh - 60px - 60px);
+            gap: 20px
+        }
+
+        .account_title{
+            font-size: 1.8rem;
         }
     }
 </style>

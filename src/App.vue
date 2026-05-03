@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to continue to design the MobileSettingsBar component with the icons that i imported
+        this is where i left off, i am working on the Preferences component
     */
 </script>
 
@@ -32,10 +32,15 @@
     }
 
     :root{
+        --preset-color-pink-1: #ffabb9;
+        --preset-color-pink-2: #ff1c42;
+
         --preset-color-blue-1: #001dc4;
+        --preset-color-black-0: #545454;;
         --preset-color-black-1: #383838;
         --preset-color-black-2: #00000080;
         --preset-color-black-3: #000835;
+
         --preset-color-grey-1: #b6b6b6;
         --preset-color-grey-2: #dfdfdf;
         --preset-color-grey-3: #d7d7d7;
@@ -84,7 +89,7 @@
         --preset-text-5-font-family: 'roboto';
         --preset-text-5-font-size: 1rem;
         --preset-text-5-font-weight: 400;
-        --preset-text-5-line-height: 1.5rem;
+        --preset-text-5-line-height: 1.3rem;
         --preset-text-5-letter-spacing: 0px;
         
     }

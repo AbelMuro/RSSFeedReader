@@ -87,4 +87,10 @@
     .submit:active{
         background-position: -150px 0px;
     }
+
+    @media(max-width: 770px){
+        .form{
+            width: 300px;
+        }
+    }
 </style>
