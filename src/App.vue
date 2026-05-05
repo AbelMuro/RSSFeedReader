@@ -4,7 +4,10 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the Preferences component
+        this is where i left off, i am working on the ReceiveEmail and ReceiveText components, 
+
+        i will need to make a fetch request to the back end, updating the receive email and receive text column
+        in the database
     */
 </script>
 

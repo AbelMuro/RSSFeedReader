@@ -1,22 +1,22 @@
 <script setup lang="ts">
     import Switch from '../../../../../Common/Components/Switch';
 
-    const itemName = 'dark-theme';
+    const itemName = 'text-updates';
 
     const watcher = (on : boolean) => {
-        localStorage.setItem(itemName, JSON.stringify(on));
+        console.log('text -updates')
     }
 </script>
 
 <template>
-    <section class="theme">
+    <section class="email">
         <Switch :item="itemName" :watcher="watcher"/>
-        Display Dark Theme
+        Receive Text Updates
     </section>
 </template>
 
 <style scoped>
-    .theme{
+    .email{
         display: flex;
         align-items: center;
         gap: 10px;
@@ -27,6 +27,4 @@
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
-
-   
 </style>

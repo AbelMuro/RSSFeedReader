@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import Theme from './Theme';
+    import TagNewArticles from './TagNewArticles';
 </script>
 
 <template>
@@ -9,6 +10,7 @@
         </h1>
         <section class="preferences_switches">
             <Theme/>
+            <TagNewArticles/>
         </section>
     </section>
 </template>
@@ -39,5 +41,19 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+    }
+
+    @media(max-width: 770px){
+        .preferences{
+            height: calc(100vh - 60px - 60px);
+        }
+
+        .preferences_title{
+            font-size: 1.8rem;
+        }
+
+        .preferences_switches{
+            width: 300px;
+        }
     }
 </style>
