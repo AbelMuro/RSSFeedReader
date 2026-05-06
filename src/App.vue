@@ -4,10 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the ReceiveEmail and ReceiveText components, 
-
-        i will need to make a fetch request to the back end, updating the receive email and receive text column
-        in the database
+        this is where i left off, i am working on the UploadImage component, i want to make another form that handles that 
+        separately from the update-email feature
     */
 </script>
 

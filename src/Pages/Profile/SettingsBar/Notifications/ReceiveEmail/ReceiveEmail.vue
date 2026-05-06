@@ -3,8 +3,24 @@
 
     const itemName = 'email-updates';
 
-    const watcher = (on : boolean) => {
-        console.log(itemName);
+    const watcher = async (on : boolean) => {
+        try{
+            const response = await fetch('http://localhost:4000/receive-emails', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({receiveEmails: on}),
+                credentials: 'include'
+            });
+
+            const results = await response.text();
+            console.log(results);
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
     }
 </script>
 

@@ -2,7 +2,6 @@
     import {ref} from 'vue';
     import { ClipLoader } from 'vue-spinner';
     import EnterEmail from '../../../../../Common/Components/EnterEmail';
-    import UploadImage from '../../../../../Common/Components/UploadImage';
     import {useToastStore} from '../../../../../Store';
 
     const loading = ref<boolean>(false);
@@ -15,12 +14,10 @@
             loading.value = true;
             const form = e.target as HTMLFormElement;
             const email = form.elements.namedItem('email') as HTMLInputElement;
-            const file = form.elements.namedItem('file') as HTMLInputElement;
             const formData = new FormData();
             formData.append('email', email.value);
-            formData.append('image', file.value);
 
-            const response = await fetch('http://localhost:4000/update-account', {
+            const response = await fetch('http://localhost:4000/update-email', {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include'
@@ -43,7 +40,6 @@
 <template>
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
-        <UploadImage/>
         <button class="submit">
             <ClipLoader :loading="loading" color="white" size="30px"/>
             <span v-if="!loading">Update</span>
