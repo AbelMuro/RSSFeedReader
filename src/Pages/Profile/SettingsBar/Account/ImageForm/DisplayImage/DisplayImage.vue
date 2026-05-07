@@ -3,12 +3,12 @@
 </script>
 
 <template>
-    <img class="file_uploaded" :src="src"> 
+    <img class="image" :src="src"> 
 </template>
 
 <style scoped>
-    .file_uploaded{
-        width: 120px;
+    .image{
+        width: 160px;
         object-fit: contain;
         align-self: center;
     }

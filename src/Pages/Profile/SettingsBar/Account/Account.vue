@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    import Form from './Form';
+    import ImageForm from './ImageForm';
+    import EmailForm from './EmailForm';
 </script>
 
 <template>
@@ -7,7 +8,8 @@
         <h1 class="account_title">
             Update account details
         </h1>
-        <Form/>
+        <ImageForm/>     
+        <EmailForm/>
     </section>
 </template>
 
@@ -17,7 +19,7 @@
         height: calc(100vh - 70px);
         padding: 25px;
         display: flex;
-        gap: 35px;
+        gap: 45px;
         flex-direction: column;
         align-items: center;
     }

@@ -4,8 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the UploadImage component, i want to make another form that handles that 
-        separately from the update-email feature
+        this is where i left off, i am working on the back end, i need to test out the update-image route
     */
 </script>
 

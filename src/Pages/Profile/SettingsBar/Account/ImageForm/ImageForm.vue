@@ -1,34 +1,78 @@
 <script setup lang="ts">
-    import {ref} from 'vue';
+    import {ref, onMounted} from 'vue';
     import DisplayImage from './DisplayImage';
-    import icons from '../../../../icons';
+    import icons from '../../../icons';
 
     const src = ref<string>(icons['placeholder']);
 
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
         const uploadedFile = e.target.files[0];
+        updateImage(uploadedFile);
         src.value = URL.createObjectURL(uploadedFile);
     }
+    
+    const updateImage = async (image : Blob) => {
+        try{
+            const formData = new FormData();
+            formData.append('image', image);
+
+            const response = await fetch('http://localhost:4000/update-image', {
+                method: 'PUT',
+                body: formData
+            });
+
+            const results = await response.text();
+            console.log(results)
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    onMounted(async () => {
+        try{
+            const response = await fetch(`http://localhost:4000/get-image?cache=${Date.now()}`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if(response.status === 200){
+                const results = await response.blob();
+                src.value = URL.createObjectURL(results);
+            }
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    });
 
 </script>
 
 <template>
-    <fieldset class="fieldset">
-        <DisplayImage v-model="src"/>     
-        <label class="input_container" for="file">
-            Upload Photo
-            <input 
-                type="file" 
-                class="input"
-                accept="image/png, image/jpeg, image/jpg"
-                id="file" 
-                name="file" 
-                @change="handleChange"/>
-        </label>
-    </fieldset>
+    <form class="form">
+        <fieldset class="fieldset">
+            <DisplayImage v-model="src"/>     
+            <label class="input_container" for="file">
+                Upload Photo
+                <input 
+                    type="file" 
+                    class="input"
+                    accept="image/png, image/jpeg, image/jpg"
+                    id="file" 
+                    name="file" 
+                    @change="handleChange"/>
+            </label>
+        </fieldset>
+    </form>
 </template>
 
 <style scoped>
+    .form{
+        width: 400px
+    }
+
     .fieldset{
         width: 100%;
         display: flex;
