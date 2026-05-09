@@ -2,6 +2,8 @@
     import {ref, watch} from 'vue';
     import icons from './icons';
 
+    const {label} = defineProps<{label: string}>()
+
     const password = ref<string>('');
     const error = ref<string>('');
     const visible = ref<boolean>(false);
@@ -12,9 +14,15 @@
 
     const handleBlur = (e: BlurEvent<HTMLInputElement>) => {
         const input = e.target.value;
+        const patternMismatch = e.target.validity.patternMismatch;
+
         if(!input.length){
             error.value = "Can't be empty."
             e.target.setCustomValidity(" ");
+        }
+        else if(patternMismatch){
+            error.value = "Password doesn't meet the requirements";
+            e.target.setCustomValidity("");
         }
         else{
             error.value = "";
@@ -25,9 +33,13 @@
 
     const handleInvalid = (e : InvalidEvent<HTMLInputElement>) => {
         const isEmpty = e.target.validity.valueMissing;
+        const patternMismatch = e.target.validity.patternMismatch;
+
         e.target.setCustomValidity(" ");
         if(isEmpty)
             error.value = "Can't be empty."
+        else if(patternMismatch)
+            error.value = "Password doesn't meet the requirements";
         else            
             error.value = "";
     }
@@ -42,13 +54,14 @@
 <template>
     <fieldset class="fieldset">
         <label class="label" for="password">
-            Re-Enter Password
+            {{label}}
         </label>
         <fieldset class="input_container">
             <input 
                 class="input" 
                 @blur="handleBlur"
                 @invalid="handleInvalid"
+                pattern="(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}"
                 v-model="password"
                 :type="visible ? 'text' : 'password'" 
                 id="reEnterPassword" 

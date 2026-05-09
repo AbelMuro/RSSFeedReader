@@ -12,6 +12,9 @@ import Articles from './Pages/Profile/SettingsBar/Articles';
 import Preferences from './Pages/Profile/SettingsBar/Preferences';
 import Notifications from './Pages/Profile/SettingsBar/Notifications';
 import Security from './Pages/Profile/SettingsBar/Security';
+import Feed from './Pages/Feed';
+import Digest from './Pages/Digest';
+import Discover from './Pages/Discover';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -43,7 +46,10 @@ const router = createRouter({
                     component: Security
                 }
         ]
-        }
+        },
+        {path: '/feed', component: Feed},
+        {path: '/digest', component: Digest},
+        {path: '/discover', component: Discover}
     ]
 });
 

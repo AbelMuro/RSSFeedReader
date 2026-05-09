@@ -6,7 +6,7 @@
     import UploadImage from '../../../../Common/Components/UploadImage';    
     import {useToastStore} from '../../../../Store';
     import {useRouter} from 'vue-router';
-    import {ClipLoader} from 'vue-spinner';
+    import {VueSpinner} from 'vue3-spinners';
 
     const error = ref<string>('');
     const loading = ref<boolean>(false);
@@ -67,15 +67,16 @@
 <template>  
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
-        <EnterPassword/>
-        <ReEnterPassword />
-        <UploadImage/>
+        <EnterPassword label="Enter Password:" name="password"/>
+        <ReEnterPassword label="Re-Enter Password:"/>
         <p class="error" v-if="error">
             {{error}}
-        </p>
+        </p>        
+        <UploadImage/>
+
         <button class="submit">
-            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
-            <span v-if="!loading"> Sign Up</span>
+            <VueSpinner v-if="loading" color="white" size="30px"/>
+            <span v-else> Sign Up</span>
         </button>
     </form>
 </template>
@@ -87,7 +88,6 @@
         flex-direction: column;
         gap: 15px;
     }
-
     .submit{
         width: 100%;
         height: 60px;
@@ -104,6 +104,9 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .submit:hover{

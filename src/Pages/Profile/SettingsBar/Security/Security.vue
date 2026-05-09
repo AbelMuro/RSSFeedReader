@@ -32,4 +32,15 @@
         line-height: var(--preset-text-2-line-height);
         letter-spacing: var(--preset-text-2-letter-spacing);
     }
+
+    @media(max-width: 770px){
+        .security{
+            height: calc(100vh - 60px - 60px);
+            gap: 15px;
+        }
+
+        .security_title{
+            font-size: 1.8rem;
+        }
+    }
 </style>

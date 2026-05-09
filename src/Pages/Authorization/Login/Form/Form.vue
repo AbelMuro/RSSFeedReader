@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {ref} from 'vue';
-    import {ClipLoader} from 'vue-spinner';
+    import {VueSpinner} from 'vue3-spinners';
     import EnterEmail from '../../../../Common/Components/EnterEmail';
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import {useToastStore} from '../../../../Store';
@@ -49,10 +49,10 @@
 <template>
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
-        <EnterPassword/>
+        <EnterPassword label="Enter Password:" name="password"/>
         <button class="submit">
-            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
-            <span v-if="!loading"> Sign In</span>
+            <VueSpinner v-if="loading" color="white" size="30px"/>
+            <span v-else> Sign In</span>
         </button>
     </form>
 </template>

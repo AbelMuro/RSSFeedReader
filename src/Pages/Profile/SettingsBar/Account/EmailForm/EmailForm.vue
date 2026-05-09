@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {ref} from 'vue';
-    import { ClipLoader } from 'vue-spinner';
+    import { VueSpinner } from 'vue3-spinners';
     import EnterEmail from '../../../../../Common/Components/EnterEmail';
     import {useToastStore} from '../../../../../Store';
 
@@ -42,8 +42,8 @@
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
         <button class="submit">
-            <ClipLoader :loading="loading" color="white" size="30px"/>
-            <span v-if="!loading">Update Email</span>
+            <ClipLoader v-if="loading" color="white" size="30px"/>
+            <span v-else>Update Email</span>
         </button>
     </form>
 </template>

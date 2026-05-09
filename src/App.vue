@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the Security form component, i need to set a condition for the EnterPassword component
-        for one letter, one number, one symbol and 8 characters
+        this is where i left off, i am working on the AddArticleDialog form component, i need to define the route on the backend
+        so that it stores an article on the database
     */
 </script>
 

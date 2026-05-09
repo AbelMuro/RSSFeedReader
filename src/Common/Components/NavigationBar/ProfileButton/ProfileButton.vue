@@ -1,9 +1,16 @@
 <script setup lang="ts">
+    import {useRouter} from 'vue-router';
     import icons from './icons';
+
+    const router = useRouter();
+
+    const handleRoute = () => {
+        router.push('/profile');
+    }
 </script>
 
 <template>
-    <button class="profile_button">
+    <button class="profile_button" @click="handleRoute">
         <img class="profile_icon" :src="icons['user']">
     </button>
 </template>

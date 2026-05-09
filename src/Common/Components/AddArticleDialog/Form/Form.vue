@@ -1,18 +1,44 @@
 <script setup lang="ts">
+    import {useToastStore} from '../../../../Store';
     import TitleInput from './TitleInput';
     import ContentTextArea from './ContentTextArea';
     import Category from './Category';
 
-    const handleSubmit = (e: SubmitEvent) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const titleElement = form.elements.namedItem('title') as HTMLInputElement;
-        const contentElement = form.elements.namedItem('content') as HTMLTextAreaElement;
-        const categoryElement = form.elements.namedItem('category') as HTMLSelectElement;
-        const title = titleElement.value;
-        const content = contentElement.value;
-        const category = categoryElement.value;
-        console.log(title, content, category);
+    const store = useToastStore();
+    const {showToast} = store;
+
+    const handleSubmit = async (e: SubmitEvent) => {
+        try{
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const titleElement = form.elements.namedItem('title') as HTMLInputElement;
+            const contentElement = form.elements.namedItem('content') as HTMLTextAreaElement;
+            const categoryElement = form.elements.namedItem('category') as HTMLSelectElement;
+            const title = titleElement.value;
+            const content = contentElement.value;
+            const category = categoryElement.value;
+
+            const response = await fetch('http://localhost:4000/add-article', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({
+                    title, content, category
+                })
+            });
+
+            const results = await response.text();
+            console.log(results);
+            showToast(results);
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    
+
+       
     }
 </script>
 
@@ -52,6 +78,9 @@
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .submit:hover{

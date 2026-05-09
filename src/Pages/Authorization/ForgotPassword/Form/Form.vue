@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {ref} from 'vue';
-    import {ClipLoader} from 'vue-spinner';
+    import {VueSpinner} from 'vue3-spinners';
     import EnterEmail from '../../../../Common/Components/EnterEmail';
     import {useToastStore} from '../../../../Store';
 
@@ -42,8 +42,8 @@
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
         <button class="submit">
-            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
-            <span v-if="!loading"> Send Reset Link</span>
+            <VueSpinner v-if="loading" color="white" size="30px" />
+            <span v-else> Send Reset Link</span>
         </button>
     </form>
 </template>
@@ -72,6 +72,9 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .submit:hover{

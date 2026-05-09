@@ -13,7 +13,7 @@
     <article class="register">
         <h1 class="register_title">Register</h1>
         <p class="register_desc">
-            Create an account to access your RSS feed reader.
+            Password must have at least one letter, one number, one symbol and 8 characters.
         </p>
         <Form/>
         <p class="register_footer">

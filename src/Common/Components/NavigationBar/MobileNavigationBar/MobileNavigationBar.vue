@@ -1,14 +1,21 @@
 <script setup lang="ts">
     import {ref} from 'vue';
+    import {useRouter} from 'vue-router';
     import AddArticleButton from './AddArticleButton';
     import SearchButton from './SearchButton';
     import {motion, AnimatePresence} from 'motion-v';
     import icons from './icons';
 
     const open = ref<boolean>(false);
+    const router = useRouter();
 
     const handleOpen = () => {
         open.value = !open.value;
+    }
+
+    const handleRouter = (route: string) => {
+        router.push(route);
+        handleOpen();
     }
 </script>
 
@@ -43,17 +50,17 @@
                         </button>
                     </li>
                     <li>
-                        <button class="link">
+                        <button class="link" @click="handleRouter('/feed')">
                             Feed
                         </button>
                     </li>
                     <li>
-                        <button class="link">
+                        <button class="link" @click="handleRouter('/digest')">
                             Digest
                         </button>
                     </li>
                     <li>
-                        <button class="link">
+                        <button class="link" @click="handleRouter('/discover')">
                             Discover
                         </button>
                     </li>
@@ -64,7 +71,7 @@
                         <SearchButton/>
                     </li>
                     <li>
-                        <button class="link">
+                        <button class="link" @click="handleRouter('/profile')">
                             Account
                         </button>
                     </li>

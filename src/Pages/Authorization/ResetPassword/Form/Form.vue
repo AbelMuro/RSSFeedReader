@@ -4,7 +4,7 @@
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
     import {useToastStore} from '../../../../Store';
-    import {ClipLoader} from 'vue-spinner';
+    import {VueSpinner} from 'vue3-spinners';
 
     const loading = ref<boolean>(false);
     const error = ref<string>('')
@@ -61,12 +61,12 @@
 
 <template>
     <form class="form" @submit="handleSubmit">
-        <EnterPassword/>
-        <ReEnterPassword/>
+        <EnterPassword label="Enter Password:" name="password"/>
+        <ReEnterPassword label="Re-Enter Password:"/>
         <p v-if="error" class="error">{{error}}</p>
         <button class="submit">
-            <ClipLoader :loading="loading" color="white" size="30px"></ClipLoader>
-            <span v-if="!loading"> Reset Password</span>
+            <VueSpinner v-if="loading" color="white" size="30px" />
+            <span v-else> Reset Password</span>
         </button>
     </form>
 </template>
@@ -95,6 +95,9 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .submit:hover{

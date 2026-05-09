@@ -1,16 +1,23 @@
 <script setup lang="ts">
-    import {ref} from 'vue';
+    import {ref, watch} from 'vue';
+    import {useRoute, useRouter} from 'vue-router';
     import icons from './icons';
 
+    const route = useRoute();
+    const router = useRouter();
     const link = ref<string>('Feed');
 
     const handleLink = (newLink : string) => {
-        link.value = newLink;
+        router.push(newLink);
     }
 
     const handleSelectedStyle = (currentLink : string) => {
         return link.value === currentLink ? {backgroundColor: '#d0d0d0', color: 'black'} : {};
     }
+
+    watch(() => route.path, (path) => {
+        link.value = path;
+    })
 
 </script>
 
@@ -21,17 +28,17 @@
             Frontpage
         </li>
         <li>
-            <button class="nav_link" @click="handleLink('Feed')" :style="handleSelectedStyle('Feed')">
+            <button class="nav_link" @click="handleLink('/feed')" :style="handleSelectedStyle('/feed')">
                 Feed
             </button>
         </li>
         <li>
-            <button class="nav_link" @click="handleLink('Digest')" :style="handleSelectedStyle('Digest')">
+            <button class="nav_link" @click="handleLink('/digest')" :style="handleSelectedStyle('/digest')">
                 Digest
             </button>
         </li>
         <li>
-            <button class="nav_link" @click="handleLink('Discover')":style="handleSelectedStyle('Discover')">
+            <button class="nav_link" @click="handleLink('/discover')":style="handleSelectedStyle('/discover')">
                 Discover
             </button>
         </li>

@@ -2,6 +2,8 @@
     import {ref, watch} from 'vue';
     import icons from './icons';
 
+    const {label, name} = defineProps<{label: string, name: string}>()
+
     const password = ref<string>('');
     const error = ref<string>('');
     const visible = ref<boolean>(false);
@@ -12,21 +14,21 @@
 
     const handleBlur = (e: BlurEvent<HTMLInputElement>) => {
         const input = e.target.value;
+
         if(!input.length){
             error.value = "Can't be empty."
             e.target.setCustomValidity(" ");
         }
         else{
             error.value = "";
-            e.target.setCustomValidity("")
+            e.target.setCustomValidity("");
         }
-            
-
     }
 
     const handleInvalid = (e : InvalidEvent<HTMLInputElement>) => {
         const isEmpty = e.target.validity.valueMissing;
         e.target.setCustomValidity(" ");
+
         if(isEmpty)
             error.value = "Can't be empty."
         else            
@@ -44,7 +46,7 @@
 <template>
     <fieldset class="fieldset">
         <label class="label" for="password">
-            Enter password
+            {{label}}
         </label>
         <fieldset class="input_container">
             <input 
@@ -54,7 +56,7 @@
                 v-model="password"
                 :type="visible ? 'text' : 'password'" 
                 id="password" 
-                name="password"
+                :name="name"
                 required/>
                     <img v-if="visible" :src="icons['invisible']" class="input_icon" @click="handleVisible"/>
                     <img v-else :src="icons['visible']"  class="input_icon" @click="handleVisible"/>                
@@ -62,7 +64,6 @@
         <p class="error" v-if="error">
             {{error}}
         </p>
-
     </fieldset>
 </template>
 
