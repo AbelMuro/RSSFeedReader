@@ -14,12 +14,13 @@
             loading.value = true;
             const form = e.target as HTMLFormElement;
             const email = form.elements.namedItem('email') as HTMLInputElement;
-            const formData = new FormData();
-            formData.append('email', email.value);
 
             const response = await fetch('http://localhost:4000/update-email', {
                 method: 'PUT',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email}),
                 credentials: 'include'
             });
             
@@ -42,7 +43,7 @@
         <EnterEmail/>
         <button class="submit">
             <ClipLoader :loading="loading" color="white" size="30px"/>
-            <span v-if="!loading">Update</span>
+            <span v-if="!loading">Update Email</span>
         </button>
     </form>
 </template>

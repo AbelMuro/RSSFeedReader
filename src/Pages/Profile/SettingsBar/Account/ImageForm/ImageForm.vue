@@ -1,34 +1,46 @@
 <script setup lang="ts">
-    import {ref, onMounted} from 'vue';
+    import {ref, onMounted, watch} from 'vue';
+    import {useToastStore} from '../../../../../Store';
     import DisplayImage from './DisplayImage';
     import icons from '../../../icons';
 
     const src = ref<string>(icons['placeholder']);
+    const file = ref<Blob | null>(null);
+    const store = useToastStore();
+    const {showToast} = store;
 
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
         const uploadedFile = e.target.files[0];
-        updateImage(uploadedFile);
         src.value = URL.createObjectURL(uploadedFile);
+        file.value = uploadedFile;
     }
     
-    const updateImage = async (image : Blob) => {
+
+    watch(file, async (file) => {
         try{
             const formData = new FormData();
-            formData.append('image', image);
+            formData.append('image', file);
 
             const response = await fetch('http://localhost:4000/update-image', {
                 method: 'PUT',
-                body: formData
+                body: formData,
+                credentials: 'include'
             });
 
+            if(response.status !== 200)
+                src.value = icons['placeholder'];
+
             const results = await response.text();
-            console.log(results)
+            console.log(results);
+            showToast(results);
         }
         catch(error : any){
             const message = error.message;
             console.log(message);
+            showToast(message);
+            src.value = icons['placeholder'];
         }
-    }
+    })
 
     onMounted(async () => {
         try{

@@ -4,7 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the back end, i need to test out the update-image route
+        this is where i left off, i am working on the Security form component, i need to set a condition for the EnterPassword component
+        for one letter, one number, one symbol and 8 characters
     */
 </script>
 

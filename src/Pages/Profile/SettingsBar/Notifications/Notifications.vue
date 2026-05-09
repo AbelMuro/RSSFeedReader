@@ -42,4 +42,18 @@
         flex-direction: column;
         gap: 15px;
     }
+
+    @media(max-width: 770px){
+        .notifications{
+            height: calc(100vh - 60px - 60px);
+        }
+
+        .notifications_title{
+            font-size: 1.8rem;
+        }
+
+        .notifications_switches{
+            width: 300px;
+        }
+    }
 </style>
