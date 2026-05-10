@@ -53,7 +53,7 @@
     }
     .register_desc{
         margin: 0px;
-        color: var(--preset-color-black-2);
+        color: var(--preset-color-transparent-black);
         font-family: var(--preset-text-4-font-family);
         font-size: var(--preset-text-4-font-size);
         font-weight: var(--preset-text-4-font-weight);

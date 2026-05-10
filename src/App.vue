@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the AddArticleDialog form component, i need to define the route on the backend
-        so that it stores an article on the database
+        this is where i left off, i want to define the handleDelete function in the DeleteButton component
+        and then i can define the route for the delete feature on the backend.
     */
 </script>
 
@@ -33,24 +33,35 @@
     }
 
     :root{
+        
         --preset-color-pink-1: #ffabb9;
-        --preset-color-pink-2: #ff1c42;
+        --preset-color-pink-2: #fd8397;
 
         --preset-color-blue-1: #001dc4;
-        --preset-color-black-0: #545454;;
-        --preset-color-black-1: #383838;
-        --preset-color-black-2: #00000080;
-        --preset-color-black-3: #000835;
+        --preset-color-blue-2: #00179c;
+        --preset-color-blue-3: #001275;
+
+        --preset-color-transparent-black: #00000080;
+        --preset-color-black-1: #000835;
+        --preset-color-black-2: #2a2a2a;
+        --preset-color-black-3: #363636;
+        --preset-color-black-4: #4b4b4b;
 
         --preset-color-grey-1: #b6b6b6;
         --preset-color-grey-2: #dfdfdf;
         --preset-color-grey-3: #d7d7d7;
+        
         --preset-color-white-1: #eeeeee;
-        --preset-color-white-2: #e6e6e6;
-        --preset-color-white-3: #d6d6d6;
-        --preset-color-red-1: rgb(183, 0, 0);
+        --preset-color-white-2: #d0d0d0;
+        --preset-color-white-3: #b3b3b3;
+
+        --preset-color-red-1: #b70000;
+        --preset-color-red-2: #9a0000;
+        --preset-color-red-3: #720000;
+
         --preset-linear-gradient-purple-black-1: linear-gradient(265deg,rgba(0, 29, 196, 1) 0%, rgba(0, 8, 53, 1) 96%);        
         --preset-linear-gradient-purple-black-2: linear-gradient(265deg,rgba(0, 8, 53, 1) 0%, rgba(0, 29, 196, 1) 36%, rgba(0, 29, 196, 1) 62%, rgba(0, 8, 53, 1) 100%);
+        --preset-linear-gradient-red-black-1: linear-gradient(265deg,rgba(0, 8, 53, 1) 0%, rgb(144, 2, 2) 36%, rgb(144, 2, 2) 62%, rgba(0, 8, 53, 1) 100%);
 
         --preset-box-shadow-1: 0px 0px 10px #00000080;
         --preset-box-shadow-2: 0px 5px 10px #00000080;

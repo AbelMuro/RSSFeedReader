@@ -6,12 +6,14 @@
 
     const handleBlur = (e: BlurEvent<HTMLInputElement>) => {
         const input = e.target.value;
-        e.target.setCustomValidity(" ");
-        if(!input.length)
-            error.value = "Can't be empty."
-        else
+        if(!input.length){
+            error.value = "Can't be empty.";
+            e.target.setCustomValidity(" ");
+        }
+        else{
             error.value = "";
-
+            e.target.setCustomValidity("");
+        }
     }
 
     const handleInvalid = (e : InvalidEvent<HTMLInputElement>) => {

@@ -1,67 +1,76 @@
 <script setup lang="ts">
     import {ref, watch} from 'vue';
 
-    const content = ref<string>('');
-    const error = ref<string>('');     
+    const company = ref<string>('');
+    const error = ref<string>('');
 
-    const handleBlur = (e : BlurEvent<HTMLTextAreaElement>) => {
+    const handleBlur = (e: BlurEvent<HTMLInputElement>) => {
         const input = e.target.value;
-        
         if(!input.length){
-           error.value = "Can't be empty.";
-           e.target.setCustomValidity(" ");  
+            error.value = "Can't be empty.";
+            e.target.setCustomValidity(" ");
         }
+            
         else{
             error.value = "";
             e.target.setCustomValidity("");
         }
-    }   
+    }
 
-    const handleInvalid = (e : InvalidEvent<HTMLTextAreaElement>) => {
+    const handleInvalid = (e : InvalidEvent<HTMLInputElement>) => {
         const isEmpty = e.target.validity.valueMissing;
+        const isInvalid = e.target.validity.typeMismatch;
+
         e.target.setCustomValidity(" ");
         if(isEmpty)
             error.value = "Can't be empty."
+        else if(isInvalid)
+            error.value = "Invalid email."
         else            
             error.value = "";
     }
 
-    watch(content, (_, newValue) => {
-        if(newValue.length)
-            error.value = "";   
+    watch(company, (_, newValue) => {
+        if(newValue.length){
+            error.value = "";  
+        }
+             
     })
+
 </script>
 
 <template>
     <fieldset class="fieldset">
-        <label for="content" class="label">
-            Enter Content
-        </label>
-        <textarea 
-            id="content" 
+        <label class='label' for="company">Enter Company: </label>
+        <input 
+            type="text" 
+            class="input"
             @blur="handleBlur"
             @invalid="handleInvalid"
-            class="textarea" 
-            v-model="content" 
-            name="content" 
+            id="company" 
+            maxLength="20"
+            name="company" 
+            v-model="company"
             required/>
-        <p v-if="error" class="error">
-            {{ error }}
+
+        <p class="error" v-if="error">
+            {{error}}
         </p>
     </fieldset>
 </template>
 
 <style scoped>
-    .fieldset{
+  .fieldset{
         width: 100%;
-        padding: 0px;
-        margin: 0px;
         display: flex;
         flex-direction: column;
         gap: 5px;
         border: none;
-    }  
-    
+        margin: 0px;
+        padding: 0px;
+    }
+
+
     .label{
         color: var(--preset-text-color-black-1);
         font-family: var(--preset-text-5-font-family);
@@ -71,21 +80,20 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
-    .textarea{
+    .input{
         width: 100%;
-        height: 150px;
+        height: 40px;
         border-radius: 5px;
         border: 1px solid var(--preset-color-grey-1);
-        padding: 10px;
+        padding: 0px 10px;
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
-        resize: none;
     }
 
-    .textarea:focus{
+    .input:focus{
         outline: none;
         border: 1px solid var(--preset-color-black-1);
     }
@@ -98,6 +106,5 @@
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
-
     }
 </style>

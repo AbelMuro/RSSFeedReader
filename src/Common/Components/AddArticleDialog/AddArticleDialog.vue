@@ -34,7 +34,7 @@
                         <button class="dialog_close" @click="handleOpen">
                             <img :src="icons['close']"/>
                         </button>
-                        <Form/>
+                        <Form v-model="open"/>
                 </motion.dialog>
         </motion.div>
     </AnimatePresence>
@@ -46,7 +46,7 @@
         position: fixed;
         top: 0px;
         left: 0px;
-        background-color: var(--preset-color-black-2);
+        background-color: var(--preset-color-transparent-black);
         z-index: var(--fifth-layer);
         display: flex;
         justify-content: center;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import Form from './Form';
-
+    import DeleteButton from './DeleteButton';
 </script>
 
 <template>
@@ -9,6 +9,7 @@
             Security
         </h1>
         <Form/>
+        <DeleteButton/>
     </section>
 </template>
 

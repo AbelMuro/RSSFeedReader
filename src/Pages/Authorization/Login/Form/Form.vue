@@ -70,7 +70,7 @@
         height: 60px;
         border-radius: 10px;
         background: var(--preset-linear-gradient-purple-black-2);
-        background-color: var(--preset-color-black-3);        
+        background-color: var(--preset-color-black-1);        
         background-position: 0px 0px;
         background-repeat: no-repeat;
         border: none;

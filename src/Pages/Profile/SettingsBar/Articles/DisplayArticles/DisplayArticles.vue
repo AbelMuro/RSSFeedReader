@@ -51,7 +51,7 @@
         align-items: center;
         gap: 10px;
         margin: 0px;
-        color: var(--preset-color-black-0);
+        color: var( --preset-color-black-3);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
@@ -86,7 +86,7 @@
 
     .article_content{
         margin: 0px;
-        color: var(--preset-color-black-0);
+        color: var( --preset-color-black-3);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);

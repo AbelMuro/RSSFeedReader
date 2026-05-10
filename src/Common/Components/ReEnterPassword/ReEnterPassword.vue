@@ -65,6 +65,7 @@
                 v-model="password"
                 :type="visible ? 'text' : 'password'" 
                 id="reEnterPassword" 
+                maxLength="20"
                 name="reEnterPassword"
                 required/>
                     <img v-if="visible" :src="icons['invisible']" class="input_icon" @click="handleVisible"/>

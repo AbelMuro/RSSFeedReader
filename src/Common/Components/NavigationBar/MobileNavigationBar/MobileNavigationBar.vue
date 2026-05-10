@@ -113,7 +113,7 @@
         position: fixed;
         top: 0px;
         left: 0px;
-        background-color: var(--preset-color-black-2);
+        background-color: var(--preset-color-transparent-black);
         z-index: var(--fifth-layer);
     }
 

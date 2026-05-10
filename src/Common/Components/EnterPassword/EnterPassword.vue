@@ -56,6 +56,7 @@
                 v-model="password"
                 :type="visible ? 'text' : 'password'" 
                 id="password" 
+                maxLength="20"
                 :name="name"
                 required/>
                     <img v-if="visible" :src="icons['invisible']" class="input_icon" @click="handleVisible"/>

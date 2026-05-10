@@ -1,15 +1,21 @@
 <script setup lang="ts">
+    import {ref} from 'vue';
     import {useToastStore} from '../../../../Store';
+    import { VueSpinner } from 'vue3-spinners';
     import TitleInput from './TitleInput';
     import ContentTextArea from './ContentTextArea';
     import Category from './Category';
 
+    const open = defineModel();
+
+    const loading = ref<boolean>(false);
     const store = useToastStore();
     const {showToast} = store;
 
     const handleSubmit = async (e: SubmitEvent) => {
         try{
             e.preventDefault();
+            loading.value = true;
             const form = e.target as HTMLFormElement;
             const titleElement = form.elements.namedItem('title') as HTMLInputElement;
             const contentElement = form.elements.namedItem('content') as HTMLTextAreaElement;
@@ -25,20 +31,24 @@
                 },
                 body: JSON.stringify({
                     title, content, category
-                })
+                }),
+                credentials: 'include'
             });
 
             const results = await response.text();
             console.log(results);
             showToast(results);
+
+            if(response.status === 200)
+                open.value = false;
         }
         catch(error: any){
             const message = error.message;
             console.log(message);
         }
-    
-
-       
+        finally{
+            loading.value = false;
+        }
     }
 </script>
 
@@ -48,7 +58,8 @@
         <ContentTextArea/>
         <Category/>
         <button class="submit">
-            Create Article
+            <VueSpinner v-if="loading" color="white" size="30px"/>
+            <span v-else>Create Article</span>
         </button>
     </form>
 </template>
@@ -69,7 +80,7 @@
         border-radius: 10px;
         border: none;
         background: var(--preset-linear-gradient-purple-black-2);
-        background-color: var(--preset-color-black-3);
+        background-color: var(--preset-color-black-1);
         background-repeat: no-repeat;
         color: var(--preset-color-white-1);
         font-family: var(--preset-text-5-font-family);

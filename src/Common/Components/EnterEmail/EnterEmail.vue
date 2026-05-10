@@ -4,19 +4,23 @@
     const email = ref<string>('');
     const error = ref<string>('');
 
+
     const handleBlur = (e: BlurEvent<HTMLInputElement>) => {
-        const input = e.target.value;
-        if(!input.length){
+        const valueMissing = e.target.validity.valueMissing;
+        const typeMismatch = e.target.validity.typeMismatch;
+
+        if(valueMissing){
             error.value = "Can't be empty.";
             e.target.setCustomValidity(" ");
         }
-            
+        else if(typeMismatch){
+            error.value = "Invalid email.";
+            e.target.setCustomValidity(" ");
+        }
         else{
             error.value = "";
             e.target.setCustomValidity("");
         }
-            
-
     }
 
     const handleInvalid = (e : InvalidEvent<HTMLInputElement>) => {
@@ -35,16 +39,15 @@
     watch(email, (_, newValue) => {
         if(newValue.length){
             error.value = "";  
-        }
-             
-    })
+        }     
+    });
 
        
 </script>
 
 <template>
     <fieldset class="fieldset">
-        <label class='label' for="email">Enter Email</label>
+        <label class='label' for="email">Enter Email: </label>
         <input 
             type="email" 
             class="input"
@@ -53,6 +56,7 @@
             id="email" 
             name="email" 
             v-model="email"
+            maxLength="40"
             required/>
 
         <p class="error" v-if="error">

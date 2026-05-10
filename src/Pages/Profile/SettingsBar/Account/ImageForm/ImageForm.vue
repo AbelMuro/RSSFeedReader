@@ -109,7 +109,7 @@
         width: 100%;
         height: 40px;
         background: var(--preset-linear-gradient-purple-black-2);
-        background-color: var(--preset-color-black-3);
+        background-color: var(--preset-color-black-1);
         background-repeat: no-repeat;
         border-radius: 5px;
         padding: 0px 10px;

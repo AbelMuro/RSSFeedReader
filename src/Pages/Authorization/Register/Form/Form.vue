@@ -4,6 +4,7 @@
     import EnterPassword from '../../../../Common/Components/EnterPassword';
     import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
     import UploadImage from '../../../../Common/Components/UploadImage';    
+    import EnterCompany from '../../../../Common/Components/EnterCompany';
     import {useToastStore} from '../../../../Store';
     import {useRouter} from 'vue-router';
     import {VueSpinner} from 'vue3-spinners';
@@ -21,6 +22,7 @@
             const form = e.target as HTMLFormElement;        
             const password = form.elements.namedItem('password') as HTMLInputElement;
             const reEnterPassword = form.elements.namedItem('reEnterPassword') as HTMLInputElement;
+            const company = form.elements.namedItem('company') as HTMLInputElement;
 
             if(password.value !== reEnterPassword.value){
                 error.value = "Passwords don't match.";
@@ -35,21 +37,19 @@
             formData.append('email', email.value);
             formData.append('password', password.value);
             formData.append('image', image.value);
+            formData.append('company', company.value);
             
             const response = await fetch('http://localhost:4000/register', {
                 method: 'POST',
                 body: formData
             });
 
-            if(response.status === 200){
-                showToast('Account has been created');
-                router.push('/');
-            }
-            else{
-                const result = await response.text();
-                console.log(result);
-                showToast(result);
-            }            
+            const result = await response.text();
+            console.log(result);      
+            showToast(result);      
+
+            if(response.status === 200)             
+                router.push('/');        
         }
         catch(error: any){
             const message = error.message;
@@ -67,6 +67,7 @@
 <template>  
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
+        <EnterCompany/>
         <EnterPassword label="Enter Password:" name="password"/>
         <ReEnterPassword label="Re-Enter Password:"/>
         <p class="error" v-if="error">
@@ -93,7 +94,7 @@
         height: 60px;
         border-radius: 10px;
         background: var(--preset-linear-gradient-purple-black-2);
-        background-color: var(--preset-color-black-3);        
+        background-color: var(--preset-color-black-1);        
         background-position: 0px 0px;
         background-repeat: no-repeat;
         border: none;
