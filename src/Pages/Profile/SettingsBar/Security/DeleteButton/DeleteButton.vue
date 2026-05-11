@@ -1,8 +1,15 @@
 <script setup lang="ts">
     import {ref} from 'vue';
+    import {useRouter} from 'vue-router';
     import Modal from '../../../../../Common/Prompts/Modal';
+    import {VueSpinner} from 'vue3-spinners';
+    import {useToastStore} from '../../../../../Store';
 
     const open = ref<boolean>(false);
+    const loading = ref<boolean>(false);
+    const router = useRouter();
+    const store = useToastStore();
+    const {showToast} = store;
 
     const handleOpen = () => {
         open.value = !open.value;
@@ -10,11 +17,25 @@
 
     const handleDelete = async () => {
         try{
-            
+            loading.value = true;
+            const response = await fetch('http://localhost:4000/delete-account', {
+                method: 'DELETE',
+                credentials: 'include'
+            });
+
+            const results = await response.text();
+            console.log(results);
+            showToast(results);
+
+            if(response.status === 200)
+                router.push('/');
         }
         catch(error : any){
             const message = error.message;
             console.log(message);
+        }
+        finally{
+            loading.value = false;
         }
     }
 </script>
@@ -36,7 +57,8 @@
                 Cancel
             </button>
             <button @click="handleDelete"> 
-                Delete
+                <VueSpinner v-if="loading" color="white" size="30px"/>
+                <span v-else>Delete</span>
             </button>
         </div>
     </Modal>
@@ -110,6 +132,9 @@
         line-height: var(--preset-text-4-line-height);
         letter-spacing: var(--preset-text-4-letter-spacing);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .buttons > button:nth-of-type(1){

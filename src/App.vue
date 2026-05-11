@@ -4,8 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i want to define the handleDelete function in the DeleteButton component
-        and then i can define the route for the delete feature on the backend.
+        this is where i left off, i want to continue defining the SideBar Nagivation component buttons
     */
 </script>
 
@@ -37,9 +36,12 @@
         --preset-color-pink-1: #ffabb9;
         --preset-color-pink-2: #fd8397;
 
+        --preset-color-transparent-blue: rgba(216, 234, 253, 0.5);
         --preset-color-blue-1: #001dc4;
         --preset-color-blue-2: #00179c;
         --preset-color-blue-3: #001275;
+
+        --preset-color-light-blue-1: #f9faff;
 
         --preset-color-transparent-black: #00000080;
         --preset-color-black-1: #000835;
@@ -49,10 +51,10 @@
 
         --preset-color-grey-1: #b6b6b6;
         --preset-color-grey-2: #dfdfdf;
-        --preset-color-grey-3: #d7d7d7;
+        --preset-color-grey-3: #dedede;
         
         --preset-color-white-1: #eeeeee;
-        --preset-color-white-2: #d0d0d0;
+        --preset-color-white-2: #e4e4e4;
         --preset-color-white-3: #b3b3b3;
 
         --preset-color-red-1: #b70000;

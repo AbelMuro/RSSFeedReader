@@ -12,7 +12,7 @@
     }
 
     const handleSelectedStyle = (currentLink : string) => {
-        return link.value === currentLink ? {backgroundColor: '#d0d0d0', color: 'black'} : {};
+        return link.value === currentLink ? {backgroundColor: '#dedede', color: 'black'} : {};
     }
 
     watch(() => route.path, (path) => {

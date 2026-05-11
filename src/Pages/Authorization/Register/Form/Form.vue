@@ -33,10 +33,11 @@
 
             const email = form.elements.namedItem('email') as HTMLInputElement;
             const image = form.elements.namedItem('file') as HTMLInputElement;
+            const imageFile = image.files?.[0] || '';
             const formData = new FormData();
             formData.append('email', email.value);
             formData.append('password', password.value);
-            formData.append('image', image.value);
+            formData.append('image', imageFile);
             formData.append('company', company.value);
             
             const response = await fetch('http://localhost:4000/register', {
