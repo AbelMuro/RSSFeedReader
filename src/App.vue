@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i want to continue defining the SideBar Nagivation component buttons
+        this is where i left off, i need to design how the categories feature in the app will work.
     */
 </script>
 
@@ -36,7 +36,7 @@
         --preset-color-pink-1: #ffabb9;
         --preset-color-pink-2: #fd8397;
 
-        --preset-color-transparent-blue: rgba(216, 234, 253, 0.5);
+        --preset-color-transparent-blue: #d8eafd80;
         --preset-color-blue-1: #001dc4;
         --preset-color-blue-2: #00179c;
         --preset-color-blue-3: #001275;
@@ -54,7 +54,7 @@
         --preset-color-grey-3: #dedede;
         
         --preset-color-white-1: #eeeeee;
-        --preset-color-white-2: #e4e4e4;
+        --preset-color-white-2: #e5e5e5;
         --preset-color-white-3: #b3b3b3;
 
         --preset-color-red-1: #b70000;
@@ -96,7 +96,7 @@
 
         --preset-text-4-font-family: 'roboto';
         --preset-text-4-font-size: 1.3rem;
-        --preset-text-4-font-weight: 300;
+        --preset-text-4-font-weight: 400;
         --preset-text-4-line-height: 1.8rem;
         --preset-text-4-letter-spacing: 0px;
 
@@ -105,6 +105,12 @@
         --preset-text-5-font-weight: 400;
         --preset-text-5-line-height: 1.3rem;
         --preset-text-5-letter-spacing: 0px;
+
+        --preset-text-6-font-family: 'roboto';
+        --preset-text-6-font-size: 0.8rem;
+        --preset-text-6-font-weight: 400;
+        --preset-text-6-line-height: 1.1rem;
+        --preset-text-6-letter-spacing: 0px;
         
     }
 </style>

@@ -1,11 +1,13 @@
 <script setup lang="ts">
     import Navigation from './Navigation';
+    import Categories from './Categories';
 </script>
 
 <template>
     <aside class="sidebar">
         <Navigation/>
         <hr/>
+        <Categories/>
     </aside>
 </template>
 

@@ -12,7 +12,7 @@
     }
 
     const handleSelectedStyle = (currentLink : string) => {
-        return link.value === currentLink ? {backgroundColor: '#dedede', color: 'black'} : {};
+        return link.value.includes(currentLink) ? {backgroundColor: '#dedede', color: 'black'} : {};
     }
 
     watch(() => route.path, (path) => {

@@ -1,10 +1,12 @@
 <script setup lang="ts">
+    import { RouterView } from 'vue-router';
     import SideBar from './SideBar';
 </script>
 
 <template>
     <section class="container">
         <SideBar/>
+        <RouterView/>
     </section>
 </template>
 
