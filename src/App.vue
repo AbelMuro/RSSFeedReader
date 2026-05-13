@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to design how the categories feature in the app will work.
+        this is where i left off, i need to refactor my fetch request for the categories component
     */
 </script>
 

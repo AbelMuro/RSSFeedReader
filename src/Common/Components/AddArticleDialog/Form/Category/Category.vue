@@ -1,14 +1,37 @@
 <script setup lang="ts">
-    import {ref} from 'vue'; 
+    import {ref, onMounted, useTemplateRef, watch} from 'vue'; 
     import {motion} from 'motion-v';
     import icons from './icons';
 
-    const category = ref<string>('Technology');
-    const open = ref<boolean>(false);
+    const inputRef = useTemplateRef('category-input');
+    const category = ref<string>('');
+    const allCategories = ref<Array<string>>([]);
 
-    const handleOpen = () => {
-        open.value = !open.value;
-    }   
+    const handleClick = (e : MouseEvent) => {
+        inputRef.value?.focus();
+    }
+    
+    const handleKeyboard = (e : KeyboardEvent) => {
+        const key = e.key;
+
+        if(key !== ' ') return;
+
+        requestAnimationFrame(() => {
+            if(category.value === ' '){
+                category.value = '';
+                return;
+            }
+            const noDuplicateCategories = [...new Set([...allCategories.value])];
+            allCategories.value = [...noDuplicateCategories, category.value];
+            category.value = '';            
+        })
+    }
+
+    onMounted(() => {
+        inputRef.value?.addEventListener('keydown', handleKeyboard);
+    });
+
+
 </script>
 
 <template>
@@ -16,34 +39,31 @@
         <label for="category" class="label">
             Select Category
         </label>
-         <motion.img 
-            class="select_arrow" 
-            :src="icons['arrow']" 
-            :initial="false"
-            :animate="open ? {rotate: '180deg'} : {rotate: '0deg'}"
-            />
-        <select class="select" id="category" name="category" v-model="category" @click="handleOpen" @blur="handleOpen">
-            <option value="Technology">Technology</option>
-            <option value="Sports">Sports</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Business">Business</option>
-            <option value="Health">Health</option>
-            <option value="Science">Science</option>
-            <option value="World">World</option>
-        </select>
+        <fieldset class="input_container" @click="handleClick">
+            <span class="input_category" v-for="(category) in allCategories">
+                {{category}}
+            </span>
+            <input 
+                type="text"
+                class="input"
+                ref="category-input"
+                maxLength="10"
+                v-model="category"
+                >
+        </fieldset>
+        <input type="hidden" :value="allCategories" name="category"/>
     </fieldset>
 </template>
 
 <style scoped>
     .fieldset{
-        width: 100%;
+        width: 350px;
         display: flex;
         flex-direction: column;
         gap: 5px;
         margin: 0px;
         padding: 0px;
         border: none;
-        position: relative;
     }
 
     .label{
@@ -55,36 +75,48 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
-    .select{
+    .input_container{
+        width: 350px;
+        height: 40px;   
+        border-radius: 5px;     
+        border: none;
+        padding: 0px 10px;
+        margin: 0px;
+        border: 1px solid var(--preset-color-grey-1);
+        background-color: white;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        overflow: hidden;
+    }
+
+    .input{
         width: 100%;
         height: 40px;
-        border-radius: 5px;
-        border: 1px solid var(--preset-color-grey-1);
         padding: 0px 10px;
         cursor: pointer;
+        background-color: transparent;
+        border: none;
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
-        appearance: none;
-        -webkit-appearance: none; /* Safari */
-        -moz-appearance: none;    /* Firefox */
-        background-image: none;   /* Some browsers still show an arrow */
     }
-
-    .select_arrow{
-        width: 20px;
-        object-fit: contain;
-        position: absolute;
-        top: 58%;
-        right: 10px;
-        pointer-events: none;
-    }
-
-    .select:focus{
+    
+    .input:focus{
         outline: none;
-        border: 1px solid var(--preset-color-black-1);
+    }
+
+    .input_category{
+        padding: 5px;
+        background-color: green;
+        border-radius: 10px;
+        font-family: var(--preset-text-5-font-family);
+        font-size: var(--preset-text-5-font-size);
+        font-weight: var(--preset-text-5-font-weight);
+        line-height: var(--preset-text-5-line-height);
+        letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
 </style>
