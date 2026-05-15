@@ -1,18 +1,24 @@
 <script setup lang="ts">
+    import {LayoutGroup, AnimatePresence, motion} from 'motion-v';
     import Category from './Category';
+
 </script>
 
 <template>
-    <section class="categories">
-        <h1 class="categories_title">
-            CATEGORIES
-        </h1>
-        <Category/>
-    </section>
+    <LayoutGroup>
+        <motion.section layout class="categories">
+            <motion.h1 layout class="categories_title">
+                CATEGORIES
+            </motion.h1>
+            <Category/>
+            <Category/> 
+        </motion.section>
+    </LayoutGroup>
 </template>
 
 <style scoped>
     .categories{
+        height: 500px;
         display: flex;
         flex-direction: column;
         gap: 10px;

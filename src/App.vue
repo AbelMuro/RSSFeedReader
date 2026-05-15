@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to implement framer-motion on the category component for the dropdown feature
+        this is where i left off, i am almost finished with the newestButton component
     */
 </script>
 

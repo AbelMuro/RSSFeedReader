@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import Navigation from './Navigation';
     import Categories from './Categories';
+    import CheckStatusFeeds from './CheckStatusFeeds';
 </script>
 
 <template>
@@ -8,6 +9,8 @@
         <Navigation/>
         <hr/>
         <Categories/>
+        <hr/>
+        <CheckStatusFeeds/>
     </aside>
 </template>
 
@@ -20,6 +23,8 @@
         background-color: var(--preset-color-white-2);
         display: flex;
         flex-direction: column;
+        grid-row: 1/3;
+        grid-column: 1/2;
         gap: 15px
     }
 

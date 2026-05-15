@@ -1,11 +1,13 @@
 <script setup lang="ts">
     import { RouterView } from 'vue-router';
     import SideBar from './SideBar';
+    import HeaderBar from './HeaderBar';
 </script>
 
 <template>
     <section class="container">
         <SideBar/>
+        <HeaderBar/>
         <RouterView/>
     </section>
 </template>
@@ -14,6 +16,7 @@
     .container{
         width: 100%;
         height: calc(100vh - 70px);
-        display: flex;
+        display: grid;
+        grid-template-columns: auto 1fr;
     }
 </style>
