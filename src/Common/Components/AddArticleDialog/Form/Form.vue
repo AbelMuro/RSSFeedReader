@@ -9,6 +9,7 @@
     const open = defineModel();
 
     const loading = ref<boolean>(false);
+    const error = ref<string>('');
     const store = useToastStore();
     const {showToast} = store;
 
@@ -19,11 +20,16 @@
             const form = e.target as HTMLFormElement;
             const titleElement = form.elements.namedItem('title') as HTMLInputElement;
             const contentElement = form.elements.namedItem('content') as HTMLTextAreaElement;
-            const categoryElement = form.elements.namedItem('category') as HTMLSelectElement;
+            const categoryElement = form.elements.namedItem('category') as HTMLInputElement;
             const title = titleElement.value;
             const content = contentElement.value;
             const category = categoryElement.value;
 
+            if(!category.length){
+                error.value = "Can't be empty.";
+                return;
+            }
+ 
             const response = await fetch('http://localhost:4000/add-article', {
                 method: 'POST',
                 headers: {
@@ -57,6 +63,9 @@
         <TitleInput/>
         <ContentTextArea/>
         <Category/>
+        <p class="error_message" v-if="error">
+            {{error}}
+        </p>
         <button class="submit">
             <VueSpinner v-if="loading" color="white" size="30px"/>
             <span v-else>Create Article</span>
@@ -100,5 +109,15 @@
 
     .submit:active{
         background-position: -150px 0px;
+    }
+
+    .error_message{
+        color: var(--preset-color-red-1);
+        font-family: var(--preset-text-5-font-family);
+        font-size: var(--preset-text-5-font-size);
+        font-weight: var(--preset-text-5-font-weight);
+        line-height: var(--preset-text-5-line-height);
+        letter-spacing: var(--preset-text-5-letter-spacing);
+        margin: 0px;
     }
 </style>

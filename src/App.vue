@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to refactor my fetch request for the categories component
+        this is where i left off, i need to implement framer-motion on the category component for the dropdown feature
     */
 </script>
 
@@ -109,7 +109,7 @@
         --preset-text-6-font-family: 'roboto';
         --preset-text-6-font-size: 0.8rem;
         --preset-text-6-font-weight: 400;
-        --preset-text-6-line-height: 1.1rem;
+        --preset-text-6-line-height: 1.3rem;
         --preset-text-6-letter-spacing: 0px;
         
     }

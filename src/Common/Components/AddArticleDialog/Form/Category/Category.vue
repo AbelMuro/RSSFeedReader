@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {ref, onMounted, useTemplateRef, watch} from 'vue'; 
+    import {ref, onMounted, useTemplateRef} from 'vue'; 
     import {motion} from 'motion-v';
     import icons from './icons';
 
@@ -7,24 +7,35 @@
     const category = ref<string>('');
     const allCategories = ref<Array<string>>([]);
 
-    const handleClick = (e : MouseEvent) => {
+    const handleClick = () => {
         inputRef.value?.focus();
     }
     
     const handleKeyboard = (e : KeyboardEvent) => {
         const key = e.key;
 
-        if(key !== ' ') return;
+        if(key === ' ') {
+            requestAnimationFrame(() => {
+                if(category.value === ' '){
+                    category.value = '';
+                    return;
+                }
 
-        requestAnimationFrame(() => {
-            if(category.value === ' '){
-                category.value = '';
-                return;
-            }
-            const noDuplicateCategories = [...new Set([...allCategories.value])];
-            allCategories.value = [...noDuplicateCategories, category.value];
-            category.value = '';            
-        })
+                if(allCategories.value.length === 5) return;
+            
+                const noDuplicateCategories = [...new Set([...allCategories.value])];
+                allCategories.value = [...noDuplicateCategories, category.value];
+                category.value = '';            
+            })            
+        }
+
+        else if(key === 'Backspace'){
+            requestAnimationFrame(() => {
+                if(category.value !== '') return;
+
+                allCategories.value.pop();
+            })
+        }
     }
 
     onMounted(() => {
@@ -37,7 +48,7 @@
 <template>
     <fieldset class="fieldset">
         <label for="category" class="label">
-            Select Category
+            Enter Category
         </label>
         <fieldset class="input_container" @click="handleClick">
             <span class="input_category" v-for="(category) in allCategories">
@@ -51,7 +62,11 @@
                 v-model="category"
                 >
         </fieldset>
-        <input type="hidden" :value="allCategories" name="category"/>
+        <input 
+            type="hidden" 
+            :value="allCategories" 
+            name="category" 
+            required/>
     </fieldset>
 </template>
 
@@ -118,6 +133,5 @@
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
-
 </style>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+    import Category from './Category';
 </script>
 
 <template>
@@ -7,6 +7,7 @@
         <h1 class="categories_title">
             CATEGORIES
         </h1>
+        <Category/>
     </section>
 </template>
 
