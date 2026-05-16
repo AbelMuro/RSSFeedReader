@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import {ref} from 'vue';
     import {useRouter} from 'vue-router';
-    import Modal from '../../../../../Common/Prompts/Modal';
+    import Modal from '../../../../Common/Prompts/Modal';
     import {VueSpinner} from 'vue3-spinners';
-    import {useToastStore} from '../../../../../Store';
+    import {useToastStore} from '../../../../Store';
 
     const open = ref<boolean>(false);
     const loading = ref<boolean>(false);

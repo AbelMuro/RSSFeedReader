@@ -1,16 +1,33 @@
 <script setup lang="ts">
+    import {useLayoutStore} from '../../../../Store';
+    import { storeToRefs } from 'pinia';
     import icons from './icons';
+
+    const store = useLayoutStore();
+    const {layout} = storeToRefs(store);
+    const {changeLayout} = store;
+
+    const handleStyles = (option: string) => {
+        return option === layout.value ? {backgroundColor: '#dfdfdf'} : {}
+    }
+
+    const handleLayout = (layout: string) => {
+        changeLayout(layout);
+    }
+
+
+
 </script>
 
 <template>
     <section class="grid">
-        <button>
+        <button @click="handleLayout('align-justify')" :style="handleStyles('align-justify')">
             <img :src="icons['threeBars']"/>
         </button>
-        <button>
+        <button @click="handleLayout('grid')" :style="handleStyles('grid')">
             <img :src="icons['squares']"/>
         </button>
-        <button>
+        <button @click="handleLayout('align-justify-less-content')" :style="handleStyles('align-justify-less-content')">
             <img :src="icons['fourBars']"/>
         </button>
     </section>

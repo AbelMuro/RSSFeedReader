@@ -1,8 +1,8 @@
 <script setup lang="ts">
     import {ref, onMounted, watch} from 'vue';
-    import {useToastStore} from '../../../../../Store';
+    import {useToastStore} from '../../../../Store';
     import DisplayImage from './DisplayImage';
-    import icons from '../../../icons';
+    import icons from '../../icons';
 
     const src = ref<string>(icons['placeholder']);
     const file = ref<Blob | null>(null);

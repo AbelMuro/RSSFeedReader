@@ -4,7 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am almost finished with the newestButton component
+        this is where i left off, i need to implement framer-motion on the sidebar component to enable the expand and
+        shrink feature for tablet and mobile devices
     */
 </script>
 

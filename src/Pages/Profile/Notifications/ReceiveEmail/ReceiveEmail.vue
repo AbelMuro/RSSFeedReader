@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import Switch from '../../../../../Common/Components/Switch';
+    import Switch from '../../../../Common/Components/Switch';
 
     const itemName = 'email-updates';
 

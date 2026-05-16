@@ -1,8 +1,8 @@
 <script setup lang="ts">
     import {ref} from 'vue';
     import { VueSpinner } from 'vue3-spinners';
-    import EnterEmail from '../../../../../Common/Components/EnterEmail';
-    import {useToastStore} from '../../../../../Store';
+    import EnterEmail from '../../../../Common/Components/EnterEmail';
+    import {useToastStore} from '../../../../Store';
 
     const loading = ref<boolean>(false);
     const store = useToastStore();

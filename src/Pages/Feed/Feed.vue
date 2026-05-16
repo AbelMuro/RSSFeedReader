@@ -18,5 +18,6 @@
         height: calc(100vh - 70px);
         display: grid;
         grid-template-columns: auto 1fr;
+        grid-template-rows: 80px 1fr;
     }
 </style>

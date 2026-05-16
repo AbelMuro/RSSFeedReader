@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import GridLayoutButtons from './GridLayoutButtons';
     import NewestButton from './NewestButton';
+    import RefreshButton from './RefreshButton';
+    import MarkAllReadButton from './MarkAllReadButton';
 </script>   
 
 <template>
@@ -16,6 +18,8 @@
         <section>
             <GridLayoutButtons/>
             <NewestButton/>
+            <RefreshButton/>
+            <MarkAllReadButton/>
         </section>
     </header>
 </template>

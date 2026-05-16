@@ -3,17 +3,18 @@
 </script>
 
 <template>
-    <button class="newest">
-        <img :src="icons['signal']"/>
-        <span>Newest</span>
+    <button class="refresh">
+        <img :src="icons['refresh']"/>
+        Refresh
     </button>
 </template>
 
 <style scoped>
-    .newest{
+    .refresh{
         height: 30px;
         padding: 7px 10px;
         display: flex;
+        align-items: center;
         gap: 10px;
         border: 1px solid var(--preset-color-grey-1);
         border-radius: 10px;
@@ -26,21 +27,18 @@
         cursor: pointer;
     }
 
-    .newest:hover{
+    .refresh:hover{
         background-color: var(--preset-color-white-2);
     }
 
-    .newest:active{
+    .refresh:active{
         background-color: var(--preset-color-grey-2);
     }
 
-    .newest > img {
-        width: 10px;
+    .refresh > img {
+        width: 15px;
         object-fit: contain;
         align-self: start;
     }
 
-    .newest > span{
-        align-self: center;
-    }
 </style>

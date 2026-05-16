@@ -1,23 +1,22 @@
 <script setup lang="ts">
-    import Switch from '../../../../../Common/Components/Switch';
+    import Switch from '../../../../Common/Components/Switch';
 
-    const itemName = 'tag-5-newest-articles';
+    const itemName = 'dark-theme';
 
     const watcher = (on : boolean) => {
         localStorage.setItem(itemName, JSON.stringify(on));
     }
-
 </script>
 
 <template>
-    <section class="tag_articles">
+    <section class="theme">
         <Switch :item="itemName" :watcher="watcher"/>
-        Tag 5 Newest Articles
+        Display Dark Theme
     </section>
 </template>
 
 <style scoped>
-    .tag_articles{
+    .theme{
         display: flex;
         align-items: center;
         gap: 10px;
@@ -29,4 +28,5 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
+   
 </style>

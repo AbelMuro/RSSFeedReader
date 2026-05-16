@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import {ref} from 'vue';
     import { VueSpinner } from 'vue3-spinners';
-    import {useToastStore} from '../../../../../Store';
-    import EnterPassword from '../../../../../Common/Components/EnterPassword';
-    import ReEnterPassword from '../../../../../Common/Components/ReEnterPassword';
+    import {useToastStore} from '../../../../Store';
+    import EnterPassword from '../../../../Common/Components/EnterPassword';
+    import ReEnterPassword from '../../../../Common/Components/ReEnterPassword';
 
     const error = ref<string>('');
     const loading = ref<boolean>(false);

@@ -1,19 +1,19 @@
 <script setup lang="ts">
-    import icons from './icons';
+
 </script>
 
 <template>
-    <button class="newest">
-        <img :src="icons['signal']"/>
-        <span>Newest</span>
+    <button class="read">
+        Mark all read
     </button>
 </template>
 
 <style scoped>
-    .newest{
+    .read{
         height: 30px;
         padding: 7px 10px;
         display: flex;
+        align-items: center;
         gap: 10px;
         border: 1px solid var(--preset-color-grey-1);
         border-radius: 10px;
@@ -26,21 +26,11 @@
         cursor: pointer;
     }
 
-    .newest:hover{
+    .read:hover{
         background-color: var(--preset-color-white-2);
     }
 
-    .newest:active{
+    .read:active{
         background-color: var(--preset-color-grey-2);
-    }
-
-    .newest > img {
-        width: 10px;
-        object-fit: contain;
-        align-self: start;
-    }
-
-    .newest > span{
-        align-self: center;
     }
 </style>

@@ -1,37 +1,52 @@
 <script setup lang="ts">
-    import { storeToRefs } from 'pinia';
-    import AlignJustify from './AlignJustify';
-    import Grid from './Grid';
-    import AlignJustifyLessContent from './AlignJustifyLessContent';
-    import {useLayoutStore} from '../../../Store';
-
-    const store = useLayoutStore();
-    const {layout} = storeToRefs(store);
-
-
+    const layout = defineModel<string>();
 </script>
 
 <template>
-    <AlignJustify v-model="layout"/>
-    <Grid v-model="layout"/>
-    <AlignJustifyLessContent v-model="layout"/>
+    <section class="grid" v-if="layout === 'grid'">
+        <h2 class="all_articles_title">
+            TODAY
+        </h2>
+        <article class="article" v-for="(i) in [1,2,3,4,5]">
+            <h2 class="article_title">
+                <div class="article_icon">
+                    S
+                </div>
+                Smashing Magazine 
+                <span> • 2h ago</span>
+            </h2>
+            <h1 class="article_name">
+                Practical Guide To Designing For Colorblind Users
+            </h1>
+            <p class="article_content">
+                Color blindness affects roughly 8% of men and 0.5% of women worldwide. 
+                Yet most interfaces rely heavily on color to convey meaning, status, and hierarchy. 
+                Here's how to design interfaces that work for everyone without sacrificing visual richness.
+            </p>
+            <div class="categories">
+                <div class="category">
+                    Development
+                </div>
+            </div>
+        </article>
+    </section>
 </template>
 
 <style scoped>
-    .align_justify{
-        width: 100%;
+    .grid{
         height: calc(100vh - 70px - 80px);
-        grid-column: 2/3;
-        grid-row: 2/3;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        padding: 0px 25px 25px 25px;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 15px;
         overflow: auto;
     }
 
     .all_articles_title{
+        grid-column: 1/4;
+        grid-row: 1/2;
         margin: 0px;
-        padding: 15px 0px 0px 25px;
+        padding: 15px 0px 0px 15px;
         color: var(--preset-color-grey-1);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
@@ -43,15 +58,15 @@
 
     .article{
         width: 100%;
-        padding: 0px 55px 25px 55px;
+        padding: 25px;
+        border-radius: 15px;
         display: flex;
         flex-direction: column;
         gap: 15px;
+        border: 1px solid var(--preset-color-grey-1);
     }
     
-    .article:not(.article:last-child){
-        border-bottom: 1px solid var(--preset-color-grey-1);
-    }
+
 
     .article_title{
         display: flex;
@@ -119,6 +134,16 @@
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
         letter-spacing: var(--preset-text-5-letter-spacing);
+    }
+    
+    @media(max-width: 1200px){
+        .grid{
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .all_articles_title{
+            grid-column: 1/3;
+        }
     }
 
     @media(max-width: 770px){

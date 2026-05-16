@@ -1,28 +1,30 @@
 <script setup lang="ts">
-    import { storeToRefs } from 'pinia';
-    import AlignJustify from './AlignJustify';
-    import Grid from './Grid';
-    import AlignJustifyLessContent from './AlignJustifyLessContent';
-    import {useLayoutStore} from '../../../Store';
-
-    const store = useLayoutStore();
-    const {layout} = storeToRefs(store);
-
-
+    const layout = defineModel<string>();
 </script>
 
 <template>
-    <AlignJustify v-model="layout"/>
-    <Grid v-model="layout"/>
-    <AlignJustifyLessContent v-model="layout"/>
+    <section class="all_articles" v-if="layout === 'align-justify-less-content'">
+        <h2 class="all_articles_title">
+            TODAY
+        </h2>
+        <article class="article" v-for="(i) in [1,2,3,4,5]">
+            <h2 class="article_title">
+                <div class="article_icon">
+                    S
+                </div>
+                Smashing Magazine 
+                <span> • 2h ago</span>
+            </h2>
+            <h1 class="article_name">
+                Practical Guide To Designing For Colorblind Users
+            </h1>
+        </article>
+    </section>
 </template>
 
 <style scoped>
-    .align_justify{
-        width: 100%;
+    .all_articles{
         height: calc(100vh - 70px - 80px);
-        grid-column: 2/3;
-        grid-row: 2/3;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -30,6 +32,8 @@
     }
 
     .all_articles_title{
+        grid-column: 1/4;
+        grid-row: 1/2;
         margin: 0px;
         padding: 15px 0px 0px 25px;
         color: var(--preset-color-grey-1);
