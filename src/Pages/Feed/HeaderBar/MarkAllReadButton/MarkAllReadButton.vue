@@ -33,4 +33,12 @@
     .read:active{
         background-color: var(--preset-color-grey-2);
     }
+
+    @media(max-width: 625px){
+        .read{
+            height: 40px;
+            width: 300px;
+            justify-content: center;
+        }
+    }
 </style>

@@ -33,11 +33,9 @@
 </template>
 
 <style scoped>
- .align_justify{
+    .align_justify{
         width: 100%;
         height: calc(100vh - 70px - 80px);
-        grid-column: 2/3;
-        grid-row: 2/3;
         display: flex;
         flex-direction: column;
         gap: 15px;

@@ -14,9 +14,6 @@
     const handleLayout = (layout: string) => {
         changeLayout(layout);
     }
-
-
-
 </script>
 
 <template>
@@ -70,5 +67,15 @@
     .grid > button > img{
         width: 20px;
         object-fit: contain;
+    }
+
+    @media(max-width: 625px){
+        .grid{
+            gap: 0px;
+        }
+
+        .grid > button{
+            width: 100px
+        }
     }
 </style>

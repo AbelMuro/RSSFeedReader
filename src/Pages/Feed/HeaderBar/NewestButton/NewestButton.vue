@@ -43,4 +43,17 @@
     .newest > span{
         align-self: center;
     }
+
+    @media(max-width: 625px){
+        .newest{
+            font-size: 1rem;
+            height: 40px;
+            width: 300px;
+            justify-content: center;
+        }
+
+        .newest > img{
+            width: 15px;
+        }
+    }
 </style>

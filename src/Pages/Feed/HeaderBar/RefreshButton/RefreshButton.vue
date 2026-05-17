@@ -41,4 +41,16 @@
         align-self: start;
     }
 
+    @media(max-width: 625px){
+        .refresh{
+            height: 40px;
+            width: 300px;
+            justify-content: center;
+        }
+
+        .refresh > img{
+            align-self: center;
+        }
+    }
+
 </style>

@@ -1,21 +1,24 @@
 <script setup lang="ts">
+    import {useMediaQuery} from '../../../Common/Hooks';
+    import MobileSideBar from './MobileSideBar';
     import Navigation from './Navigation';
     import Categories from './Categories';
     import CheckStatusFeeds from './CheckStatusFeeds';
-    import icons from './icons';
+
+    const mobile = useMediaQuery('(max-width: 1025px)');
+
+
 </script>
 
 <template>
-    <aside class="sidebar">
+    <aside class="sidebar" v-if="!mobile">
         <Navigation/>
         <hr/>
         <Categories/>
         <hr/>
         <CheckStatusFeeds/>
-        <button class="expand_sidebar">
-            <img class="arrow" :src="icons['arrow']"/>
-        </button>
     </aside>
+    <MobileSideBar v-else/>
 </template>
 
 <style scoped>
@@ -50,6 +53,7 @@
         position: absolute;
         top: 0px;
         right: 0px;
+        cursor: pointer;
     }
 
     .arrow{

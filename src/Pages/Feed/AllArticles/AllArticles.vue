@@ -12,120 +12,24 @@
 </script>
 
 <template>
-    <AlignJustify v-model="layout"/>
-    <Grid v-model="layout"/>
-    <AlignJustifyLessContent v-model="layout"/>
+    <section class="all_articles_container">
+        <AlignJustify v-model="layout"/>
+        <Grid v-model="layout"/>
+        <AlignJustifyLessContent v-model="layout"/>
+    </section>
 </template>
 
 <style scoped>
-    .align_justify{
+    .all_articles_container{
         width: 100%;
         height: calc(100vh - 70px - 80px);
         grid-column: 2/3;
         grid-row: 2/3;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        overflow: auto;
     }
 
-    .all_articles_title{
-        margin: 0px;
-        padding: 15px 0px 0px 25px;
-        color: var(--preset-color-grey-1);
-        font-family: var(--preset-text-5-font-family);
-        font-size: var(--preset-text-5-font-size);
-        font-weight: 500;
-        line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
-    }
-
-
-    .article{
-        width: 100%;
-        padding: 0px 55px 25px 55px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .article:not(.article:last-child){
-        border-bottom: 1px solid var(--preset-color-grey-1);
-    }
-
-    .article_title{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin: 0px;
-        color: var( --preset-color-black-3);
-        font-family: var(--preset-text-5-font-family);
-        font-size: var(--preset-text-5-font-size);
-        font-weight: var(--preset-text-5-font-weight);
-        line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
-    }
-
-    .article_title > span{
-        color: var(--preset-color-grey-1);
-    }
-
-    .article_icon{
-        width: 25px;
-        height: 25px;
-        border-radius: 10px;
-        background-color: var(--preset-color-red-1);
-        color: var(--preset-color-white-1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .article_name{
-        margin: 0px;
-        color: var(--preset-color-black-1);
-        font-family: var(--preset-text-3-font-family);
-        font-size: var(--preset-text-3-font-size);
-        font-weight: var(--preset-text-3-font-weight);
-        line-height: var(--preset-text-3-line-height);
-        letter-spacing: var(--preset-text-3-letter-spacing);
-    }
-
-    .article_content{
-        margin: 0px;
-        color: var( --preset-color-black-3);
-        font-family: var(--preset-text-5-font-family);
-        font-size: var(--preset-text-5-font-size);
-        font-weight: var(--preset-text-5-font-weight);
-        line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
-    }
-
-    .categories{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: 5px;
-        column-gap: 10px;
-    }
-
-    .category{
-        padding: 5px;
-        border-radius: 10px;
-        color: var(--preset-color-pink-2);
-        background-color: var(--preset-color-pink-1);
-        font-family: var(--preset-text-5-font-family);
-        font-size: var(--preset-text-5-font-size);
-        font-weight: var(--preset-text-5-font-weight);
-        line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
-    }
-
-    @media(max-width: 770px){
-        .article_name{
-            font-size: 1.5rem;
-            line-height: 2rem;
+    @media(max-width: 915px){
+        .all_articles_container{
+            grid-row: 1/2;
         }
-
     }
 </style>

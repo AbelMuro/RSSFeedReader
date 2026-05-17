@@ -19,5 +19,13 @@
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: 80px 1fr;
+        align-content: end;
     }
+
+    @media(max-width: 915px){
+        .container{
+            grid-template-rows: 1fr auto;
+        }        
+    }
+
 </style>
