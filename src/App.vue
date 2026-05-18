@@ -4,9 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to continue working on implementing the MobileHeaderBar component, 
-
-        there are still some fixes i need to perform
+        this is where i left off, i need to implement the article route on the backend that enables me to fetch
+        all articles from the database
     */
 </script>
 
