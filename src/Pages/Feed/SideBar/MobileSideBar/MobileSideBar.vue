@@ -63,7 +63,7 @@
 
     .expand_sidebar{
         width: 40px;
-        height: calc(100vh - 70px);
+        height: 100%;
         border: none;
         background-color: var(--preset-color-grey-2);
         position: absolute;
@@ -82,9 +82,13 @@
             grid-row: 1/2;
             height: calc(100vh - 70px - 80px);
         }
+    }
 
-        .expand_sidebar{
-            height: calc(100vh - 70px - 80px);
+    @media(max-width: 625px){
+        .mobile_sidebar{
+            height: initial;
+            max-height: calc(100vh - 70px - 40px);
+            min-height: calc(100vh - 70px - 420px);
         }
     }
 </style>

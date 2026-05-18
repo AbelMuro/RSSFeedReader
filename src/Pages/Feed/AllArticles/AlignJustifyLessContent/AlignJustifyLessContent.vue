@@ -24,11 +24,10 @@
 
 <style scoped>
     .all_articles{
-        height: calc(100vh - 70px - 80px);
+        height: 100%;
         display: flex;
         flex-direction: column;
         gap: 15px;
-        overflow: auto;
     }
 
     .all_articles_title{
@@ -126,10 +125,13 @@
     }
 
     @media(max-width: 770px){
+        .article{
+            padding: 15px;
+        }
+
         .article_name{
             font-size: 1.5rem;
             line-height: 2rem;
         }
-
     }
 </style>

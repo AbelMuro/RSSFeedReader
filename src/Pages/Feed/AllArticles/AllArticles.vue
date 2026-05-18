@@ -8,7 +8,6 @@
     const store = useLayoutStore();
     const {layout} = storeToRefs(store);
 
-
 </script>
 
 <template>
@@ -25,11 +24,20 @@
         height: calc(100vh - 70px - 80px);
         grid-column: 2/3;
         grid-row: 2/3;
+        overflow: auto;
     }
 
     @media(max-width: 915px){
         .all_articles_container{
             grid-row: 1/2;
+        }
+    }
+
+    @media(max-width: 625px){
+        .all_articles_container{
+            height: initial;
+            max-height: calc(100vh - 60px - 40px);
+            min-height: calc(100vh - 60px - 420px);
         }
     }
 </style>

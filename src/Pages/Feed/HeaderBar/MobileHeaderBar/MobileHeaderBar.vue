@@ -13,6 +13,10 @@
         open.value = !open.value;
     }
 
+    const handleClick = () => {
+        open.value = false;
+    }
+
 </script>
 
 <template>
@@ -34,10 +38,10 @@
                 47 unread
             </p>
         </section>
-        <GridLayoutButtons/>
-        <NewestButton/>
-        <RefreshButton/>
-        <MarkAllReadButton/>
+        <GridLayoutButtons @click="handleOpen"/>
+        <NewestButton @click="handleOpen"/>
+        <RefreshButton @click="handleOpen"/>
+        <MarkAllReadButton @click="handleOpen"/>
     </motion.header>
 </template>
 

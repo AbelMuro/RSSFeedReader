@@ -34,12 +34,11 @@
 
 <style scoped>
     .grid{
-        height: calc(100vh - 70px - 80px);
+        height: 100%;
         display: grid;
         padding: 0px 25px 25px 25px;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 15px;
-        overflow: auto;
     }
 
     .all_articles_title{
@@ -146,11 +145,25 @@
         }
     }
 
-    @media(max-width: 770px){
+    @media(max-width: 940px){
+        .article{
+            padding: 15px;
+        }
+
         .article_name{
             font-size: 1.5rem;
             line-height: 2rem;
         }
-
     }
+
+    @media(max-width: 680px){
+        .grid{
+            grid-template-columns: 1fr;
+        }
+
+        .all_articles_title{
+            grid-column: 1/2;
+        }
+    }
+
 </style>

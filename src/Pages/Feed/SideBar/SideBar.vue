@@ -66,4 +66,5 @@
             padding-right: 50px;
         }
     }
+
 </style>
