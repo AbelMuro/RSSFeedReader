@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to implement the article route on the backend that enables me to fetch
-        all articles from the database
+        this is where i left off, i need to finish the fetch request for the profile component
+        
     */
 </script>
 

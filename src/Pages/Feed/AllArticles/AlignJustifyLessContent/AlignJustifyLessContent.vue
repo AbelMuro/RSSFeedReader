@@ -1,5 +1,11 @@
 <script setup lang="ts">
-    const layout = defineModel<string>();
+    import { storeToRefs } from 'pinia';
+    import {useLayoutStore} from '../../../../Store';
+    import type {Article} from '../../../../Common/Types';
+
+    const articles = defineModel<Array<Article>>();
+    const store = useLayoutStore();
+    const {layout} = storeToRefs(store);
 </script>
 
 <template>
@@ -7,7 +13,7 @@
         <h2 class="all_articles_title">
             TODAY
         </h2>
-        <article class="article" v-for="(i) in [1,2,3,4,5]">
+        <article class="article" v-for="(article) in articles">
             <h2 class="article_title">
                 <div class="article_icon">
                     S
@@ -16,7 +22,7 @@
                 <span> • 2h ago</span>
             </h2>
             <h1 class="article_name">
-                Practical Guide To Designing For Colorblind Users
+               {{article.title}}
             </h1>
         </article>
     </section>
