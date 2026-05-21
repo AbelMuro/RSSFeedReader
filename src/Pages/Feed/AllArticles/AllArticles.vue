@@ -1,21 +1,27 @@
 <script setup lang="ts">
-    import {onMounted, ref} from 'vue';
+    import {onMounted, ref, onBeforeUnmount} from 'vue';
     import AlignJustify from './AlignJustify';
     import Grid from './Grid';
     import AlignJustifyLessContent from './AlignJustifyLessContent';
     import {Article} from '../../../Common/Types';
 
     const articles = ref<Array<Article>>([]);
+    let interval : ReturnType<typeof setInterval> | null = null;
 
-    onMounted(async () => {
-        try{
+    const fetchArticles = async () => {
+         try{
             const response = await fetch('http://localhost:4000/get-all-articles', {
                 method: 'GET',
             });
 
             if(response.status === 200){
-                const results = await response.json();
-                console.log(results);
+                let results = await response.json();
+                results = results.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                })
                 articles.value = results;
             }
             else{
@@ -27,6 +33,20 @@
             const message = error.message;
             console.log(message);
         }
+    }
+
+    onMounted(() => {
+       fetchArticles();
+
+       interval = setInterval(() => {
+        console.log('polling')
+            fetchArticles();
+       }, 5000)
+    });
+
+    onBeforeUnmount(() => {
+        if(interval)
+            clearInterval(interval);
     })
 
 </script>

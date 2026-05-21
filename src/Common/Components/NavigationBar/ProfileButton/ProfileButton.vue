@@ -4,14 +4,32 @@
 
     const router = useRouter();
 
-    const handleRoute = () => {
-        router.push('/profile');
+    const handleRoute = async () => {
+        try{
+            const response = await fetch('http://localhost:4000/get-login-status', {
+                method: 'GET',
+                credentials: 'include'
+            });
+
+            const results = await response.text();
+            console.log(results);
+
+            if(response.status === 200)
+                router.push('/profile');
+            else
+                router.push('/');
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+        
     }
 </script>
 
 <template>
     <button class="profile_button" @click="handleRoute">
-        <img class="profile_icon" :src="icons['user']">
+        <img class="profile_icon" :src="icons['user']"/>
     </button>
 </template>
 

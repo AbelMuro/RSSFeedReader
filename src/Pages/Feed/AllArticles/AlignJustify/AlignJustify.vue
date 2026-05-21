@@ -2,10 +2,57 @@
     import { storeToRefs } from 'pinia';
     import {useLayoutStore} from '../../../../Store';
     import { Article } from '../../../../Common/Types';
+    import FetchUserName from '../FetchUserName';
 
     const articles = defineModel<Array<Article>>();
     const store = useLayoutStore();
     const {layout} = storeToRefs(store);
+
+    const formatDate = (date: string) : string => {
+        const currentTime : number = Date.now();
+        const articleTimePosted : number = currentTime - Number(date);
+
+        const seconds = Math.floor(articleTimePosted / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(months / 12);
+
+        if(years > 0)
+            return `${years} year${years > 1 ? 's' : ''} ago`;
+        else if(months > 0)
+            return `${months} month${months > 1 ? 's' : ''} ago`;
+        else if(days > 0)
+            return `${days} day${days > 1 ? 's' : ''} ago`;
+        else if(hours > 0)
+            return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        else if(minutes > 0)
+            return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        else
+            return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    }
+
+    const fetchOPname = async (accountId: string) : Promise<string> => {
+        try{
+            const response = await fetch(`http://localhost:4000/get-account-name/${accountId}`, {
+                method: 'GET'
+            });
+            const result = await response.text();
+            console.log(result);
+
+            if(response.status === 200)
+                return result;
+            else
+                return '';
+            
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+            return '';
+        }
+    }
 
 </script>
 
@@ -14,13 +61,13 @@
         <h2 class="all_articles_title">
             TODAY
         </h2>
-        <article class="article" v-for="(article) in articles">
+        <article class="article" v-for="(article) in articles" :key="article.date_created">
             <h2 class="article_title">
                 <div class="article_icon">
                     S
                 </div>
-                Smashing Magazine 
-                <span> • 2h ago</span>
+                <FetchUserName :accountId="article.account_id"/>
+                <span> • {{formatDate(article.date_created)}}</span>
             </h2>
             <h1 class="article_name">
                 {{article.title}}

@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to finish the fetch request for the profile component
+        this is where i left off, i need to continue defining the FetchUserName component.
         
     */
 </script>

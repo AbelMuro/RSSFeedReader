@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import ImageForm from './ImageForm';
     import EmailForm from './EmailForm';
+    import LogOutButton from './LogOutButton';
 </script>
 
 <template>
@@ -10,6 +11,7 @@
         </h1>
         <ImageForm/>     
         <EmailForm/>
+        <LogOutButton/>
     </section>
 </template>
 

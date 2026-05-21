@@ -1,18 +1,25 @@
 <script setup lang="ts">
-    import {onMounted} from 'vue'; 
+    import {onBeforeMount} from 'vue'; 
     import SettingsBar from './SettingsBar';
     import MobileSettingsBar from './MobileSettingsBar';
     import {useMediaQuery} from '../../Common/Hooks';
-    import { RouterView } from 'vue-router';
+    import { RouterView, useRouter } from 'vue-router';
 
+    const router = useRouter();
     const mobile = useMediaQuery('(max-width: 770px)');
 
-    onMounted(async () => {
+    onBeforeMount(async () => {
         try{
             const response = await fetch('http://localhost:4000/get-login-status', {
                 method: 'GET',
                 credentials: 'include'
             });
+
+            const results = await response.text();
+            console.log(results);
+
+            if(response.status !== 200)
+                router.push('/');
         }
         catch(error : any){
             const message = error.message;

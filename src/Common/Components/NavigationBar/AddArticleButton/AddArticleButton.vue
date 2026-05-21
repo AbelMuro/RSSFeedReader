@@ -1,12 +1,42 @@
 <script setup lang="ts">
     import {ref} from 'vue';
+    import {useToastStore} from '../../../../Store';
     import AddArticleDialog from '../../AddArticleDialog';
     import icons from './icons';
 
     const open = ref<boolean>(false);
+    const store = useToastStore();
+    const {showToast} = store;
+    
+    const userIsOnline = async () => {
+        try{
+            const response = await fetch('http://localhost:4000/get-login-status', {
+                method: 'GET',
+                credentials: 'include'
+            });
 
-    const handleOpen = () => {
-        open.value = !open.value;
+            const results = await response.text();
+            console.log(results);
+
+            return response.status === 200;
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    const handleOpen = async () => {
+        if(open.value)
+            open.value = false;
+        else{
+            const result = await userIsOnline();
+            if(result)
+                open.value = true;
+            else
+                showToast('You must be logged in to post an article');
+        }
+
     }
 </script>
 

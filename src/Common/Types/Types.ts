@@ -3,5 +3,6 @@
         account_id: string,
         title: string,
         content: string,
-        category: string
+        category: string,
+        date_created: string,
     }
