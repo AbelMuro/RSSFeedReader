@@ -3,6 +3,7 @@
     import {useLayoutStore} from '../../../../Store';
     import { Article } from '../../../../Common/Types';
     import FetchUserName from '../FetchUserName';
+    import FetchUserPhoto from '../FetchUserPhoto';
 
     const articles = defineModel<Array<Article>>();
     const store = useLayoutStore();
@@ -33,26 +34,7 @@
             return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
     }
 
-    const fetchOPname = async (accountId: string) : Promise<string> => {
-        try{
-            const response = await fetch(`http://localhost:4000/get-account-name/${accountId}`, {
-                method: 'GET'
-            });
-            const result = await response.text();
-            console.log(result);
 
-            if(response.status === 200)
-                return result;
-            else
-                return '';
-            
-        }
-        catch(error : any){
-            const message = error.message;
-            console.log(message);
-            return '';
-        }
-    }
 
 </script>
 
@@ -63,9 +45,7 @@
         </h2>
         <article class="article" v-for="(article) in articles" :key="article.date_created">
             <h2 class="article_title">
-                <div class="article_icon">
-                    S
-                </div>
+                <FetchUserPhoto/>
                 <FetchUserName :accountId="article.account_id"/>
                 <span> • {{formatDate(article.date_created)}}</span>
             </h2>
