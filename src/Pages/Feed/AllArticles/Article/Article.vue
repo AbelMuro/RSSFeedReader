@@ -1,45 +1,80 @@
 <script setup lang="ts">
-    import { storeToRefs } from 'pinia';
     import {useLayoutStore} from '../../../../Store';
-    import type {Article as ArticleType} from '../../../../Common/Types';
-    import Article from '../Article';
+    import {onMounted} from 'vue';
+    import { storeToRefs } from 'pinia';
+    import FetchUserName from './FetchUserName';
+    import FetchUserPhoto from './FetchUserPhoto';
+    import {useCategoriesStore} from '../../../../Store';
 
-    const articles = defineModel<Array<ArticleType>>();
-    const store = useLayoutStore();
-    const {layout} = storeToRefs(store);
+    type Article = {
+        id: string;
+        account_id: string;
+        title: string;
+        content: string;
+        category: Array<string>;
+        date_created: string;
+    }
+
+    const {article} = defineProps<{article: Article}>();
+    const layoutStore = useLayoutStore();
+    const {addCategory} = useCategoriesStore();
+    const {layout} = storeToRefs(layoutStore);
+
+    const formatDate = (date: string) : string => {
+        const currentTime : number = Date.now();
+        const articleTimePosted : number = currentTime - Number(date);
+
+        const seconds = Math.floor(articleTimePosted / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(months / 12);
+
+        if(years > 0)
+            return `${years} year${years > 1 ? 's' : ''} ago`;
+        else if(months > 0)
+            return `${months} month${months > 1 ? 's' : ''} ago`;
+        else if(days > 0)
+            return `${days} day${days > 1 ? 's' : ''} ago`;
+        else if(hours > 0)
+            return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        else if(minutes > 0)
+            return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        else
+            return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    }
+
+    onMounted(() => {
+        article.category.forEach((category) => {
+            addCategory({category, accountId: article.account_id});
+        })
+    })
 
 </script>
 
 <template>
-    <section class="all_articles" v-if="layout === 'align-justify-less-content'">
-        <h2 class="all_articles_title">
-            TODAY
+    <article class="article" :key="article.date_created">
+        <h2 class="article_title">
+            <FetchUserPhoto :accountId="article.account_id"/>
+            <FetchUserName :accountId="article.account_id"/>
+            <span> • {{formatDate(article.date_created)}}</span>
         </h2>
-        <Article v-for="(article) in articles" :article="article" :key="article.date_created"/>
-    </section>
+        <h1 class="article_name">
+            {{article.title}}
+        </h1>
+        <p class="article_content" v-if="layout !== 'align-justify-less-content'"> 
+            {{article.content}}
+        </p>
+        <div class="categories" v-if="layout !== 'align-justify-less-content'">
+            <div class="category" v-for="(category) in article.category">
+                {{category}}
+            </div>
+        </div>
+    </article>
 </template>
 
 <style scoped>
-    .all_articles{
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .all_articles_title{
-        grid-column: 1/4;
-        grid-row: 1/2;
-        margin: 0px;
-        padding: 15px 0px 0px 25px;
-        color: var(--preset-color-grey-1);
-        font-family: var(--preset-text-5-font-family);
-        font-size: var(--preset-text-5-font-size);
-        font-weight: 500;
-        line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
-    }
-
 
     .article{
         width: 100%;
@@ -131,4 +166,5 @@
             line-height: 2rem;
         }
     }
+
 </style>

@@ -1,36 +1,13 @@
-<script setup lang="ts">
+<script setup lang="ts"> 
     import { storeToRefs } from 'pinia';
     import {useLayoutStore} from '../../../../Store';
-    import type {Article} from '../../../../Common/Types';
+    import type {Article as ArticleType} from '../../../../Common/Types';
+    import Article from '../Article';
 
-    const articles = defineModel<Array<Article>>();
+    const articles = defineModel<Array<ArticleType>>();
     const store = useLayoutStore();
     const {layout} = storeToRefs(store);
 
-    const formatDate = (date: string) => {
-        const currentTime : number = Date.now();
-        const articleTimePosted : number = currentTime - Number(date);
-
-        const seconds = Math.floor(articleTimePosted / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(months / 12);
-
-        if(years > 0)
-            return `${years} year${years > 1 ? 's' : ''} ago`;
-        else if(months > 0)
-            return `${months} month${months > 1 ? 's' : ''} ago`;
-        else if(days > 0)
-            return `${days} day${days > 1 ? 's' : ''} ago`;
-        else if(hours > 0)
-            return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-        else if(minutes > 0)
-            return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-        else
-            return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
-    }
 </script>
 
 <template>
@@ -38,26 +15,7 @@
         <h2 class="all_articles_title">
             TODAY
         </h2>
-        <article class="article" v-for="(article) in articles">
-            <h2 class="article_title">
-                <div class="article_icon">
-                    S
-                </div>
-                Smashing Magazine 
-                <span> • {{formatDate(article.date_created)}}</span>
-            </h2>
-            <h1 class="article_name">
-                {{article.title}}
-            </h1>
-            <p class="article_content">
-                {{article.content}}
-            </p>
-            <div class="categories">
-                <div class="category" v-for="(category) in article.category">
-                    {{category}}
-                </div>
-            </div>
-        </article>
+        <Article v-for="(article) in articles" :article="article" :key="article.date_created"/>
     </section>
 </template>
 

@@ -39,7 +39,7 @@
        fetchArticles();
 
        interval = setInterval(() => {
-        console.log('polling')
+            console.log('polling')
             fetchArticles();
        }, 5000)
     });

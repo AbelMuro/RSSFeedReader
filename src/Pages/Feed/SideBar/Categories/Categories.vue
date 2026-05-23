@@ -1,6 +1,13 @@
 <script setup lang="ts">
+    import {ref, onMounted} from 'vue';
+    import {useCategoriesStore} from '../../../../Store';
+    import {storeToRefs} from 'pinia';
     import {LayoutGroup, AnimatePresence, motion} from 'motion-v';
     import Category from './Category';
+
+    const store = useCategoriesStore();
+    const {categories} = storeToRefs(store);
+
 
 </script>
 
@@ -10,8 +17,7 @@
             <motion.h1 layout class="categories_title">
                 CATEGORIES
             </motion.h1>
-            <Category/>
-            <Category/> 
+            <Category v-for="(category) in categories" :category="category.category" :accountIds="category.accountIds" />
         </motion.section>
     </LayoutGroup>
 </template>
