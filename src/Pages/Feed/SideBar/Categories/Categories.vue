@@ -1,11 +1,11 @@
 <script setup lang="ts">
     import {ref, onMounted} from 'vue';
-    import {useCategoriesStore} from '../../../../Store';
+    import {useArticlesStore} from '../../../../Store';
     import {storeToRefs} from 'pinia';
-    import {LayoutGroup, AnimatePresence, motion} from 'motion-v';
+    import {LayoutGroup, motion} from 'motion-v';
     import Category from './Category';
 
-    const store = useCategoriesStore();
+    const store = useArticlesStore();
     const {categories} = storeToRefs(store);
 
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import {useArticlesStore} from '../../../Store';
+    import { storeToRefs } from 'pinia';
     import GridLayoutButtons from './GridLayoutButtons';
     import NewestButton from './NewestButton';
     import RefreshButton from './RefreshButton';
@@ -7,6 +9,10 @@
     import {useMediaQuery} from '../../../Common/Hooks';
 
     const mobile = useMediaQuery('(max-width: 625px)');
+    const store = useArticlesStore();
+    const {unreadArticles} = storeToRefs(store);
+
+
 </script>   
 
 <template>
@@ -16,7 +22,7 @@
                 All Items
             </h1>
             <p class="header_unread">
-                47 unread
+                {{unreadArticles}} unread
             </p>
         </section>
         <section>

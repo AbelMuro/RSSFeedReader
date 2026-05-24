@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import {ref, onMounted} from 'vue';
     import {motion} from 'motion-v';
 
     type CategoryAccount = {
@@ -7,8 +8,9 @@
     }    
 
     const {account} = defineProps<{account: CategoryAccount}>();
-    console.log(account);
-
+    const accountId = account.accountId;
+    const quantity = account.quantity;
+    const userName = ref<string>('');
 
     type custom = {show : number, exit: number}; 
     const LIvariant = {
@@ -23,7 +25,22 @@
                 delay: index.show * 0.15,
             },
         }),
-    }
+    };
+
+    onMounted(async () => {
+        try{
+            const response = await fetch(`http://localhost:4000/get-account-name/${accountId}`, {
+                method: 'GET'
+            });
+
+            const results = await response.text();
+            userName.value = results;
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    })
 </script>
 
 <template>
@@ -32,12 +49,10 @@
         layout
         :custom="{show: 1}"
         class="category_content">
-            <div class="category_image">
-                C
-            </div>
-            CSS-Tricks
+            <img class="category_image" :src="`http://localhost:4000/get-image/${accountId}`">
+            {{userName}}
             <p class="category_quantity">
-                14
+                {{quantity}}
             </p>
     </motion.li>  
 </template>

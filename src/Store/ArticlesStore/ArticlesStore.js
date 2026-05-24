@@ -1,18 +1,14 @@
 import {defineStore} from 'pinia';
 
-/*
-    type Category = {
-        category: string,
-        accountIds: Array<{accountId: string, quantity: number}>
-    }
-*/
-
-
-const useCategoriesStore = defineStore('categories', {
+const useArticlesStore = defineStore('articles', {
     state: () => ({
-        categories: []
+        categories: [],
+        unreadArticles: 0
     }),
     actions: {
+        setTotalArticles(count){
+            this.unreadArticles = count;
+        },
         addCategory(newCategory){
             for(let category in this.categories){
                 if(category.category === newCategory.category){
@@ -31,12 +27,10 @@ const useCategoriesStore = defineStore('categories', {
                 accountIds: [{accountId: newCategory.accountId, quantity: 1}]
             });
         },
-        deleteCategory(categoryToDelete){
-            this.categories = this.categories.filter((category) => {
-                return category !== categoryToDelete;
-            })
+        removeCategory(categoryToDelete){
+            this.categories = this.categories.filter((category) => category.category !== categoryToDelete.category);
         }
     }
 });
 
-export default useCategoriesStore;
+export default useArticlesStore;

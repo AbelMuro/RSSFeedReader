@@ -4,9 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to continue defining the User component, 
-        i finally fixed the issue regarding the object being passed as a prop.
-        now i need to display the properties of the object in the template
+        this is where i left off, i need to finish up displaying the unreadArticles property of the global state
+        then i can start implementing the features regarding sorting newest, Refresh and marking all read.
     */
 </script>
 

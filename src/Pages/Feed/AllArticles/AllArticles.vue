@@ -3,19 +3,22 @@
     import AlignJustify from './AlignJustify';
     import Grid from './Grid';
     import AlignJustifyLessContent from './AlignJustifyLessContent';
-    import {Article} from '../../../Common/Types';
+    import {Article} from '../../../Common/Types';;
+    import {useArticlesStore} from '../../../Store';
 
     const articles = ref<Array<Article>>([]);
     let interval : ReturnType<typeof setInterval> | null = null;
+    const {setTotalArticles} = useArticlesStore();
 
     const fetchArticles = async () => {
          try{
             const response = await fetch('http://localhost:4000/get-all-articles', {
                 method: 'GET',
+                credentials: 'include',
             });
 
             if(response.status === 200){
-                let results = await response.json();
+                let {articles : results, unreadArticles} = await response.json();
                 results = results.map((article: Article) => {
                     return {
                         ...article,
@@ -23,6 +26,7 @@
                     }
                 })
                 articles.value = results;
+                setTotalArticles(unreadArticles);
             }
             else{
                 const results = await response.text();

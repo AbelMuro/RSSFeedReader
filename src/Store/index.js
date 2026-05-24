@@ -1,5 +1,5 @@
 import useToastStore from './ToastStore';
 import useLayoutStore from './LayoutStore';
-import useCategoriesStore from './CategoriesStore';
+import useArticlesStore from './ArticlesStore';
 
-export {useToastStore, useLayoutStore, useCategoriesStore};
+export {useToastStore, useLayoutStore, useArticlesStore};

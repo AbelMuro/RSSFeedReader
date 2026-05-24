@@ -1,10 +1,10 @@
 <script setup lang="ts">
     import {useLayoutStore} from '../../../../Store';
-    import {onMounted} from 'vue';
+    import {onMounted, onBeforeUnmount} from 'vue';
     import { storeToRefs } from 'pinia';
     import FetchUserName from './FetchUserName';
     import FetchUserPhoto from './FetchUserPhoto';
-    import {useCategoriesStore} from '../../../../Store';
+    import {useArticlesStore} from '../../../../Store';
 
     type Article = {
         id: string;
@@ -17,7 +17,7 @@
 
     const {article} = defineProps<{article: Article}>();
     const layoutStore = useLayoutStore();
-    const {addCategory} = useCategoriesStore();
+    const {addCategory, removeCategory} = useArticlesStore();
     const {layout} = storeToRefs(layoutStore);
 
     const formatDate = (date: string) : string => {
@@ -48,6 +48,12 @@
     onMounted(() => {
         article.category.forEach((category) => {
             addCategory({category, accountId: article.account_id});
+        })
+    });
+
+    onBeforeUnmount(() => {
+        article.category.forEach((category) => {
+            removeCategory({category});
         })
     })
 
