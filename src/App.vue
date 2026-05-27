@@ -4,8 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to finish up displaying the unreadArticles property of the global state
-        then i can start implementing the features regarding sorting newest, Refresh and marking all read.
+        this is where i left off, i need to check the sortNewestFirst property of the global state before i make a fetch request for the articles.
     */
 </script>
 
