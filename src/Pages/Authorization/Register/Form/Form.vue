@@ -50,7 +50,7 @@
             showToast(result);      
 
             if(response.status === 200)             
-                router.push('/');        
+                router.push('/select-category');        
         }
         catch(error: any){
             const message = error.message;

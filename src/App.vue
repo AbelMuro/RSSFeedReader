@@ -4,7 +4,12 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to check the sortNewestFirst property of the global state before i make a fetch request for the articles.
+        this is where i left off, i am redesigning how and what articles should be displayed on the feed page. 
+        after the user registers for an account, they will be taken to a page where they can select a category of
+        articles that they want to read. I also want to update the Profile page with an option that lets users change
+        the category whenever they want\
+
+        i am currently working on the SelectCategory component
     */
 </script>
 

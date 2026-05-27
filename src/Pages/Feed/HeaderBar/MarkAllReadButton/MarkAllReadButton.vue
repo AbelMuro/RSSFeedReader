@@ -1,9 +1,24 @@
 <script setup lang="ts">
 
+    const handleClick = async () => {
+        try{
+            const response = await fetch('http://localhost:4000/mark-all-read', {
+                method: 'POST',
+                credentials: 'include',
+            });
+
+            const results = await response.text();
+            console.log(results);
+        }   
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
 </script>
 
 <template>
-    <button class="read">
+    <button class="read" @click="handleClick">
         Mark all read
     </button>
 </template>

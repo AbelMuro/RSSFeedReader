@@ -9,7 +9,7 @@
     import {useArticlesStore} from '../../../Store';
 
     const store = useArticlesStore();
-    const {setUnreadArticles, setArticles} = store;
+    const {setUnreadArticles, setArticles, sortArticlesBasedOnDate} = store;
     const {sortNewestFirst, articles} = storeToRefs(store);
     const router = useRouter();
 
@@ -30,7 +30,8 @@
                 });
                 setArticles(results);
                 setUnreadArticles(unreadArticles);
-                //sortArticlesBasedOnDate();
+                if(sortNewestFirst.value)
+                    sortArticlesBasedOnDate();
             }
             else{
                 const results = await response.text();
@@ -43,18 +44,6 @@
         }
     }
 
-    const sortArticlesBasedOnDate = () => {
-        articles.value.sort((articleA, articleB) => {
-            const dateA = Number(articleA.date_created);
-            const dateB = Number(articleB.date_created);
-            if(dateA > dateB)
-                return -1;
-            else if(dateA < dateB)
-                return 1;
-            else
-                return 0;
-        })
-    };
 
     const sortArticlesAlphabetically = () => {
         articles.value.sort((articleA, ArticleB) => {
@@ -89,7 +78,7 @@
 
     watch(sortNewestFirst, () => {
         sortArticlesBasedOnDate();
-    });
+    })
 
     onMounted(() => {
         console.log('mounted')

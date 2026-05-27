@@ -37,6 +37,18 @@ const useArticlesStore = defineStore('articles', {
         },
         removeCategory(categoryToDelete){
             this.categories = this.categories.filter((category) => category.category !== categoryToDelete.category);
+        },
+        sortArticlesBasedOnDate(){
+            this.articles.sort((articleA, articleB) => {
+                const dateA = Number(articleA.date_created);
+                const dateB = Number(articleB.date_created);
+                if(dateA > dateB)
+                    return -1;
+                else if(dateA < dateB)
+                    return 1;
+                else
+                    return 0;
+            })
         }
     }
 });

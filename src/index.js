@@ -12,6 +12,7 @@ import Articles from './Pages/Profile/Articles';
 import Preferences from './Pages/Profile/Preferences';
 import Notifications from './Pages/Profile/Notifications';
 import Security from './Pages/Profile/Security';
+import SelectCategory from './Pages/Authorization/SelectCategory';
 import Feed from './Pages/Feed';
 import AllArticles from './Pages/Feed/AllArticles';
 import SavedArticles from './Pages/Feed/SavedArticles';
@@ -62,7 +63,8 @@ const router = createRouter({
             ]
         },
         {path: '/digest', component: Digest},
-        {path: '/discover', component: Discover}
+        {path: '/discover', component: Discover},
+        {path: '/select-category', component: SelectCategory}
     ]
 });
 

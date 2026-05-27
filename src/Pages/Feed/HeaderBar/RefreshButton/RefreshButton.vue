@@ -1,10 +1,13 @@
 <script setup lang="ts">
+    import { storeToRefs } from 'pinia';
     import {useArticlesStore} from '../../../../Store';
     import { Article } from '../../../../Common/Types';
     import icons from './icons';
 
     const store = useArticlesStore();
-    const {setArticles, setUnreadArticles} = store;
+    const {setArticles, setUnreadArticles, sortArticlesBasedOnDate} = store;
+    const {sortNewestFirst} = storeToRefs(store);
+
 
     const handleClick = async () => {
          try{
@@ -23,6 +26,8 @@
                 });
                 setArticles(results);
                 setUnreadArticles(unreadArticles);
+                if(sortNewestFirst.value)
+                    sortArticlesBasedOnDate();
             }
             else{
                 const results = await response.text();
