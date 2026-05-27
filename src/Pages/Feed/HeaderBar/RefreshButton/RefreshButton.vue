@@ -1,9 +1,43 @@
 <script setup lang="ts">
+    import {useArticlesStore} from '../../../../Store';
+    import { Article } from '../../../../Common/Types';
     import icons from './icons';
+
+    const store = useArticlesStore();
+    const {setArticles, setUnreadArticles} = store;
+
+    const handleClick = async () => {
+         try{
+            const response = await fetch('http://localhost:4000/get-all-articles', {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if(response.status === 200){
+                let {articles : results, unreadArticles} = await response.json();
+                results = results.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                });
+                setArticles(results);
+                setUnreadArticles(unreadArticles);
+            }
+            else{
+                const results = await response.text();
+                console.log(results);
+            } 
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    };
 </script>
 
 <template>
-    <button class="refresh">
+    <button class="refresh" @click="handleClick">
         <img :src="icons['refresh']"/>
         Refresh
     </button>

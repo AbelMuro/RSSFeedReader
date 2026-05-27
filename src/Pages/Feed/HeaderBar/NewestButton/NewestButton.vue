@@ -1,9 +1,17 @@
 <script setup lang="ts">
+    import {useArticlesStore} from '../../../../Store';
     import icons from './icons';
+
+    const store = useArticlesStore();
+    const {setNewestFirst} = store;
+
+    const handleClick = () => {
+        setNewestFirst();
+    }
 </script>
 
 <template>
-    <button class="newest">
+    <button class="newest" @click="handleClick">
         <img :src="icons['signal']"/>
         <span>Newest</span>
     </button>

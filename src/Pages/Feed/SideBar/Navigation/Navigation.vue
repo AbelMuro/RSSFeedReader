@@ -1,11 +1,12 @@
 <script setup lang="ts">
     import {ref, watch} from 'vue';
-    import icons from './icons';
+    import {useArticlesStore} from '../../../../Store';
     import {useRouter, useRoute} from 'vue-router';
 
     const option = ref<string>('/feed');
     const router = useRouter();
     const route = useRoute();
+    const {unreadArticles} = useArticlesStore();
 
     const handleRoute = (route: string) => {
         router.push(route);
@@ -32,7 +33,7 @@
                 All Items
             </div>
             <div>
-                47
+                {{unreadArticles}}
             </div>
         </button>
         <button class="option" @click="handleRoute('/feed/saved-articles')" :style="handleStyle('/feed/saved-articles')">

@@ -1,14 +1,17 @@
 <script setup lang="ts">
-    import {onMounted, ref, onBeforeUnmount} from 'vue';
+    import {onMounted, ref, onBeforeMount, watch} from 'vue';
+    import {storeToRefs} from 'pinia';
+    import {useRouter} from 'vue-router';
     import AlignJustify from './AlignJustify';
     import Grid from './Grid';
     import AlignJustifyLessContent from './AlignJustifyLessContent';
-    import {Article} from '../../../Common/Types';;
+    import {Article} from '../../../Common/Types';
     import {useArticlesStore} from '../../../Store';
 
-    const articles = ref<Array<Article>>([]);
-    let interval : ReturnType<typeof setInterval> | null = null;
-    const {setTotalArticles} = useArticlesStore();
+    const store = useArticlesStore();
+    const {setUnreadArticles, setArticles} = store;
+    const {sortNewestFirst, articles} = storeToRefs(store);
+    const router = useRouter();
 
     const fetchArticles = async () => {
          try{
@@ -24,9 +27,10 @@
                         ...article,
                         category: article.category.split(','),
                     }
-                })
-                articles.value = results;
-                setTotalArticles(unreadArticles);
+                });
+                setArticles(results);
+                setUnreadArticles(unreadArticles);
+                //sortArticlesBasedOnDate();
             }
             else{
                 const results = await response.text();
@@ -39,19 +43,64 @@
         }
     }
 
-    onMounted(() => {
-       fetchArticles();
+    const sortArticlesBasedOnDate = () => {
+        articles.value.sort((articleA, articleB) => {
+            const dateA = Number(articleA.date_created);
+            const dateB = Number(articleB.date_created);
+            if(dateA > dateB)
+                return -1;
+            else if(dateA < dateB)
+                return 1;
+            else
+                return 0;
+        })
+    };
 
-       interval = setInterval(() => {
-            console.log('polling')
-            fetchArticles();
-       }, 5000)
+    const sortArticlesAlphabetically = () => {
+        articles.value.sort((articleA, ArticleB) => {
+            const titleA = articleA.title.toLowerCase();
+            const titleB = ArticleB.title.toLowerCase();
+
+            if(titleA < titleB)
+                return -1;
+            else if(titleA > titleB)
+                return 1;
+            else
+                return 0;
+        })
+    };
+
+    const checkOnlineStatus = async () => {
+        try{
+            const response = await fetch('http://localhost:4000/get-login-status',{
+                    method: 'GET',
+                    credentials: 'include'        
+                }
+            );
+
+            if(response.status !== 200)
+                router.push('/');
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    watch(sortNewestFirst, () => {
+        sortArticlesBasedOnDate();
     });
 
-    onBeforeUnmount(() => {
-        if(interval)
-            clearInterval(interval);
+    onMounted(() => {
+        console.log('mounted')
+        sortArticlesAlphabetically();
     })
+
+    onBeforeMount(async() => {
+        checkOnlineStatus();        
+        fetchArticles();
+    })
+
 
 </script>
 

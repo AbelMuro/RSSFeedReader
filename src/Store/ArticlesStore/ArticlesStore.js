@@ -3,11 +3,19 @@ import {defineStore} from 'pinia';
 const useArticlesStore = defineStore('articles', {
     state: () => ({
         categories: [],
-        unreadArticles: 0
+        unreadArticles: 0,
+        sortNewestFirst: false,
+        articles: []
     }),
     actions: {
-        setTotalArticles(count){
+        setArticles(articles){
+            this.articles = articles;
+        },
+        setUnreadArticles(count){
             this.unreadArticles = count;
+        },
+        setNewestFirst(){
+            this.sortNewestFirst = !this.sortNewestFirst;
         },
         addCategory(newCategory){
             for(let category in this.categories){
