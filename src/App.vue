@@ -4,12 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am redesigning how and what articles should be displayed on the feed page. 
-        after the user registers for an account, they will be taken to a page where they can select a category of
-        articles that they want to read. I also want to update the Profile page with an option that lets users change
-        the category whenever they want\
-
-        i am currently working on the SelectCategory component
+        this is where i left off, i am still working on the Category component, i want to remove the cursor: pointer
+        for the pink boxes
     */
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+    import Form from './Form';
 </script>
 
 <template>
@@ -10,12 +10,13 @@
         <p class="category_desc">
             You can choose what articles you want to read based on a category.
         </p>
+        <Form/>
     </article>
 </template>
 
 <style scoped>
     .category{
-        width: 400px;
+        width: 500px;
         height: fit-content;
         padding: 25px;
         border-radius: 10px;

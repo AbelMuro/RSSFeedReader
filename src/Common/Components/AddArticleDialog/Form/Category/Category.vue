@@ -3,76 +3,111 @@
     import {motion} from 'motion-v';
     import icons from './icons';
 
-    const inputRef = useTemplateRef('category-input');
-    const category = ref<string>('');
-    const allCategories = ref<Array<string>>([]);
+    const open = ref<boolean>(false);
+    const selectedCategories = ref<Array<string>>([]);
+    const articleCategories : Array<string> = [
+        "Technology",
+        "Science",
+        "Health & Wellness",
+        "Fitness",
+        "Nutrition",
+        "Mental Health",
+        "Personal Finance",
+        "Investing",
+        "Entrepreneurship",
+        "Business Strategy",
+        "Marketing",
+        "Productivity",
+        "Self‑Improvement",
+        "Education",
+        "Career Development",
+        "Remote Work",
+        "Artificial Intelligence",
+        "Cybersecurity",
+        "Software Development",
+        "Web Development",
+        "Design & UX",
+        "Art & Creativity",
+        "Music",
+        "Film & TV",
+        "Gaming",
+        "Travel",
+        "Food & Cooking",
+        "Lifestyle",
+        "Parenting",
+        "Relationships",
+        "History",
+        "Politics",
+        "Environment",
+        "Sustainability",
+        "Space Exploration",
+        "Automotive",
+        "Real Estate",
+        "Home Improvement",
+        "Gardening",
+        "Sports",
+        "Fashion",
+        "Beauty",
+        "Philosophy",
+        "Psychology"
+    ]
 
-    const handleClick = () => {
-        inputRef.value?.focus();
+    const handleOpen = () => {
+        open.value = !open.value;
     }
-    
-    const handleKeyboard = (e : KeyboardEvent) => {
-        const key = e.key;
 
-        if(key === ' ') {
-            requestAnimationFrame(() => {
-                if(category.value === ' '){
-                    category.value = '';
-                    return;
-                }
+    const handleDropdown = (e: MouseEvent) => {
+        const element = e.target as HTMLDivElement;
+        const category = element.dataset.category;
 
-                if(allCategories.value.length === 5) return;
-            
-                const noDuplicateCategories = [...new Set([...allCategories.value])];
-                allCategories.value = [...noDuplicateCategories, category.value];
-                category.value = '';            
-            })            
-        }
+        if(!category) return;
 
-        else if(key === 'Backspace'){
-            requestAnimationFrame(() => {
-                if(category.value !== '') return;
-
-                allCategories.value.pop();
-            })
-        }
+        selectedCategories.value = [...new Set([...selectedCategories.value, category])];
     }
 
-    onMounted(() => {
-        inputRef.value?.addEventListener('keydown', handleKeyboard);
-    });
-
+    const handleRemove = (e: MouseEvent) => {
+        e.preventDefault();
+      console.log('remove');
+    }
 
 </script>
 
 <template>
     <fieldset class="fieldset">
-        <label for="category" class="label">
+        <label class="label">
             Enter Category
         </label>
-        <fieldset class="input_container" @click="handleClick">
-            <span class="input_category" v-for="(category) in allCategories">
-                {{category}}
-            </span>
-            <input 
-                type="text"
-                class="input"
-                ref="category-input"
-                maxLength="10"
-                v-model="category"
-                >
-        </fieldset>
-        <input 
-            type="hidden" 
-            :value="allCategories" 
-            name="category" 
-            required/>
+        <label class="select" @click="handleOpen">
+            <div class="select_categories">
+                <div class="select_category" v-for="(category) in selectedCategories">
+                    {{category}}
+                    <div class="remove_button" @click="handleRemove">
+                        <img :src="icons['close']">
+                    </div>
+                </div>
+            </div>
+            <motion.img 
+                class="arrow" :src="icons['arrow']"
+                :initial="false"
+                :animate="open ? {rotate: '180deg'} : {rotate: '0deg'}"
+                />
+            <motion.div 
+                v-if="open"
+                :initial="{scale: 0}"
+                :animate="{scale: 1}"
+                class="dropdown" 
+                @click="handleDropdown">
+                    <div class="dropdown_option" v-for="(category) in articleCategories" :data-category="category">
+                        {{category}}
+                    </div>
+            </motion.div>
+        </label>
     </fieldset>
 </template>
 
 <style scoped>
     .fieldset{
-        width: 350px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 5px;
@@ -90,48 +125,97 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
     }
 
-    .input_container{
-        width: 350px;
-        height: 40px;   
-        border-radius: 5px;     
-        border: none;
-        padding: 0px 10px;
-        margin: 0px;
+    .select{
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         border: 1px solid var(--preset-color-grey-1);
-        background-color: white;
+        padding: 0px 10px;
+        font-family: var(--preset-text-5-font-family);
+        font-size: var(--preset-text-5-font-size);
+        font-weight: var(--preset-text-5-font-weight);
+        line-height: var(--preset-text-5-line-height);
+        letter-spacing: var(--preset-text-5-letter-spacing);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .arrow{
+        width: 20px;
+        object-fit: contain;
+    }
+
+    .select:focus{
+        outline: none;
+        border: 1px solid var(--preset-color-black-1);
+    }
+
+    .dropdown{
+        width: 100%;
+        height: 300px;
+        padding: 10px 10px 15px 10px;
+        border-radius: 5px;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: var(--preset-box-shadow-1);
+        background-color: var(--preset-color-white-1);
+        position: absolute;
+        top: 50px;
+        left: 0px;
+    }
+
+
+    .dropdown_option{
+        color: var(--preset-color-black-1);
+        font-family: var(--preset-text-5-font-family);
+        font-size: var(--preset-text-5-font-size);
+        font-weight: var(--preset-text-5-font-weight);
+        line-height: var(--preset-text-5-line-height);
+        letter-spacing: var(--preset-text-5-letter-spacing);
+    }
+
+    .select_categories{
+        width: 400px;
         display: flex;
         align-items: center;
         gap: 5px;
-        overflow: hidden;
+        overflow: auto;
     }
 
-    .input{
-        width: 100%;
-        height: 40px;
-        padding: 0px 10px;
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-        font-family: var(--preset-text-5-font-family);
-        font-size: var(--preset-text-5-font-size);
-        font-weight: var(--preset-text-5-font-weight);
-        line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
-    }
-    
-    .input:focus{
-        outline: none;
-    }
-
-    .input_category{
+    .select_category{
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-shrink: 0;
         padding: 5px;
-        background-color: green;
-        border-radius: 10px;
+        border-radius: 5px;
+        background-color: var(--preset-color-pink-1);
+        color: var(--preset-color-pink-2);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
-        letter-spacing: var(--preset-text-5-letter-spacing);
     }
+
+    .remove_button{
+        width: 10px;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+    }
+
+    .remove_button > img{
+        width: 10px;
+        object-fit: contain;
+    }
+
 </style>
 
