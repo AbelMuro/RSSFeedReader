@@ -1,8 +1,9 @@
 <script setup lang="ts">
-    import {ref, onMounted, useTemplateRef} from 'vue'; 
+    import {ref, watch, onMounted, onBeforeUnmount} from 'vue'; 
     import {motion} from 'motion-v';
     import icons from './icons';
 
+    const error = defineModel<string>()
     const open = ref<boolean>(false);
     const selectedCategories = ref<Array<string>>([]);
     const articleCategories : Array<string> = [
@@ -52,7 +53,12 @@
         "Psychology"
     ]
 
-    const handleOpen = () => {
+    const handleOpen = (e : MouseEvent) => {
+        const target = e.target as HTMLLabelElement; 
+        const classes = target.classList;
+
+        if(classes.contains('select_category') || classes.contains('remove_button') || classes.contains('remove_icon')) return;
+
         open.value = !open.value;
     }
 
@@ -65,10 +71,24 @@
         selectedCategories.value = [...new Set([...selectedCategories.value, category])];
     }
 
-    const handleRemove = (e: MouseEvent) => {
-        e.preventDefault();
-      console.log('remove');
+    const handleRemove = (categoryToRemove : string) => {
+      selectedCategories.value = selectedCategories.value.filter((selectedCategory) => selectedCategory !== categoryToRemove);
     }
+
+    const handleClick = (e : MouseEvent) => {
+        const target = e.target;
+
+   
+    }
+
+    watch(selectedCategories, (selectedCategories) => {
+        if(selectedCategories.length)
+        error.value = '';
+    })
+
+    onMounted(() => {
+        document.addEventListener('click', handleClick);
+    })
 
 </script>
 
@@ -81,8 +101,8 @@
             <div class="select_categories">
                 <div class="select_category" v-for="(category) in selectedCategories">
                     {{category}}
-                    <div class="remove_button" @click="handleRemove">
-                        <img :src="icons['close']">
+                    <div class="remove_button" @click="handleRemove(category)">
+                        <img class="remove_icon" :src="icons['close']">
                     </div>
                 </div>
             </div>
@@ -102,6 +122,7 @@
                     </div>
             </motion.div>
         </label>
+        <input type="hidden" name="categories" :value="selectedCategories.join(',')"/>
     </fieldset>
 </template>
 
@@ -201,19 +222,21 @@
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);
         line-height: var(--preset-text-5-line-height);
+        cursor: default;
     }
 
     .remove_button{
-        width: 10px;
-        height: 10px;
+        width: 15px;
+        height: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: transparent;
+        cursor: pointer;
     }
 
-    .remove_button > img{
-        width: 10px;
+    .remove_icon{
+        width: 15px;
         object-fit: contain;
     }
 
