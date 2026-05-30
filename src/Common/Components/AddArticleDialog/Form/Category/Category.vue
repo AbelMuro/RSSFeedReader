@@ -76,24 +76,30 @@
     }
 
     const handleClick = (e : MouseEvent) => {
-        const target = e.target;
+        const target = e.target as HTMLLabelElement;
 
-   
+        if(!target.closest('.select'))
+            open.value = false;
     }
 
-    watch(selectedCategories, (selectedCategories) => {
-        if(selectedCategories.length)
-        error.value = '';
-    })
+    watch(selectedCategories, (newCategories) => {
+        if(newCategories.length)
+            error.value = '';
+    });
+    
 
     onMounted(() => {
         document.addEventListener('click', handleClick);
+    });
+
+    onBeforeUnmount(() => {
+        document.removeEventListener('click', handleClick);
     })
 
 </script>
 
 <template>
-    <fieldset class="fieldset">
+    <fieldset class="fieldset-category">
         <label class="label">
             Enter Category
         </label>
@@ -127,7 +133,7 @@
 </template>
 
 <style scoped>
-    .fieldset{
+    .fieldset-category{
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -162,6 +168,7 @@
         letter-spacing: var(--preset-text-5-letter-spacing);
         cursor: pointer;
         position: relative;
+        background-color: white;
     }
 
     .arrow{
@@ -201,7 +208,7 @@
     }
 
     .select_categories{
-        width: 400px;
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 5px;

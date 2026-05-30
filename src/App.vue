@@ -4,8 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am still working on the Category component, i want to create an event listener that closes
-        the dropdown everytime the user clicks on anything outside the parent element
+        this is where i left off, i need to test out the Register component's automatic sign in process.
     */
 </script>
 

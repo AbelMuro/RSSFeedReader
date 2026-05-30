@@ -42,7 +42,8 @@
             
             const response = await fetch('http://localhost:4000/register', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                credentials: 'include'
             });
 
             const result = await response.text();

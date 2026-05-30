@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import Theme from './Theme';
     import TagNewArticles from './TagNewArticles';
+    import UpdateCategories from './UpdateCategories';
 </script>
 
 <template>
@@ -12,6 +13,8 @@
             <Theme/>
             <TagNewArticles/>
         </section>
+        <hr/>
+        <UpdateCategories/>
     </section>
 </template>
 
@@ -24,6 +27,15 @@
         align-items: center;
         flex-direction: column;
         gap: 25px;
+    }
+
+    .preferences > hr{
+        width: 100%;
+        height: 1px;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+        background-color: var(--preset-color-black-1);
     }
 
     .preferences_title{

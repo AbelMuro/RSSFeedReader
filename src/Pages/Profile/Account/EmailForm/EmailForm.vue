@@ -42,7 +42,7 @@
     <form class="form" @submit="handleSubmit">
         <EnterEmail/>
         <button class="submit">
-            <ClipLoader v-if="loading" color="white" size="30px"/>
+            <VueSpinner v-if="loading" color="white" size="30px"/>
             <span v-else>Update Email</span>
         </button>
     </form>
