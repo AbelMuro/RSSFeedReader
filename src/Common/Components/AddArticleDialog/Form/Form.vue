@@ -20,7 +20,7 @@
             const form = e.target as HTMLFormElement;
             const titleElement = form.elements.namedItem('title') as HTMLInputElement;
             const contentElement = form.elements.namedItem('content') as HTMLTextAreaElement;
-            const categoryElement = form.elements.namedItem('category') as HTMLInputElement;
+            const categoryElement = form.elements.namedItem('categories') as HTMLInputElement;
             const title = titleElement.value;
             const content = contentElement.value;
             const category = categoryElement.value;
@@ -62,7 +62,7 @@
     <form class="form" @submit="handleSubmit">
         <TitleInput/>
         <ContentTextArea/>
-        <Category/>
+        <Category :limit="3" v-model="error"/>
         <p class="error_message" v-if="error">
             {{error}}
         </p>

@@ -1,17 +1,76 @@
 <script setup lang="ts">
-    import {ref} from 'vue';
+    import {ref, onBeforeMount} from 'vue';
+    import {useToastStore} from '../../../../Store';
     import {VueSpinner} from 'vue3-spinners';
     import Category from '../../../../Common/Components/AddArticleDialog/Form/Category';
 
     const loading = ref<boolean>(false);
+    const prevCategories = ref<Array<string>>();
+    const store = useToastStore();
+    const {showToast} = store;
+
+    const handleSubmit = async (e : SubmitEvent) => {
+        try{
+            e.preventDefault();
+
+            const form = e.target as HTMLFormElement;
+
+            const categoryElement = form.elements.namedItem('categories') as HTMLInputElement;
+            const categories = categoryElement.value;
+
+            const response = await fetch('http://localhost:4000/update-categories',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({categories})
+                }
+            );
+
+            const results = await response.text();
+            console.log(results);
+            showToast(results);
+
+        }   
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    onBeforeMount(async () => {
+        try{
+            const response = await fetch('http://localhost:4000/get-categories', {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if(response.status === 200){
+                const results = await response.json();
+                console.log(results);
+                prevCategories.value = results;
+            }
+            else{
+                const results = await response.text();
+                console.log(results);
+                showToast(results);
+            }
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    })
+
 </script>
 
 <template>
-    <form class="form">
+    <form class="form" @submit="handleSubmit">
         <legend>
             Update Categories
         </legend>
-        <Category/>
+        <Category :prevCategories="prevCategories"/>
         <button class="submit">
             <VueSpinner v-if="loading" color="white" size="30px"/>
             <span v-else>Submit</span>

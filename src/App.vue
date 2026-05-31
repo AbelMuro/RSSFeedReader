@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to test out the Register component's automatic sign in process.
+        this is where i left off, i need to continue updating my notes on typescript
     */
 </script>
 

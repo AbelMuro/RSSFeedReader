@@ -2,11 +2,14 @@
     import Category from '../../../../Common/Components/AddArticleDialog/Form/Category';
     import { VueSpinner } from 'vue3-spinners';
     import { useRouter } from 'vue-router';
+    import {useToastStore} from '../../../../Store';
     import {ref} from 'vue';
 
     const loading = ref<boolean>(false);
     const error = ref<string>('')
     const router = useRouter();
+    const store = useToastStore();
+    const {showToast} = store;
 
     const handleSubmit = async (e: SubmitEvent) => {
         try{
@@ -29,6 +32,7 @@
 
             const results = await response.text();
             console.log(results);
+            showToast(results);
 
             if(response.status === 200)
                 router.push('/profile');

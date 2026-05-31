@@ -4,8 +4,9 @@
     import icons from './icons';
 
     const error = defineModel<string>()
+    const {limit, prevCategories} = defineProps<{limit?: number | undefined, prevCategories?: Array<string> | undefined}>();
     const open = ref<boolean>(false);
-    const selectedCategories = ref<Array<string>>([]);
+    const selectedCategories = ref<Array<string>>(prevCategories || []);
     const articleCategories : Array<string> = [
         "Technology",
         "Science",
@@ -51,7 +52,7 @@
         "Beauty",
         "Philosophy",
         "Psychology"
-    ]
+    ];
 
     const handleOpen = (e : MouseEvent) => {
         const target = e.target as HTMLLabelElement; 
@@ -68,6 +69,10 @@
 
         if(!category) return;
 
+        if(limit && selectedCategories.value.length + 1 > limit){
+            error.value = "Articles can only have at most 3 categories";
+            return;
+        }
         selectedCategories.value = [...new Set([...selectedCategories.value, category])];
     }
 
@@ -86,6 +91,11 @@
         if(newCategories.length)
             error.value = '';
     });
+
+    watch(() => prevCategories, (prevCategories) => {
+        if(prevCategories)
+            selectedCategories.value = prevCategories;
+    })
     
 
     onMounted(() => {
@@ -94,7 +104,7 @@
 
     onBeforeUnmount(() => {
         document.removeEventListener('click', handleClick);
-    })
+    });
 
 </script>
 
@@ -156,9 +166,8 @@
         width: 100%;
         height: 40px;
         border-radius: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr auto;
         border: 1px solid var(--preset-color-grey-1);
         padding: 0px 10px;
         font-family: var(--preset-text-5-font-family);
@@ -174,6 +183,7 @@
     .arrow{
         width: 20px;
         object-fit: contain;
+        align-self: center;
     }
 
     .select:focus{
