@@ -46,7 +46,7 @@
 
 
     const sortArticlesAlphabetically = () => {
-        articles.value.sort((articleA, ArticleB) => {
+        articles.value.sort((articleA : Article, ArticleB : Article) => {
             const titleA = articleA.title.toLowerCase();
             const titleB = ArticleB.title.toLowerCase();
 
@@ -81,7 +81,6 @@
     })
 
     onMounted(() => {
-        console.log('mounted')
         sortArticlesAlphabetically();
     })
 

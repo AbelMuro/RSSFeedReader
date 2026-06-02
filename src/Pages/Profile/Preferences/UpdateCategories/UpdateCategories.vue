@@ -17,6 +17,7 @@
 
             const categoryElement = form.elements.namedItem('categories') as HTMLInputElement;
             const categories = categoryElement.value;
+            console.log(categories);
 
             const response = await fetch('http://localhost:4000/update-categories',
                 {
@@ -24,12 +25,12 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({categories})
+                    body: JSON.stringify({categories}),
+                    credentials: 'include'
                 }
             );
 
             const results = await response.text();
-            console.log(results);
             showToast(results);
 
         }   
@@ -48,12 +49,10 @@
 
             if(response.status === 200){
                 const results = await response.json();
-                console.log(results);
                 prevCategories.value = results;
             }
             else{
                 const results = await response.text();
-                console.log(results);
                 showToast(results);
             }
         }
