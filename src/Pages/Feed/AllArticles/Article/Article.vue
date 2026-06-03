@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import {useLayoutStore} from '../../../../Store';
+    import {useRouter} from 'vue-router';
     import {onMounted, onBeforeUnmount} from 'vue';
     import { storeToRefs } from 'pinia';
     import FetchUserName from './FetchUserName';
@@ -13,12 +14,22 @@
         content: string;
         category: Array<string>;
         date_created: string;
-    }
+    };
 
     const {article} = defineProps<{article: Article}>();
     const layoutStore = useLayoutStore();
     const {addCategory, removeCategory} = useArticlesStore();
     const {layout} = storeToRefs(layoutStore);
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push({
+            name: `feed/${article.title}`,
+            state: {
+                id : article.id
+            }
+        });
+    }
 
     const formatDate = (date: string) : string => {
         const currentTime : number = Date.now();
@@ -60,7 +71,7 @@
 </script>
 
 <template>
-    <article class="article" :key="article.date_created">
+    <article class="article" :key="article.date_created" @click="handleClick">
         <h2 class="article_title">
             <FetchUserPhoto :accountId="article.account_id"/>
             <FetchUserName :accountId="article.account_id"/>
@@ -81,13 +92,21 @@
 </template>
 
 <style scoped>
-
     .article{
         width: 100%;
         padding: 0px 55px 25px 55px;
         display: flex;
         flex-direction: column;
         gap: 15px;
+        cursor: pointer;
+    }
+
+    .article:hover{
+        background-color: var(--preset-color-white-2);
+    }
+
+    .article:active{
+        background-color: var(--preset-color-grey-2);
     }
     
     .article:not(.article:last-child){

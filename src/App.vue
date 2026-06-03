@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to test out the update on the json web tokens on the back end
+        this is where i left off, i need to display the DisplayArticle component with the RouterView component in AllArticles compopnent
     */
 </script>
 

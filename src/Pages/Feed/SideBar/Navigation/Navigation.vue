@@ -1,12 +1,14 @@
 <script setup lang="ts">
     import {ref, watch} from 'vue';
+    import { storeToRefs } from 'pinia';
     import {useArticlesStore} from '../../../../Store';
     import {useRouter, useRoute} from 'vue-router';
 
     const option = ref<string>('/feed');
     const router = useRouter();
     const route = useRoute();
-    const {unreadArticles} = useArticlesStore();
+    const store = useArticlesStore();
+    const {unreadArticles} = storeToRefs(store);
 
     const handleRoute = (route: string) => {
         router.push(route);

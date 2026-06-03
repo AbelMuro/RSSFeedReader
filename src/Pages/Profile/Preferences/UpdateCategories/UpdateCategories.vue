@@ -17,7 +17,6 @@
 
             const categoryElement = form.elements.namedItem('categories') as HTMLInputElement;
             const categories = categoryElement.value;
-            console.log(categories);
 
             const response = await fetch('http://localhost:4000/update-categories',
                 {

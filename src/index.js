@@ -18,6 +18,7 @@ import AllArticles from './Pages/Feed/AllArticles';
 import SavedArticles from './Pages/Feed/SavedArticles';
 import Digest from './Pages/Digest';
 import Discover from './Pages/Discover';
+import DisplayArticle from './Common/Components/DisplayArticle';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -54,7 +55,13 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    component: AllArticles
+                    component: AllArticles,
+                    children: [
+                        {
+                            path: ':articleTitle',
+                            component: DisplayArticle
+                        }
+                    ]
                 }, 
                 {
                     path: 'saved-articles',
