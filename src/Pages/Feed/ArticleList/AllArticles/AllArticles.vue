@@ -1,17 +1,12 @@
 <script setup lang="ts">
-    import {onMounted, ref, onBeforeMount, watch} from 'vue';
+    import {watch, onMounted} from 'vue';
+    import {useArticlesStore} from '../../../../Store';
     import {storeToRefs} from 'pinia';
-    import {useRouter} from 'vue-router';
-    import AlignJustify from './AlignJustify';
-    import Grid from './Grid';
-    import AlignJustifyLessContent from './AlignJustifyLessContent';
     import {Article} from '../../../Common/Types';
-    import {useArticlesStore} from '../../../Store';
 
     const store = useArticlesStore();
     const {setUnreadArticles, setArticles, sortArticlesBasedOnDate} = store;
-    const {sortNewestFirst, articles} = storeToRefs(store);
-    const router = useRouter();
+    const {sortNewestFirst} = storeToRefs(store);
 
     const fetchArticles = async () => {
          try{
@@ -44,59 +39,18 @@
         }
     }
 
-
-    const sortArticlesAlphabetically = () => {
-        articles.value.sort((articleA : Article, ArticleB : Article) => {
-            const titleA = articleA.title.toLowerCase();
-            const titleB = ArticleB.title.toLowerCase();
-
-            if(titleA < titleB)
-                return -1;
-            else if(titleA > titleB)
-                return 1;
-            else
-                return 0;
-        })
-    };
-
-    const checkOnlineStatus = async () => {
-        try{
-            const response = await fetch('http://localhost:4000/get-login-status',{
-                    method: 'GET',
-                    credentials: 'include'        
-                }
-            );
-
-            if(response.status !== 200)
-                router.push('/');
-        }
-        catch(error: any){
-            const message = error.message;
-            console.log(message);
-        }
-    }
-
     watch(sortNewestFirst, () => {
         sortArticlesBasedOnDate();
     })
 
     onMounted(() => {
-        sortArticlesAlphabetically();
-    })
-
-    onBeforeMount(async() => {
-        checkOnlineStatus();        
         fetchArticles();
     })
-
-
 </script>
 
 <template>
     <section class="all_articles_container">
-        <AlignJustify v-model="articles"/>
-        <Grid v-model="articles"/>
-        <AlignJustifyLessContent v-model="articles"/>
+        <RouterView/>
     </section>
 </template>
 

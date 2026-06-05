@@ -4,7 +4,7 @@
     import {useArticlesStore} from '../../../../Store';
     import {useRouter, useRoute} from 'vue-router';
 
-    const option = ref<string>('/feed');
+    const option = ref<string>('/feed/all');
     const router = useRouter();
     const route = useRoute();
     const store = useArticlesStore();
@@ -29,9 +29,9 @@
 
 <template>
     <div class="navigation">
-        <button class="option" @click="handleRoute('/feed')" :style="handleStyle('/feed')">
+        <button class="option" @click="handleRoute('/feed/all')" :style="handleStyle('/feed/all')">
             <div>
-                <img class="newspaper_icon" :style="option === '/feed' ? {backgroundColor: '#001dc4'} : {}"/>
+                <img class="newspaper_icon" :style="option === '/feed/all' ? {backgroundColor: '#001dc4'} : {}"/>
                 All Items
             </div>
             <div>

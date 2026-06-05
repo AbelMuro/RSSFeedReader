@@ -24,7 +24,7 @@
 
     const handleClick = () => {
         router.push({
-            name: `feed/${article.title}`,
+            path: `/feed/all/${article.title.replaceAll(' ', '-')}`,
             state: {
                 id : article.id
             }

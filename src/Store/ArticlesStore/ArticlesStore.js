@@ -49,7 +49,20 @@ const useArticlesStore = defineStore('articles', {
                 else
                     return 0;
             })
-        }
+        },
+        sortArticlesAlphabetically(){
+            this.articles.sort((articleA, ArticleB) => {
+                const titleA = articleA.title.toLowerCase();
+                const titleB = ArticleB.title.toLowerCase();
+
+                if(titleA < titleB)
+                    return -1;
+                else if(titleA > titleB)
+                    return 1;
+                else
+                    return 0;
+            })
+        },
     }
 });
 

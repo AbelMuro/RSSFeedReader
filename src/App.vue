@@ -4,7 +4,9 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to display the DisplayArticle component with the RouterView component in AllArticles compopnent
+        this is where i left off, i need to continue organizing the routes for DisplayArticle component
+
+        AlignArticles and DisplayArticles should be child routes of AllArticles route.
     */
 </script>
 

@@ -14,11 +14,13 @@ import Notifications from './Pages/Profile/Notifications';
 import Security from './Pages/Profile/Security';
 import SelectCategory from './Pages/Authorization/SelectCategory';
 import Feed from './Pages/Feed';
-import AllArticles from './Pages/Feed/AllArticles';
-import SavedArticles from './Pages/Feed/SavedArticles';
+import ArticleList from './Pages/Feed/ArticleList';
+import SavedArticles from './Pages/Feed/ArticleList/SavedArticles';
 import Digest from './Pages/Digest';
 import Discover from './Pages/Discover';
-import DisplayArticle from './Common/Components/DisplayArticle';
+import DisplayArticle from './Pages/Feed/ArticleList/DisplayArticle';
+import AlignArticles from './Pages/Feed/ArticleList/AlignArticles';
+import AllArticles from './Pages/Feed/ArticleList/AllArticles';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -55,17 +57,29 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    component: AllArticles,
+                    component: ArticleList,
                     children: [
                         {
-                            path: ':articleTitle',
-                            component: DisplayArticle
+                            path: 'all',
+                            component: AllArticles,
+                            children: [
+                                {
+                                    path: '',
+                                    component: AlignArticles,
+                                    children: [
+                                        {
+                                            path: ':articleTitle',
+                                            component: DisplayArticle
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            path: 'saved-articles',
+                            component: SavedArticles
                         }
                     ]
-                }, 
-                {
-                    path: 'saved-articles',
-                    component: SavedArticles
                 }
             ]
         },

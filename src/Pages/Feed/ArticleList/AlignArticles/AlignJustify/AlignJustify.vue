@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import { storeToRefs } from 'pinia';
     import { computed } from 'vue';
-    import {useLayoutStore} from '../../../../Store';
+    import {useLayoutStore} from '../../../../../Store';
     import type { Article as ArticleType } from '../../../../Common/Types';
-    import Article from '../Article'
+    import Article from '../../Article'
 
     const articles = defineModel<Array<Article>>();
     const store = useLayoutStore();
