@@ -66,12 +66,10 @@ const router = createRouter({
                                 {
                                     path: '',
                                     component: AlignArticles,
-                                    children: [
-                                        {
-                                            path: ':articleTitle',
-                                            component: DisplayArticle
-                                        }
-                                    ]
+                                },
+                                {
+                                    path: ':articleTitle',
+                                    component: DisplayArticle
                                 }
                             ]
                         },

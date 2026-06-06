@@ -17,6 +17,29 @@ const useArticlesStore = defineStore('articles', {
         setNewestFirst(){
             this.sortNewestFirst = !this.sortNewestFirst;
         },
+        setCategories(){
+            this.categories = [];
+            this.articles.forEach((article) => {
+                article.category.forEach((articleCategory) => {
+                    for(let savedCategory in this.categories){
+                        if(savedCategory.category === articleCategory){
+                            for(let accountId in savedCategory.accountIds){
+                                if(accountId.accountId === article.accountId){
+                                    accountId.quantity += 1;
+                                    return;
+                                }
+                            }
+                            savedCategory.accountIds.push({accountId: article.account_id, quantity: 1});
+                            return;
+                        }
+                    }
+                    this.categories.push({
+                        category: articleCategory,
+                        accountIds: [{accountId: article.account_id, quantity: 1}]
+                    });
+                })
+            })
+        },
         addCategory(newCategory){
             for(let category in this.categories){
                 if(category.category === newCategory.category){
@@ -37,6 +60,9 @@ const useArticlesStore = defineStore('articles', {
         },
         removeCategory(categoryToDelete){
             this.categories = this.categories.filter((category) => category.category !== categoryToDelete.category);
+        },
+        removeAllCategories(){
+            this.categories = [];
         },
         sortArticlesBasedOnDate(){
             this.articles.sort((articleA, articleB) => {

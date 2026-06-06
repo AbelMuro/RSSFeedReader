@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import {ref, onMounted} from 'vue';
     import {useArticlesStore} from '../../../../Store';
     import {storeToRefs} from 'pinia';
     import {LayoutGroup, motion} from 'motion-v';

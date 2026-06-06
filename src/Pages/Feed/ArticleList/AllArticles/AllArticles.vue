@@ -1,11 +1,11 @@
 <script setup lang="ts">
-    import {watch, onMounted} from 'vue';
+    import {watch, onMounted, onBeforeUnmount, onBeforeMount} from 'vue';
     import {useArticlesStore} from '../../../../Store';
     import {storeToRefs} from 'pinia';
     import {Article} from '../../../Common/Types';
 
     const store = useArticlesStore();
-    const {setUnreadArticles, setArticles, sortArticlesBasedOnDate} = store;
+    const {setUnreadArticles, setArticles, sortArticlesBasedOnDate, setCategories} = store;
     const {sortNewestFirst} = storeToRefs(store);
 
     const fetchArticles = async () => {
@@ -24,6 +24,7 @@
                     }
                 });
                 setArticles(results);
+                setCategories();
                 setUnreadArticles(unreadArticles);
                 if(sortNewestFirst.value)
                     sortArticlesBasedOnDate();
@@ -45,7 +46,8 @@
 
     onMounted(() => {
         fetchArticles();
-    })
+    });
+
 </script>
 
 <template>

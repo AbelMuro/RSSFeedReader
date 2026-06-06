@@ -1,3 +1,3 @@
-import type {Article} from './Types.ts';
+import type {Article, Category} from './Types.ts';
 
-export type {Article};
+export type {Article, Category};

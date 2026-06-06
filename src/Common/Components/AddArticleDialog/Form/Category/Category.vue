@@ -1,58 +1,14 @@
 <script setup lang="ts">
     import {ref, watch, onMounted, onBeforeUnmount} from 'vue'; 
+    import Categories from '../../../../Categories';
     import {motion} from 'motion-v';
+    import { Category } from '../../../../Types';
     import icons from './icons';
 
     const error = defineModel<string>()
     const {limit, prevCategories} = defineProps<{limit?: number | undefined, prevCategories?: Array<string> | undefined}>();
     const open = ref<boolean>(false);
     const selectedCategories = ref<Array<string>>(prevCategories || []);
-    const articleCategories : Array<string> = [
-        "Technology",
-        "Science",
-        "Health & Wellness",
-        "Fitness",
-        "Nutrition",
-        "Mental Health",
-        "Personal Finance",
-        "Investing",
-        "Entrepreneurship",
-        "Business Strategy",
-        "Marketing",
-        "Productivity",
-        "Self‑Improvement",
-        "Education",
-        "Career Development",
-        "Remote Work",
-        "Artificial Intelligence",
-        "Cybersecurity",
-        "Software Development",
-        "Web Development",
-        "Design & UX",
-        "Art & Creativity",
-        "Music",
-        "Film & TV",
-        "Gaming",
-        "Travel",
-        "Food & Cooking",
-        "Lifestyle",
-        "Parenting",
-        "Relationships",
-        "History",
-        "Politics",
-        "Environment",
-        "Sustainability",
-        "Space Exploration",
-        "Automotive",
-        "Real Estate",
-        "Home Improvement",
-        "Gardening",
-        "Sports",
-        "Fashion",
-        "Beauty",
-        "Philosophy",
-        "Psychology"
-    ];
 
     const handleOpen = (e : MouseEvent) => {
         const target = e.target as HTMLLabelElement; 
@@ -115,7 +71,14 @@
         </label>
         <label class="select" @click="handleOpen">
             <div class="select_categories">
-                <div class="select_category" v-for="(category) in selectedCategories">
+                <div 
+                    class="select_category" 
+                    v-for="(category) in selectedCategories"
+                    :style="{
+                        backgroundColor: Categories[category].backgroundColor,
+                        color: Categories[category].color
+                    }"
+                    >
                     {{category}}
                     <div class="remove_button" @click="handleRemove(category)">
                         <img class="remove_icon" :src="icons['close']">
@@ -133,8 +96,12 @@
                 :animate="{scale: 1}"
                 class="dropdown" 
                 @click="handleDropdown">
-                    <div class="dropdown_option" v-for="(category) in articleCategories" :data-category="category">
-                        {{category}}
+                    <div 
+                        class="dropdown_option" 
+                        v-for="(category) in Object.keys(Categories)" 
+                        :data-category="category"
+                        >
+                            {{category}}
                     </div>
             </motion.div>
         </label>

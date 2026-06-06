@@ -1,11 +1,9 @@
 <script setup lang="ts">
     import {useLayoutStore} from '../../../../Store';
     import {useRouter} from 'vue-router';
-    import {onMounted, onBeforeUnmount} from 'vue';
     import { storeToRefs } from 'pinia';
     import FetchUserName from './FetchUserName';
     import FetchUserPhoto from './FetchUserPhoto';
-    import {useArticlesStore} from '../../../../Store';
 
     type Article = {
         id: string;
@@ -18,14 +16,13 @@
 
     const {article} = defineProps<{article: Article}>();
     const layoutStore = useLayoutStore();
-    const {addCategory, removeCategory} = useArticlesStore();
     const {layout} = storeToRefs(layoutStore);
     const router = useRouter();
 
     const handleClick = () => {
         router.push({
             path: `/feed/all/${article.title.replaceAll(' ', '-')}`,
-            state: {
+            query: {
                 id : article.id
             }
         });
@@ -56,17 +53,6 @@
             return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
     }
 
-    onMounted(() => {
-        article.category.forEach((category) => {
-            addCategory({category, accountId: article.account_id});
-        })
-    });
-
-    onBeforeUnmount(() => {
-        article.category.forEach((category) => {
-            removeCategory({category});
-        })
-    })
 
 </script>
 

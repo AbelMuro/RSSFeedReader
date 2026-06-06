@@ -15,7 +15,7 @@
     }
 
     const handleStyle = (currentOption: string) => {
-        if(currentOption === option.value)
+        if(option.value?.includes(currentOption))
             return {backgroundColor: '#d8eafd80', color: '#001dc4'}
         else
             return {};
@@ -31,7 +31,7 @@
     <div class="navigation">
         <button class="option" @click="handleRoute('/feed/all')" :style="handleStyle('/feed/all')">
             <div>
-                <img class="newspaper_icon" :style="option === '/feed/all' ? {backgroundColor: '#001dc4'} : {}"/>
+                <img class="newspaper_icon" :style="option?.includes('/feed/all') ? {backgroundColor: '#001dc4'} : {}"/>
                 All Items
             </div>
             <div>
@@ -40,7 +40,7 @@
         </button>
         <button class="option" @click="handleRoute('/feed/saved-articles')" :style="handleStyle('/feed/saved-articles')">
             <div>
-                <img class="bookmark_icon" :style="option === '/feed/saved-articles' ? {backgroundColor: '#001dc4'} : {}"/>
+                <img class="bookmark_icon" :style="option?.includes('/feed/saved-articles') ? {backgroundColor: '#001dc4'} : {}"/>
                 Saved
             </div>
             <div>

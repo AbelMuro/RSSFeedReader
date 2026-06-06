@@ -4,9 +4,9 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to continue organizing the routes for DisplayArticle component
+        this is where i left off, i need to update the keys in the Categories object
 
-        AlignArticles and DisplayArticles should be child routes of AllArticles route.
+        i also need to finish defining the DisplayArticle component
     */
 </script>
 
