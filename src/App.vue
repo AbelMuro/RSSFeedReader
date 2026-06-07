@@ -4,9 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to update the keys in the Categories object
-
-        i also need to finish defining the DisplayArticle component
+        this is where i left off, i want to refactor the add article component into its own
+        page in the app
     */
 </script>
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import {ref} from 'vue';
     import {motion} from 'motion-v';
+    import Categories from '../../../../../Common/Categories';
     import User from './User';
 
     type AccountId = Array<{accountId: string, quantity: number}>
@@ -19,7 +20,8 @@
         layout
         class="category">
         <motion.button layout class="category_header" @click="handleOpen">
-            <motion.div layout/>
+            <motion.div layout :style="{backgroundColor: Categories[category].color}">
+            </motion.div>
             {{category}}
             <motion.p layout class="category_total">
                {{accountIds.length}}
