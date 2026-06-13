@@ -2,7 +2,7 @@
     import {ref, onBeforeMount} from 'vue';
     import {useToastStore} from '../../../../Store';
     import {VueSpinner} from 'vue3-spinners';
-    import Category from '../../../../Common/Components/AddArticleDialog/Form/Category';
+    import Category from '../../../../Pages/CreateArticle/Form/Category';
 
     const loading = ref<boolean>(false);
     const prevCategories = ref<Array<string>>();

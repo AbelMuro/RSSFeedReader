@@ -1,8 +1,7 @@
 <script setup lang="ts">
     import {ref, watch, onMounted, onBeforeUnmount} from 'vue'; 
-    import Categories from '../../../../Categories';
+    import Categories from '../../../../Common/Categories';
     import {motion} from 'motion-v';
-    import { Category } from '../../../../Types';
     import icons from './icons';
 
     const error = defineModel<string>()

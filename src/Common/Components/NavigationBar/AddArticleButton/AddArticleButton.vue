@@ -1,12 +1,12 @@
 <script setup lang="ts">
     import {ref} from 'vue';
     import {useToastStore} from '../../../../Store';
-    import AddArticleDialog from '../../AddArticleDialog';
+    import {useRouter} from 'vue-router';
     import icons from './icons';
 
-    const open = ref<boolean>(false);
     const store = useToastStore();
     const {showToast} = store;
+    const router = useRouter();
     
     const userIsOnline = async () => {
         try{
@@ -27,16 +27,11 @@
     }
 
     const handleOpen = async () => {
-        if(open.value)
-            open.value = false;
-        else{
-            const result = await userIsOnline();
-            if(result)
-                open.value = true;
-            else
-                showToast('You must be logged in to post an article');
-        }
-
+        const result = await userIsOnline();
+        if(result)
+            router.push('/create-article');
+        else
+            showToast('You must be logged in to post an article');
     }
 </script>
 
@@ -44,7 +39,6 @@
     <button class="article_button" @click="handleOpen">
         <img :src="icons['plus']"/>
     </button>
-    <AddArticleDialog v-model="open" :handleOpen="handleOpen"/>
 </template>
 
 <style scoped>

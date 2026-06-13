@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {ref} from 'vue';
-    import {useToastStore} from '../../../../Store';
+    import {useToastStore} from '../../../Store';
     import { VueSpinner } from 'vue3-spinners';
     import TitleInput from './TitleInput';
     import ContentTextArea from './ContentTextArea';

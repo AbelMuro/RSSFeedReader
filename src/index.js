@@ -21,6 +21,7 @@ import Discover from './Pages/Discover';
 import DisplayArticle from './Pages/Feed/ArticleList/DisplayArticle';
 import AlignArticles from './Pages/Feed/ArticleList/AlignArticles';
 import AllArticles from './Pages/Feed/ArticleList/AllArticles';
+import CreateArticle from './Pages/CreateArticle';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -81,6 +82,7 @@ const router = createRouter({
                 }
             ]
         },
+        {path: '/create-article', component: CreateArticle},
         {path: '/digest', component: Digest},
         {path: '/discover', component: Discover},
         {path: '/select-category', component: SelectCategory}

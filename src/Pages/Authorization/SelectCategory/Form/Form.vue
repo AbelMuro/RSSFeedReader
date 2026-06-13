@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import Category from '../../../../Common/Components/AddArticleDialog/Form/Category';
+    import Category from '../../../../Pages/CreateArticle/Form/Category';
     import { VueSpinner } from 'vue3-spinners';
     import { useRouter } from 'vue-router';
     import {useToastStore} from '../../../../Store';

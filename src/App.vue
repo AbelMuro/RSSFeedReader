@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i want to refactor the add article component into its own
-        page in the app
+        this is where i left off, i am working on the OverlayText component, i need to find a way to remove text from the formattedText
+        state
     */
 </script>
 

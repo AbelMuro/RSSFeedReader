@@ -1,11 +1,11 @@
 <script setup lang="ts">
-    import {ref} from 'vue';
-    import AddArticleDialog from '../../../AddArticleDialog';
+    import {useRouter} from 'vue-router';
 
-    const open = ref<boolean>(false);
+
+    const router = useRouter();
 
     const handleOpen = () => {
-        open.value = !open.value;
+        router.push('/create-article');
     }
 
 </script>
@@ -14,7 +14,6 @@
     <button class="link" @click="handleOpen">
         Add Article
     </button>
-    <AddArticleDialog v-model="open" :handleOpen="handleOpen"/>
 </template>
 
 <style scoped>
