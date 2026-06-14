@@ -1,10 +1,75 @@
 <script setup lang="ts">
-    import {ref, watch} from 'vue';
+    import {ref, watch, useTemplateRef, onMounted, onBeforeUnmount} from 'vue';
     import OverlayText from './OverlayText';
 
     const content = ref<string>('');
-    const error = ref<string>('');     
+    const error = ref<string>('');    
+    const textarea = useTemplateRef('textarea'); 
 
+
+    const handleKeyboard = (e : KeyboardEvent) => {
+        handleTab(e);
+        handleEnter(e);
+    }
+
+    const handleEnter = (e : KeyboardEvent) => {
+        const pressedKey = e.key;
+
+        if(pressedKey !== 'Enter') return;
+        e.preventDefault();
+        const {selectionStart, selectionEnd} = textarea.value as HTMLTextAreaElement;
+        let lineBefore = '';
+        let indent = '';
+
+        for(let i = selectionEnd - 1; i >= 0; i--){
+            if(content.value[i] === '\n'){
+                lineBefore = content.value.slice(i + 1, selectionStart + 2);
+                break;
+            }
+        }
+
+        for(let i = 0; i < lineBefore.length; i++){
+            if(lineBefore[i] === ' ' || lineBefore[i] === '\t')
+                indent += lineBefore[i];
+            else
+                break;
+        }
+
+
+        let newCode : string | Array<string> = content.value.split('');
+        newCode.splice(selectionEnd, 0, `\n${indent}`);
+        const newStart : number = selectionEnd + indent.length + 1;
+
+        content.value = newCode.join('');
+
+        requestAnimationFrame(() => {
+            textarea.value?.setSelectionRange(newStart, newStart);
+        })
+    }
+
+    const handleTab = (e: KeyboardEvent) => {
+        const keyPressed = e.key;
+
+        if(keyPressed !== 'Tab') return;
+        e.preventDefault();
+        const {selectionStart, selectionEnd} = textarea.value as HTMLTextAreaElement;
+
+        let before : string = content.value.slice(0, selectionStart);
+        let linesToTab : string | Array<string> = content.value.slice(selectionStart, selectionEnd).split('\n');
+        let after : string = content.value.slice(selectionEnd, content.value.length);
+        const tab = '\t';
+
+        linesToTab = linesToTab.map((line) => {
+            return tab + line;
+        }).join('\n');  
+
+        const newStart = selectionEnd + linesToTab.length;
+        content.value = before + linesToTab + after;
+
+        requestAnimationFrame(() => {
+            textarea.value?.setSelectionRange(newStart, newStart);
+        })
+    }
 
     const handleBlur = (e : BlurEvent<HTMLTextAreaElement>) => {
         const input = e.target.value;
@@ -32,6 +97,15 @@
         if(newValue.length)
             error.value = "";   
     })
+
+
+    onMounted(() => {
+        textarea.value?.addEventListener('keydown', handleKeyboard);
+    });
+
+    onBeforeUnmount(() => {
+        textarea.value?.removeEventListener('keydown', handleKeyboard);
+    })
 </script>
 
 <template>
@@ -42,6 +116,7 @@
         <fieldset class="inner_fieldset">
             <OverlayText v-model="content"/>
             <textarea 
+                ref="textarea"
                 id="content" 
                 @blur="handleBlur"
                 @invalid="handleInvalid"

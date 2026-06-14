@@ -4,8 +4,10 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the OverlayText component, i need to find a way to remove text from the formattedText
-        state
+        this is where i left off, i am working on the handleUnsave handler in DisplayArticle component
+        i need to make a fetch request and a back end route that handles the query
+
+        i also need to fix any issues concerning the handleSave fetch request as well
     */
 </script>
 

@@ -1,16 +1,21 @@
 <script setup lang="ts">
-    import {onBeforeMount, ref, watch, watchEffect} from 'vue';
+    import {onBeforeMount, ref, watch, watchEffect, onMounted} from 'vue';
     import {useRoute} from 'vue-router';
     import {Article} from '../../../Types/Article';
+    import {useToastStore} from '../../../../Store';
     import Categories from '../../../../Common/Categories';
     import {useMediaQuery} from '../../../../Common/Hooks';
+    import icons from '../../SideBar/Navigation/icons';
 
     const mobile = useMediaQuery('(max-width: 770px)');
     const article = ref<Article>({});
+    const isArticleSaved = ref<boolean>(false);
     const articleOwnerName = ref<string>('');
     const articleDate = ref<string>('');
     const route = useRoute();
     const articleId = route.query.id;
+    const store = useToastStore();
+    const {showToast} = store;
     const months : Array<string> = [
             "January",
             "February",
@@ -26,6 +31,33 @@
             "December"
         ];
 
+    const handleSave = async () => {
+        try{
+            const response = await fetch('http://localhost:4000/save-article', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({articleId}),
+                credentials: 'include'
+            });
+
+            const result = await response.text();
+            console.log(result);
+            showToast(result);
+
+            if(response.status === 200)
+                isArticleSaved.value = true;
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+    
+    const handleUnsave = async () => {
+
+    }
 
     onBeforeMount(async () => {
         try{
@@ -82,19 +114,49 @@
             articleDate.value = `${day} ${months[month]} ${fullyear}`;
         else
             articleDate.value = `${month + 1}/${day}/${fullyear}`        
+    });
+
+    onMounted(async () => {
+        try{
+            const response = await fetch(`http://localhost:4000/is-article-saved/${articleId}`,
+                {
+                    method: 'GET',
+                    credentials: 'include'
+                }
+            );
+
+            if(response.status === 200){
+                const result = await response.json();
+                isArticleSaved.value = result
+            }
+            else{
+                const result = await response.text();
+                console.log(result);
+                showToast(result);
+            }
+               
+            
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
     })
 
 </script>
 
 <template>
     <article class="article" v-if="article">
+        <button class="save_article_button" @click="handleSave">
+            <img :src="icons['selectedBookmark']"/>
+        </button>
         <section class="article_owner">
             <img :src="`http://localhost:4000/get-image/${article.account_id}`"/>
             {{articleOwnerName}}
         </section>
-        <date class="article_date">
+        <p class="article_date">
             • {{articleDate}}
-        </date>
+        </p>
         <h1 class="article_title">
             {{article.title}}
         </h1>
@@ -125,6 +187,49 @@
         gap: 10px;
     }
 
+    .save_article_button{
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        padding: 0px;
+        grid-column: 2/3;
+        grid-row: 1/2;
+        justify-self: end;
+        align-self: center;
+        border: 2px solid var(--preset-color-blue-1);
+        border-radius: 5px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .save_article_button:after{
+        content: 'Save article';
+        width: 90px;
+        height: fit-content;
+        padding: 8px;
+        background-color: var(--preset-color-grey-2);
+        border-radius: 5px;
+        position: absolute;
+        bottom: 20px;
+        right: 30px;
+        display: none;
+        font-family: var(--preset-text-5-font-family);
+        font-size: var(--preset-text-5-font-size);
+        font-weight: var(--preset-text-5-font-weight);
+        line-height: var(--preset-text-5-line-height);
+        letter-spacing: var(--preset-text-5-letter-spacing);
+        color: var(--preset-color-black-1);
+    }
+
+    .save_article_button:hover:after{
+        display: block;
+    }
+
+    .save_article_button > img{
+        width: 30px;
+        object-fit: contain;
+    }
+
     .article_owner{
         grid-column: 1/2;
         grid-row: 1/2;
@@ -153,6 +258,7 @@
     }
 
     .article_date{
+        margin: 0px;
         grid-column: 2/3;
         grid-row: 1/2;
         color: var(--preset-color-grey-1);

@@ -8,6 +8,8 @@
     const formattedText = ref<string>('');
     const formatOption = ref<string>('');
 
+        
+
     const handleFormat = (option : string) => {
         formatOption.value = option;
     }
@@ -50,7 +52,7 @@
         </button>
     </div>  
     <section class="overlay">
-        {{formattedText}}
+        {{text}}
     </section>
 </template>
 
