@@ -56,7 +56,29 @@
     }
     
     const handleUnsave = async () => {
+        try{
+            const response = await fetch('http://localhost:4000/unsave-article',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({articleId}),
+                    credentials: 'include'
+                }
+            );
 
+            const results = await response.text();
+            console.log(results);
+            showToast(results);
+
+            if(response.status === 200)
+                isArticleSaved.value = false;
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
     }
 
     onBeforeMount(async () => {
@@ -127,6 +149,7 @@
 
             if(response.status === 200){
                 const result = await response.json();
+                console.log(result);
                 isArticleSaved.value = result
             }
             else{
@@ -147,7 +170,10 @@
 
 <template>
     <article class="article" v-if="article">
-        <button class="save_article_button" @click="handleSave">
+        <button class="save_article_button" @click="handleSave" v-if="!isArticleSaved">
+            <img :src="icons['unselectedBookmark']"/>
+        </button>
+        <button class="unsave_article_button" @click="handleUnsave" v-else>
             <img :src="icons['selectedBookmark']"/>
         </button>
         <section class="article_owner">
@@ -187,7 +213,7 @@
         gap: 10px;
     }
 
-    .save_article_button{
+    .save_article_button, .unsave_article_button{
         width: 40px;
         height: 40px;
         background-color: transparent;
@@ -196,15 +222,20 @@
         grid-row: 1/2;
         justify-self: end;
         align-self: center;
-        border: 2px solid var(--preset-color-blue-1);
         border-radius: 5px;
         cursor: pointer;
         position: relative;
     }
 
-    .save_article_button:after{
-        content: 'Save article';
-        width: 90px;
+    .save_article_button{
+        border: 2px solid var(--preset-color-grey-1);
+    }
+
+    .unsave_article_button{
+        border: 2px solid var(--preset-color-blue-1);
+    }
+
+    .save_article_button:after, .unsave_article_button:after{
         height: fit-content;
         padding: 8px;
         background-color: var(--preset-color-grey-2);
@@ -221,11 +252,29 @@
         color: var(--preset-color-black-1);
     }
 
-    .save_article_button:hover:after{
+    .save_article_button:after{
+        width: 90px;
+    }
+
+    .unsave_article_button:after{
+        width: 120px;
+    }
+
+    .save_article_button:after{
+        content: 'Save article';
+    }
+
+    .unsave_article_button:after{
+        content: 'Unsave article';
+    }
+
+    .save_article_button:hover:after, 
+    .unsave_article_button:hover:after{
         display: block;
     }
 
-    .save_article_button > img{
+    .save_article_button > img,
+    .unsave_article_button > img{
         width: 30px;
         object-fit: contain;
     }

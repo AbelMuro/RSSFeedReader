@@ -4,10 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i am working on the handleUnsave handler in DisplayArticle component
-        i need to make a fetch request and a back end route that handles the query
-
-        i also need to fix any issues concerning the handleSave fetch request as well
+        this is where i left off, i finished implementing the save article feature, now i need to work on the Saved component
+        in the side bar
     */
 </script>
 
