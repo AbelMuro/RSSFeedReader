@@ -15,12 +15,11 @@ import Security from './Pages/Profile/Security';
 import SelectCategory from './Pages/Authorization/SelectCategory';
 import Feed from './Pages/Feed';
 import ArticleList from './Pages/Feed/ArticleList';
-import SavedArticles from './Pages/Feed/ArticleList/SavedArticles';
 import Digest from './Pages/Digest';
 import Discover from './Pages/Discover';
 import DisplayArticle from './Pages/Feed/ArticleList/DisplayArticle';
-import AlignArticles from './Pages/Feed/ArticleList/AlignArticles';
-import AllArticles from './Pages/Feed/ArticleList/AllArticles';
+import OrganizeAllArticles from './Pages/Feed/ArticleList/OrganizeAllArticles';
+import OrganizeSavedArticles from './Pages/Feed/ArticleList/OrganizeSavedArticles';
 import CreateArticle from './Pages/CreateArticle';
 
 const router = createRouter({
@@ -62,11 +61,35 @@ const router = createRouter({
                     children: [
                         {
                             path: 'all',
+                            component: OrganizeAllArticles,
+                            children: [
+                                {
+                                    path: ':articleTitle',
+                                    component: DisplayArticle
+                                }                                
+                            ]
+                        },
+                        {
+                            path: 'saved-articles',
+                            component: OrganizeSavedArticles,
+                            children: [
+                                {
+                                    path: ':articleTitle',
+                                    component: DisplayArticle
+                                }      
+                            ]
+                        }
+
+                    ]
+                    /* 
+                    children: [
+                        {
+                            path: 'all',
                             component: AllArticles,
                             children: [
                                 {
                                     path: '',
-                                    component: AlignArticles,
+                                    component: OrganizeAllArticles,
                                 },
                                 {
                                     path: ':articleTitle',
@@ -76,9 +99,21 @@ const router = createRouter({
                         },
                         {
                             path: 'saved-articles',
-                            component: SavedArticles
+                            component: SavedArticles,
+                            children: [
+                                {
+                                    path: '',
+                                    component: OrganizeSavedArticles,
+                                },
+                                {
+                                    path: ':articleTitle',
+                                    component: DisplayArticle
+                                }
+                            ]
                         }
-                    ]
+                    ]                    
+                    */
+
                 }
             ]
         },

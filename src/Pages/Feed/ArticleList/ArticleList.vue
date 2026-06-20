@@ -1,8 +1,75 @@
 <script setup lang="ts">
     import {onBeforeMount} from 'vue';
     import {RouterView, useRouter} from 'vue-router';
+    import {useArticlesStore} from '../../../Store';
+    import { storeToRefs } from 'pinia';
+    import {Article} from '../../../Common/Types';
 
     const router = useRouter();
+    const store = useArticlesStore();
+    const {setSavedArticles, sortArticlesBasedOnDate, setArticles, setUnreadArticles} = store;
+    const {sortNewestFirst} = storeToRefs(store);
+
+    const fetchSavedArticles = async () => {
+         try{
+            const response = await fetch('http://localhost:4000/get-saved-articles', {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if(response.status === 200){
+                let {articles : results} = await response.json();
+                results = results.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                });
+                setSavedArticles(results);
+                if(sortNewestFirst.value)
+                    sortArticlesBasedOnDate();
+            }
+            else{
+                const results = await response.text();
+                console.log(results);
+            } 
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    const fetchAllArticles = async () => {
+         try{
+            const response = await fetch('http://localhost:4000/get-all-articles', {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if(response.status === 200){
+                let {articles : results, unreadArticles} = await response.json();
+                results = results.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                });
+                setArticles(results);
+                setUnreadArticles(unreadArticles);
+                if(sortNewestFirst.value)
+                    sortArticlesBasedOnDate();
+            }
+            else{
+                const results = await response.text();
+                console.log(results);
+            } 
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
 
     const checkOnlineStatus = async () => {
         try{
@@ -14,6 +81,10 @@
 
             if(response.status !== 200)
                 router.push('/');
+            else{
+                fetchSavedArticles();
+                fetchAllArticles();
+            }
         }
         catch(error: any){
             const message = error.message;
@@ -21,11 +92,9 @@
         }
     }
 
-
     onBeforeMount(async() => {
         checkOnlineStatus();        
-    })
-
+    });
 
 </script>
 

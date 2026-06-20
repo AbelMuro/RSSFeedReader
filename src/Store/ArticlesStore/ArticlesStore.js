@@ -5,11 +5,19 @@ const useArticlesStore = defineStore('articles', {
         categories: [],
         unreadArticles: 0,
         sortNewestFirst: false,
-        articles: []
+        articles: [],
+        savedArticles: [],
+        displayArticles: [],
     }),
     actions: {
         setArticles(articles){
             this.articles = articles;
+        },
+        setSavedArticles(articles){
+            this.savedArticles = articles;
+        },
+        setDisplayArticles(articles){
+            this.displayArticles = articles;
         },
         setUnreadArticles(count){
             this.unreadArticles = count;
@@ -17,9 +25,32 @@ const useArticlesStore = defineStore('articles', {
         setNewestFirst(){
             this.sortNewestFirst = !this.sortNewestFirst;
         },
-        setCategories(){
+        setAllCategories(){
             this.categories = [];
             this.articles.forEach((article) => {
+                article.category.forEach((articleCategory) => {
+                    for(let savedCategory in this.categories){
+                        if(savedCategory.category === articleCategory){
+                            for(let accountId in savedCategory.accountIds){
+                                if(accountId.accountId === article.accountId){
+                                    accountId.quantity += 1;
+                                    return;
+                                }
+                            }
+                            savedCategory.accountIds.push({accountId: article.account_id, quantity: 1});
+                            return;
+                        }
+                    }
+                    this.categories.push({
+                        category: articleCategory,
+                        accountIds: [{accountId: article.account_id, quantity: 1}]
+                    });
+                })
+            })
+        },
+        setSavedCategories(){
+            this.categories = [];
+            this.savedArticles.forEach((article) => {
                 article.category.forEach((articleCategory) => {
                     for(let savedCategory in this.categories){
                         if(savedCategory.category === articleCategory){

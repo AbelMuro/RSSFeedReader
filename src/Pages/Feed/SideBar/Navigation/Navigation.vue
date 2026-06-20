@@ -8,7 +8,7 @@
     const router = useRouter();
     const route = useRoute();
     const store = useArticlesStore();
-    const {unreadArticles} = storeToRefs(store);
+    const {unreadArticles, savedArticles} = storeToRefs(store);
 
     const handleRoute = (route: string) => {
         router.push(route);
@@ -23,7 +23,8 @@
 
     watch(() => route.path, (newPath) => {
         option.value = newPath;
-    })
+    }, {immediate: true});
+
 
 </script>
 
@@ -44,7 +45,7 @@
                 Saved
             </div>
             <div>
-                21
+                {{savedArticles.length}}
             </div>
         </button>
     </div>

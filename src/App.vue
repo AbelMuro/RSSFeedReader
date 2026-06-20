@@ -4,8 +4,8 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i finished implementing the save article feature, now i need to work on the Saved component
-        in the side bar
+        this is where i left off, i finished the 'saved' and 'all' components. now i need to fix the DisplayArticle component
+        with vue router.
     */
 </script>
 
