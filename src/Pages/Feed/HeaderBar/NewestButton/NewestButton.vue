@@ -3,7 +3,7 @@
     import icons from './icons';
 
     const store = useArticlesStore();
-    const {setNewestFirst} = store;
+    const {setNewestFirst, sortArticlesBasedOnDate} = store;
 
     const handleClick = () => {
         setNewestFirst();

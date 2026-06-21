@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {RouterView} from 'vue-router';
-    import { onMounted } from 'vue';
+    import { onBeforeMount} from 'vue';
     import AlignJustify from '../AlignJustify';
     import AlignJustifyLessContent from '../AlignJustifyLessContent';
     import Grid from '../Grid';
@@ -11,9 +11,9 @@
     const {savedArticles} = storeToRefs(store);
     const {setSavedCategories} = store;
 
-    onMounted(() => {
+    onBeforeMount(() => {
         setSavedCategories();
-    })
+    });
 
 </script>
 

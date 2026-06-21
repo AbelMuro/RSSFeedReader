@@ -96,7 +96,7 @@ const useArticlesStore = defineStore('articles', {
             this.categories = [];
         },
         sortArticlesBasedOnDate(){
-            this.articles.sort((articleA, articleB) => {
+            const sort = (articleA, articleB) => {
                 const dateA = Number(articleA.date_created);
                 const dateB = Number(articleB.date_created);
                 if(dateA > dateB)
@@ -105,7 +105,10 @@ const useArticlesStore = defineStore('articles', {
                     return 1;
                 else
                     return 0;
-            })
+            }
+
+            this.articles.sort(sort);
+            this.savedArticles.sort(sort);
         },
         sortArticlesAlphabetically(){
             this.articles.sort((articleA, ArticleB) => {

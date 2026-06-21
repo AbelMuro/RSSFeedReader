@@ -28,7 +28,7 @@
             Frontpage
         </li>
         <li>
-            <button class="nav_link" @click="handleLink('/feed/all')" :style="handleSelectedStyle('/feed/all')">
+            <button class="nav_link" @click="handleLink('/feed/all')" :style="handleSelectedStyle('/feed')">
                 Feed
             </button>
         </li>

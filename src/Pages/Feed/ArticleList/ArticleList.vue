@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {onBeforeMount, onMounted, onBeforeUnmount} from 'vue';
+    import {onBeforeUnmount, onMounted, onBeforeMount, watch} from 'vue';
     import {RouterView, useRouter} from 'vue-router';
     import {useArticlesStore} from '../../../Store';
     import { storeToRefs } from 'pinia';
@@ -92,6 +92,11 @@
         }
     }
 
+    watch(sortNewestFirst, (newestFirst) => {
+        if(newestFirst)
+            sortArticlesBasedOnDate();
+    })
+
     onBeforeMount(() => {
         checkOnlineStatus();        
     });
@@ -100,10 +105,9 @@
         document.addEventListener('fetch-saved-articles', fetchSavedArticles);
     });
 
-    onBeforeMount(() => {
+    onBeforeUnmount(() => {
         document.removeEventListener('fetch-saved-articles', fetchSavedArticles);
     });
-
 
 </script>
 

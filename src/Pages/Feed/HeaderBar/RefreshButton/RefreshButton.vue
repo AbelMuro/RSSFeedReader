@@ -5,12 +5,11 @@
     import icons from './icons';
 
     const store = useArticlesStore();
-    const {setArticles, setUnreadArticles, sortArticlesBasedOnDate} = store;
+    const {setArticles, setSavedArticles, setUnreadArticles, sortArticlesBasedOnDate} = store;
     const {sortNewestFirst} = storeToRefs(store);
 
-
-    const handleClick = async () => {
-         try{
+    const fetchAllArticles = async () => {
+        try{
             const response = await fetch('http://localhost:4000/get-all-articles', {
                 method: 'GET',
                 credentials: 'include',
@@ -38,6 +37,41 @@
             const message = error.message;
             console.log(message);
         }
+    }
+
+    const fetchSavedArticles = async () => {
+         try{
+            const response = await fetch('http://localhost:4000/get-saved-articles', {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if(response.status === 200){
+                let {articles : results} = await response.json();
+                results = results.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                });
+                setSavedArticles(results);
+                if(sortNewestFirst.value)
+                    sortArticlesBasedOnDate();
+            }
+            else{
+                const results = await response.text();
+                console.log(results);
+            } 
+        }
+        catch(error : any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    const handleClick = async () => {
+        await fetchAllArticles();
+        await fetchSavedArticles();
     };
 </script>
 
