@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {useLayoutStore} from '../../../../Store';
-    import {useRouter} from 'vue-router';
+    import {useRouter, useRoute} from 'vue-router';
     import { storeToRefs } from 'pinia';
     import FetchUserName from './FetchUserName';
     import FetchUserPhoto from './FetchUserPhoto';
@@ -14,6 +14,7 @@
         date_created: string;
     };
 
+    const route = useRoute();
     const {article} = defineProps<{article: Article}>();
     const layoutStore = useLayoutStore();
     const {layout} = storeToRefs(layoutStore);
@@ -21,7 +22,7 @@
 
     const handleClick = () => {
         router.push({
-            path: `/feed/all/${article.title.replaceAll(' ', '-')}`,
+            path: `${route.path}/${article.title.replaceAll(' ', '-')}`,
             query: {
                 id : article.id
             }

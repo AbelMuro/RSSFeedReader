@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {onBeforeMount} from 'vue';
+    import {onBeforeMount, onMounted, onBeforeUnmount} from 'vue';
     import {RouterView, useRouter} from 'vue-router';
     import {useArticlesStore} from '../../../Store';
     import { storeToRefs } from 'pinia';
@@ -92,9 +92,18 @@
         }
     }
 
-    onBeforeMount(async() => {
+    onBeforeMount(() => {
         checkOnlineStatus();        
     });
+
+    onMounted(() => {
+        document.addEventListener('fetch-saved-articles', fetchSavedArticles);
+    });
+
+    onBeforeMount(() => {
+        document.removeEventListener('fetch-saved-articles', fetchSavedArticles);
+    });
+
 
 </script>
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import {RouterView} from 'vue-router';
     import { onMounted } from 'vue';
     import AlignJustify from '../AlignJustify';
     import AlignJustifyLessContent from '../AlignJustifyLessContent';
@@ -17,9 +18,13 @@
 </script>
 
 <template>
-    <AlignJustify v-model="savedArticles"/>
-    <AlignJustifyLessContent v-model="savedArticles"/>
-    <Grid v-model="savedArticles"/>
+    <RouterView v-slot="{Component}">
+        <component :is="Component"/>
+        <AlignJustify v-model="savedArticles" v-if="!Component"/>
+        <AlignJustifyLessContent v-model="savedArticles" v-if="!Component"/>
+        <Grid v-model="savedArticles" v-if="!Component"/>
+    </RouterView>
+
 </template>
 
 <style scoped>

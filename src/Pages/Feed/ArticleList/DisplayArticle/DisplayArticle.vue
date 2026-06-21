@@ -29,7 +29,7 @@
             "October",
             "November",
             "December"
-        ];
+    ];
 
     const handleSave = async () => {
         try{
@@ -46,8 +46,12 @@
             console.log(result);
             showToast(result);
 
-            if(response.status === 200)
+            if(response.status === 200){
                 isArticleSaved.value = true;
+                const event = new CustomEvent('fetch-saved-articles');
+                document.dispatchEvent(event);
+            }
+                
         }
         catch(error: any){
             const message = error.message;
@@ -72,8 +76,12 @@
             console.log(results);
             showToast(results);
 
-            if(response.status === 200)
+            if(response.status === 200){
                 isArticleSaved.value = false;
+                const event = new CustomEvent('fetch-saved-articles');
+                document.dispatchEvent(event);
+            }
+                
         }
         catch(error: any){
             const message = error.message;
