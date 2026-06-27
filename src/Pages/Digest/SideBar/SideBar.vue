@@ -3,7 +3,7 @@
     import {useRouter, useRoute} from 'vue-router';
     import icons from './icons';
 
-    const currentRoute = ref<string>('popular');
+    const currentRoute = ref<string>('most-viewed');
     const router = useRouter();
     const route = useRoute();
 
@@ -30,15 +30,15 @@
     <section class="sidebar">
         <ul class="links">
             <li>
-                <button class="link" @click="handleLink('popular')" :style="handleStyles('popular')">
-                    <img v-if="currentRoute.includes('popular')" :src="icons['selectedFlame']"/>
-                    <img v-else :src="icons['unselectedFlame']"/>
-                    Most Popular
+                <button class="link" @click="handleLink('most-viewed')" :style="handleStyles('most-viewed')">
+                    <img v-if="currentRoute.includes('most-viewed')" :src="icons['selectedEye']"/>
+                    <img v-else :src="icons['unselectedEye']"/>
+                    Most Viewed
                 </button>
-                <button class="link" @click="handleLink('relevant')" :style="handleStyles('relevant')">
-                    <img v-if="currentRoute.includes('relevant')" :src="icons['selectedUser']" @click="handleLink('relevant')" :style="handleStyles('relevant')"/>
-                    <img v-else :src="icons['unselectedUser']"/>
-                    Most Relevant To You
+                <button class="link" @click="handleLink('most-saved')" :style="handleStyles('most-saved')">
+                    <img v-if="currentRoute.includes('most-saved')" :src="icons['selectedBookmark']" @click="handleLink('relevant')" :style="handleStyles('relevant')"/>
+                    <img v-else :src="icons['unselectedBookmark']"/>
+                    Most Saved
                 </button>
             </li>
         </ul>

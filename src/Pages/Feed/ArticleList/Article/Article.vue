@@ -4,6 +4,7 @@
     import { storeToRefs } from 'pinia';
     import FetchUserName from './FetchUserName';
     import FetchUserPhoto from './FetchUserPhoto';
+    import Categories from '../../../../Common/Categories';
 
     type Article = {
         id: string;
@@ -71,7 +72,7 @@
             {{article.content}}
         </p>
         <div class="categories" v-if="layout !== 'align-justify-less-content'">
-            <div class="category" v-for="(category) in article.category">
+            <div class="category" v-for="(category) in article.category" :style="{color: Categories[category].color, backgroundColor: Categories[category].backgroundColor}">
                 {{category}}
             </div>
         </div>
@@ -159,8 +160,6 @@
     .category{
         padding: 5px;
         border-radius: 10px;
-        color: var(--preset-color-pink-2);
-        background-color: var(--preset-color-pink-1);
         font-family: var(--preset-text-5-font-family);
         font-size: var(--preset-text-5-font-size);
         font-weight: var(--preset-text-5-font-weight);

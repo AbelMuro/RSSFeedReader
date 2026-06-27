@@ -21,8 +21,8 @@ import DisplayArticle from './Pages/Feed/ArticleList/DisplayArticle';
 import OrganizeAllArticles from './Pages/Feed/ArticleList/OrganizeAllArticles';
 import OrganizeSavedArticles from './Pages/Feed/ArticleList/OrganizeSavedArticles';
 import CreateArticle from './Pages/CreateArticle';
-import MostPopular from './Pages/Digest/MostPopular';
-import MostRelevant from './Pages/Digest/MostRelevant';
+import MostSaved from './Pages/Digest/MostSaved';
+import MostViewed from './Pages/Digest/MostViewed';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -122,12 +122,12 @@ const router = createRouter({
         {path: '/create-article', component: CreateArticle},
         {path: '/digest', component: Digest, children: [
             {
-                path: 'popular',
-                component: MostPopular
+                path: 'most-viewed',
+                component: MostViewed
             },
             {
-                path: 'relevant',
-                component: MostRelevant
+                path: 'most-saved',
+                component: MostSaved
             }
         ]},
         {path: '/discover', component: Discover},

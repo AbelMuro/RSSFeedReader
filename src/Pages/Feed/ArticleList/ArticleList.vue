@@ -1,13 +1,14 @@
 <script setup lang="ts">
     import {onBeforeUnmount, onMounted, onBeforeMount, watch} from 'vue';
-    import {RouterView, useRouter} from 'vue-router';
+    import {RouterView, useRouter, useRoute} from 'vue-router';
     import {useArticlesStore} from '../../../Store';
     import { storeToRefs } from 'pinia';
     import {Article} from '../../../Common/Types';
 
     const router = useRouter();
+    const route = useRoute();
     const store = useArticlesStore();
-    const {setSavedArticles, sortArticlesBasedOnDate, setArticles, setUnreadArticles} = store;
+    const {setSavedArticles, sortArticlesBasedOnDate, setArticles, setUnreadArticles, setAllCategories, setSavedCategories} = store;
     const {sortNewestFirst} = storeToRefs(store);
 
     const fetchSavedArticles = async () => {
@@ -80,11 +81,16 @@
             );
 
             if(response.status !== 200)
-                router.push('/');
+                return router.push('/');
             else{
-                fetchSavedArticles();
-                fetchAllArticles();
+                await fetchSavedArticles();
+                await fetchAllArticles();
             }
+            const pathname = route.fullPath;
+            if(pathname.includes('all'))
+                setAllCategories();
+            else
+                setSavedCategories();
         }
         catch(error: any){
             const message = error.message;
@@ -97,7 +103,7 @@
             sortArticlesBasedOnDate();
     })
 
-    onBeforeMount(() => {
+    onMounted(() => {
         checkOnlineStatus();        
     });
 

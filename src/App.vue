@@ -4,11 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to fix some bugs in the Feed component,
-        everytime i refresh the page, the onBeforeMounted lifecycle in <OrganizeAllArticles/> 
-        gets called before the onBeforeMounted lifecycle in <ArticleList> 
-
-        because of this, the categories are not initially displayed
+        this is where i left off, i need to start designing the MostViewed component
 
         
     */

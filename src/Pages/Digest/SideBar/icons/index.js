@@ -1,7 +1,7 @@
-import selectedFlame from './selected-flame.svg';
-import unselectedFlame from './unselected-flame.svg';
+import selectedEye from './selected-eye.svg';
+import unselectedEye from './unselected-eye.svg';
 
-import selectedUser from './selected-user.svg';
-import unselectedUser from './unselected-user.svg';
+import selectedBookmark from './selected-bookmark.svg';
+import unselectedBookmark from './unselected-bookmark.svg';
 
-export default {selectedFlame, unselectedFlame, unselectedUser, selectedUser};
+export default {selectedEye, unselectedEye, unselectedBookmark, selectedBookmark};

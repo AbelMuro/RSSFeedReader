@@ -148,6 +148,28 @@
 
     onMounted(async () => {
         try{
+            const response = await fetch('http://localhost:4000/update-article-views',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({articleId})
+                }
+            );
+
+            const results = await response.text();
+            console.log(results);
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+
+    })
+
+    onMounted(async () => {
+        try{
             const response = await fetch(`http://localhost:4000/is-article-saved/${articleId}`,
                 {
                     method: 'GET',
@@ -185,7 +207,7 @@
             <img :src="icons['selectedBookmark']"/>
         </button>
         <section class="article_owner">
-            <img :src="`http://localhost:4000/get-image/${article.account_id}`"/>
+            <img v-if="article.account_id" :src="`http://localhost:4000/get-image/${article.account_id}`"/>
             {{articleOwnerName}}
         </section>
         <p class="article_date">
