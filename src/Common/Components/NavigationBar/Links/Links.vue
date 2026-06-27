@@ -33,7 +33,7 @@
             </button>
         </li>
         <li>
-            <button class="nav_link" @click="handleLink('/digest')" :style="handleSelectedStyle('/digest')">
+            <button class="nav_link" @click="handleLink('/digest/most-viewed')" :style="handleSelectedStyle('/digest')">
                 Digest
             </button>
         </li>
