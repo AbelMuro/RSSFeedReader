@@ -5,6 +5,7 @@
     import TitleInput from './TitleInput';
     import ContentTextArea from './ContentTextArea';
     import Category from './Category';
+    import UploadCoverImage from './UploadCoverImage';
 
     const open = defineModel();
 
@@ -61,6 +62,7 @@
 <template>
     <form class="form" @submit="handleSubmit">
         <TitleInput/>
+        <UploadCoverImage/>
         <ContentTextArea/>
         <Category :limit="3" v-model="error"/>
         <p class="error_message" v-if="error">
