@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to refactor the onSubmit handler for the Form component in CreateArticle
+        this is where i left off, i need to continue working on the MostViewed and Article components
         
     */
 </script>
