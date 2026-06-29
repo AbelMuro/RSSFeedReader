@@ -1,18 +1,49 @@
 <script setup lang="ts">
+    import {ref, onMounted} from 'vue';
+    import { Article } from '../../../Common/Types';
+
+    const {article} = defineProps<{article: Article}>();
+    const articleOwner = ref<string>('');
+
+    const getOwnerName = async() => {
+        try{
+            const response = await fetch(`http://localhost:4000/get-account-name/${article.account_id}`,
+                {
+                    method: 'GET'
+                }
+            );
+            const result = await response.text();
+
+            if(response.status === 200)
+                articleOwner.value = result;
+            else 
+                console.log(result);
+            
+                
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    }
+
+    onMounted(() => {
+        getOwnerName();
+    })
 
 </script>
 
 <template>
     <article class="article">
-        <div class="article_image"/>
+        <img class="article_image" :src="`http://localhost:4000/get-article-cover-image/${article.id}`"/>
         <h2 class="article_title">
-            Article Name
+            {{article.title}}
         </h2>
         <h3 class="article_owner">
-            by Smash Magazine
+            by {{articleOwner}}
         </h3>
         <h2 class="article_content">
-            Just a quick example.
+            {{article.content}}
         </h2>
         <p class="article_posted">
             Posted 2h ago
@@ -43,9 +74,8 @@
 
     .article_image{
         width: 200px;
-        height: 150px;
+        object-fit: contain;
         border-radius: 10px;
-        background-color: aqua;
         grid-column: 1/2;
         grid-row: 1/5;
     }

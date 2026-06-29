@@ -4,13 +4,19 @@
     import Categories from '../../../../../Common/Categories';
     import User from './User';
 
-    type AccountId = Array<{accountId: string, quantity: number}>
-    const {category, accountIds} = defineProps<{category: string, accountIds: AccountId}>();
+    type AccountIds= Array<{accountId: string, quantity: number}>
+    const {category, accountIds} = defineProps<{category: string, accountIds: AccountIds}>();
     const open = ref<boolean>(false);
     const ULvariant = {hidden: {}, show: {}};
 
     const handleOpen = () => {
         open.value = !open.value;
+    }
+
+    const countTotalCategories = (accountIds : AccountIds) => {
+        return accountIds.reduce((acc, accountId) => {
+            return acc + accountId.quantity;
+        }, 0)
     }
 
 </script>
@@ -24,7 +30,7 @@
             </motion.div>
             {{category}}
             <motion.p layout class="category_total">
-               {{accountIds.length}}
+               {{countTotalCategories(accountIds)}}
             </motion.p>
         </motion.button>
             <motion.ul

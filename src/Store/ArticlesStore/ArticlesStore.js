@@ -29,10 +29,10 @@ const useArticlesStore = defineStore('articles', {
             this.categories = [];
             this.articles.forEach((article) => {
                 article.category.forEach((articleCategory) => {
-                    for(let savedCategory in this.categories){
+                    for(let savedCategory of this.categories){
                         if(savedCategory.category === articleCategory){
-                            for(let accountId in savedCategory.accountIds){
-                                if(accountId.accountId === article.accountId){
+                            for(let accountId of savedCategory.accountIds){
+                                if(accountId.accountId === article.account_id){
                                     accountId.quantity += 1;
                                     return;
                                 }
@@ -52,10 +52,10 @@ const useArticlesStore = defineStore('articles', {
             this.categories = [];
             this.savedArticles.forEach((article) => {
                 article.category.forEach((articleCategory) => {
-                    for(let savedCategory in this.categories){
+                    for(let savedCategory of this.categories){
                         if(savedCategory.category === articleCategory){
-                            for(let accountId in savedCategory.accountIds){
-                                if(accountId.accountId === article.accountId){
+                            for(let accountId of savedCategory.accountIds){
+                                if(accountId.accountId === article.account_id){
                                     accountId.quantity += 1;
                                     return;
                                 }

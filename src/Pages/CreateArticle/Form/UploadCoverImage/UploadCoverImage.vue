@@ -1,13 +1,11 @@
 <script setup lang="ts">
-    import {ref, watch} from 'vue';
+    import {ref} from 'vue';
 
     const imageURL = ref<string>('');
-    const imageBlob = ref<Blob>();
 
     const handleFile = (e : ChangeEvent<HTMLInputElement>) => {
         const uploadedFile = e.target.files[0];
         imageURL.value = URL.createObjectURL(uploadedFile);
-        imageBlob.value = uploadedFile;
     }
 
 </script>
@@ -18,10 +16,9 @@
             Upload Cover Image
         </label>
         <label class="upload" for="upload">
-            <input type="file" id="upload" class="input" @change="handleFile"/>
+            <input type="file" id="upload" class="input" name="coverImage" @change="handleFile"/>
             Upload Image
         </label>
-        <input type="hidden" name="coverImage" :value="imageBlob"/>
         <img class="uploaded_image" :src="imageURL" v-if="imageURL"/>
     </fieldset>
 </template>

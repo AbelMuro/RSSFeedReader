@@ -18,13 +18,20 @@
         try{
             e.preventDefault();
             loading.value = true;
-            const form = e.target as HTMLFormElement;
-            const titleElement = form.elements.namedItem('title') as HTMLInputElement;
-            const contentElement = form.elements.namedItem('content') as HTMLTextAreaElement;
-            const categoryElement = form.elements.namedItem('categories') as HTMLInputElement;
+            const formElement = e.target as HTMLFormElement;
+            const titleElement = formElement.elements.namedItem('title') as HTMLInputElement;
+            const contentElement = formElement.elements.namedItem('content') as HTMLTextAreaElement;
+            const categoryElement = formElement.elements.namedItem('categories') as HTMLInputElement;
+            const coverImage = formElement.elements.namedItem('coverImage') as HTMLInputElement;
             const title = titleElement.value;
             const content = contentElement.value;
             const category = categoryElement.value;
+            const coverImageFile = coverImage?.files?.[0] || '';
+            const form = new FormData();
+            form.append('title', title);
+            form.append('content', content);
+            form.append('category', category);
+            form.append('file', coverImageFile);
 
             if(!category.length){
                 error.value = "Can't be empty.";
@@ -33,12 +40,7 @@
  
             const response = await fetch('http://localhost:4000/add-article', {
                 method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify({
-                    title, content, category
-                }),
+                body: form,
                 credentials: 'include'
             });
 
