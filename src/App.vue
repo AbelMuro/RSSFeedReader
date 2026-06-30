@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to continue working on the MostViewed and Article components
+        this is where i left off, i need to implement the SearchBar feature in the app
         
     */
 </script>

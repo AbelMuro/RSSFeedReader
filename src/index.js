@@ -17,7 +17,7 @@ import Feed from './Pages/Feed';
 import ArticleList from './Pages/Feed/ArticleList';
 import Digest from './Pages/Digest';
 import Discover from './Pages/Discover';
-import DisplayArticle from './Pages/Feed/ArticleList/DisplayArticle';
+import DisplayArticle from './Common/DisplayArticle';
 import OrganizeAllArticles from './Pages/Feed/ArticleList/OrganizeAllArticles';
 import OrganizeSavedArticles from './Pages/Feed/ArticleList/OrganizeSavedArticles';
 import CreateArticle from './Pages/CreateArticle';
@@ -83,39 +83,6 @@ const router = createRouter({
                         }
 
                     ]
-                    /* 
-                    children: [
-                        {
-                            path: 'all',
-                            component: AllArticles,
-                            children: [
-                                {
-                                    path: '',
-                                    component: OrganizeAllArticles,
-                                },
-                                {
-                                    path: ':articleTitle',
-                                    component: DisplayArticle
-                                }
-                            ]
-                        },
-                        {
-                            path: 'saved-articles',
-                            component: SavedArticles,
-                            children: [
-                                {
-                                    path: '',
-                                    component: OrganizeSavedArticles,
-                                },
-                                {
-                                    path: ':articleTitle',
-                                    component: DisplayArticle
-                                }
-                            ]
-                        }
-                    ]                    
-                    */
-
                 }
             ]
         },
@@ -123,11 +90,23 @@ const router = createRouter({
         {path: '/digest', component: Digest, children: [
             {
                 path: 'most-viewed',
-                component: MostViewed
+                component: MostViewed,
+                children: [
+                    {
+                        path: ':articleTitle',
+                        component: DisplayArticle
+                    }
+                ]
             },
             {
                 path: 'most-saved',
-                component: MostSaved
+                component: MostSaved,
+                children: [
+                    {
+                        path: ':articleTitle',
+                        component: DisplayArticle
+                    }
+                ]
             }
         ]},
         {path: '/discover', component: Discover},

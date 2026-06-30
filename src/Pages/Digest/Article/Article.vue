@@ -1,9 +1,16 @@
 <script setup lang="ts">
     import {ref, onMounted} from 'vue';
+    import {useRouter, useRoute} from 'vue-router';
     import { Article } from '../../../Common/Types';
 
     const {article} = defineProps<{article: Article}>();
     const articleOwner = ref<string>('');
+    const route = useRoute();
+    const router = useRouter();
+
+    const formatContent = (content: string) => {
+        return content.slice(0, 50);
+    }
 
     const getOwnerName = async() => {
         try{
@@ -27,6 +34,15 @@
         }
     }
 
+    const handleClick = () => {
+        router.push({
+            path: `${route.path}/${article.title}`,
+            query: {
+                id: article.id
+            }
+        });
+    }
+
     onMounted(() => {
         getOwnerName();
     })
@@ -34,7 +50,7 @@
 </script>
 
 <template>
-    <article class="article">
+    <article class="article" @click="handleClick">
         <img class="article_image" :src="`http://localhost:4000/get-article-cover-image/${article.id}`"/>
         <h2 class="article_title">
             {{article.title}}
@@ -43,7 +59,7 @@
             by {{articleOwner}}
         </h3>
         <h2 class="article_content">
-            {{article.content}}
+            {{formatContent(article.content)}}
         </h2>
         <p class="article_posted">
             Posted 2h ago
@@ -55,13 +71,13 @@
 
     .article{
         width: 100%;
+        height: 220px;
         padding: 10px;
         border-radius: 10px;
         display: grid;
         grid-template-columns: auto 1fr;
         flex-shrink: 0;
-        align-content: flex-start;
-        align-items: flex-start;
+        align-content: start;
         column-gap: 15px;
         overflow: hidden;
         row-gap: 10px;
@@ -81,7 +97,7 @@
     }
 
     .article_title{
-        margin: 10px 0px 0px 0px;
+        margin: 0px;
         color: var(--preset-color-black-1);
         font-size: var(--preset-text-4-font-size);
         font-family: var(--preset-text-4-font-family);
@@ -104,7 +120,6 @@
         grid-row: 2/3;
     }
 
-
     .article_content{
         margin: 0px;
         color: var(--preset-color-black-1);
@@ -116,8 +131,6 @@
         grid-column: 2/3;
         grid-row: 3/4;  
     }
-
-
 
     .article_posted{
         margin: 0px;

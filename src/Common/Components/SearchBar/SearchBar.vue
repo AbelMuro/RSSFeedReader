@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {ref} from 'vue';
+    import {ref, watch} from 'vue';
     import icons from './icons';
 
     const query = ref<string>('');
@@ -7,6 +7,10 @@
     const handleClear = () => {
         query.value = '';
     }
+
+    watch(query, (newQuery) => {
+        console.log(newQuery);
+    })
 </script>
 
 <template>

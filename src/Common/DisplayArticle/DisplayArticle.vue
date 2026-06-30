@@ -1,11 +1,11 @@
 <script setup lang="ts">
     import {onBeforeMount, ref, watch, watchEffect, onMounted} from 'vue';
     import {useRoute} from 'vue-router';
-    import {Article} from '../../../Types/Article';
-    import {useToastStore} from '../../../../Store';
-    import Categories from '../../../../Common/Categories';
-    import {useMediaQuery} from '../../../../Common/Hooks';
-    import icons from '../../SideBar/Navigation/icons';
+    import {Article} from './Types/Article';
+    import {useToastStore} from '../../Store';
+    import Categories from '../Categories';
+    import {useMediaQuery} from '../Hooks';
+    import icons from './icons';
 
     const mobile = useMediaQuery('(max-width: 770px)');
     const article = ref<Article>({});

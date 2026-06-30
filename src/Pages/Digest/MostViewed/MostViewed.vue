@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import {ref, onMounted} from 'vue';
+    import {RouterView} from 'vue-router';
     import DisplayArticle from '../Article';
     import { Article } from '../../../Common/Types';
 
@@ -30,7 +31,11 @@
 
 <template>
     <section class="container">
-        <DisplayArticle v-for="(article) of articles" :article="article"/>
+        <RouterView v-slot="{Component}">
+            <component :is="Component"/>
+            <DisplayArticle v-for="(article) of articles" :article="article" v-if="!Component"/>
+        </RouterView>
+       
     </section>
 </template>
 
