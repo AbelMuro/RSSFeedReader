@@ -1,16 +1,52 @@
 <script setup lang="ts">
     import {ref, watch} from 'vue';
+    import {useArticlesStore} from '../../../Store';
+    import {Article} from '../../Types';
+    import {useRouter} from 'vue-router';
     import icons from './icons';
 
     const query = ref<string>('');
+    let timeout : ReturnType<typeof setTimeout> | undefined;
+    const store = useArticlesStore();
+    const {setSearchedArticles} = store;
+    const router = useRouter();
 
     const handleClear = () => {
         query.value = '';
     }
 
     watch(query, (newQuery) => {
-        console.log(newQuery);
-    })
+        if(timeout)
+            clearTimeout(timeout);
+
+        timeout = setTimeout(async() => {
+            try{
+                const response = await fetch(`http://localhost:4000/get-searched-articles/${newQuery}`, {
+                    method: 'GET'
+                });
+
+                if(response.status === 200){
+                    let results = await response.json();
+                    results = results.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                });
+                    setSearchedArticles(results);
+                    router.push('/search');
+                }
+                else{
+                    const results = await response.text();
+                    console.log(results);
+                }
+            }
+            catch(error: any){
+                const message = error.message;
+                console.log(message);
+            }
+        }, 1000);
+    }, {flush: 'post'})
 </script>
 
 <template>

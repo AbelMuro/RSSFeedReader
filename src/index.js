@@ -17,12 +17,13 @@ import Feed from './Pages/Feed';
 import ArticleList from './Pages/Feed/ArticleList';
 import Digest from './Pages/Digest';
 import Discover from './Pages/Discover';
-import DisplayArticle from './Common/DisplayArticle';
+import DisplayArticle from './Common/Components/DisplayArticle';
 import OrganizeAllArticles from './Pages/Feed/ArticleList/OrganizeAllArticles';
 import OrganizeSavedArticles from './Pages/Feed/ArticleList/OrganizeSavedArticles';
 import CreateArticle from './Pages/CreateArticle';
 import MostSaved from './Pages/Digest/MostSaved';
 import MostViewed from './Pages/Digest/MostViewed';
+import Search from './Pages/Search';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -110,7 +111,8 @@ const router = createRouter({
             }
         ]},
         {path: '/discover', component: Discover},
-        {path: '/select-category', component: SelectCategory}
+        {path: '/select-category', component: SelectCategory},
+        {path: '/search', component: Search}
     ]
 });
 

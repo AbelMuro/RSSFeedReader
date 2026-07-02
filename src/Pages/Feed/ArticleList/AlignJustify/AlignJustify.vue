@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { storeToRefs } from 'pinia';
     import {useLayoutStore} from '../../../../Store';
-    import Article from '../Article'
+    import Article from '../../../../Common/Components/Article';
 
     const articles = defineModel<Array<Article>>();
     const store = useLayoutStore();

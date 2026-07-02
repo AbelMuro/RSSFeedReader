@@ -8,6 +8,7 @@ const useArticlesStore = defineStore('articles', {
         articles: [],
         savedArticles: [],
         displayArticles: [],
+        searchedArticles: [],
     }),
     actions: {
         setArticles(articles){
@@ -15,6 +16,9 @@ const useArticlesStore = defineStore('articles', {
         },
         setSavedArticles(articles){
             this.savedArticles = articles;
+        },
+        setSearchedArticles(articles){
+            this.searchedArticles = articles;
         },
         setDisplayArticles(articles){
             this.displayArticles = articles;

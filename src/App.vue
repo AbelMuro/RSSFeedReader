@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to implement the SearchBar feature in the app
+        this is where i left off, i need to finish implementing the Search Component, and its Route
         
     */
 </script>

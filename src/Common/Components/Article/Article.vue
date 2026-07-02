@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import {useLayoutStore} from '../../../../Store';
+    import {useLayoutStore} from '../../../Store';
     import {useRouter, useRoute} from 'vue-router';
     import { storeToRefs } from 'pinia';
     import FetchUserName from './FetchUserName';
     import FetchUserPhoto from './FetchUserPhoto';
-    import Categories from '../../../../Common/Categories';
+    import Categories from '../../Categories';
+
 
     type Article = {
         id: string;
@@ -17,6 +18,7 @@
 
     const route = useRoute();
     const {article} = defineProps<{article: Article}>();
+    console.log(Categories[article.category[0]], article.category)
     const layoutStore = useLayoutStore();
     const {layout} = storeToRefs(layoutStore);
     const router = useRouter();

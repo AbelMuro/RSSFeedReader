@@ -2,7 +2,7 @@
     import { storeToRefs } from 'pinia';
     import {useLayoutStore} from '../../../../Store';
     import type {Article as ArticleType} from '../../../Common/Types';
-    import Article from '../Article';
+    import Article from '../../../../Common/Components/Article';
 
     const articles = defineModel<Array<ArticleType>>();
     const store = useLayoutStore();

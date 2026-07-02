@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import {ref, onMounted} from 'vue';
     import {RouterView} from 'vue-router';
-    import DisplayArticle from '../Article';
+    import DisplayArticle from '../../../Common/Components/Article';
     import { Article } from '../../../Common/Types';
 
     const articles = ref<Array<Article>>([]);
@@ -13,8 +13,13 @@
             });
 
             if(response.status === 200){
-                const result = await response.json();
-                console.log(result);
+                let result = await response.json();
+                result = result.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                }); 
                 articles.value = result;
             }
             else{
