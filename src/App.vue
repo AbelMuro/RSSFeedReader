@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to finish implementing the Search Component, and its Route
+        this is where i left off, i need to finish implementing the Latest component and its Route
         
     */
 </script>

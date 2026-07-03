@@ -24,6 +24,7 @@ import CreateArticle from './Pages/CreateArticle';
 import MostSaved from './Pages/Digest/MostSaved';
 import MostViewed from './Pages/Digest/MostViewed';
 import Search from './Pages/Search';
+import Latest from './Pages/Digest/Latest';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -108,11 +109,20 @@ const router = createRouter({
                         component: DisplayArticle
                     }
                 ]
+            },
+            {
+                path: 'latest',
+                component: Latest
             }
         ]},
         {path: '/discover', component: Discover},
         {path: '/select-category', component: SelectCategory},
-        {path: '/search', component: Search}
+        {path: '/search', component: Search, children: [
+            {
+                path: ':articleTitle',
+                component: DisplayArticle
+            }
+        ]},
     ]
 });
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {ref, watch} from 'vue';
+    import {ref, watch, onMounted, onBeforeUnmount} from 'vue';
     import {useArticlesStore} from '../../../Store';
     import {Article} from '../../Types';
     import {useRouter} from 'vue-router';
@@ -11,15 +11,7 @@
     const {setSearchedArticles} = store;
     const router = useRouter();
 
-    const handleClear = () => {
-        query.value = '';
-    }
-
-    watch(query, (newQuery) => {
-        if(timeout)
-            clearTimeout(timeout);
-
-        timeout = setTimeout(async() => {
+    const fetchSearchedArticles = async (newQuery: string) => {
             try{
                 const response = await fetch(`http://localhost:4000/get-searched-articles/${newQuery}`, {
                     method: 'GET'
@@ -45,8 +37,37 @@
                 const message = error.message;
                 console.log(message);
             }
-        }, 1000);
-    }, {flush: 'post'})
+    }
+
+    const handleEnter = async (e: KeyboardEvent) => {
+        const key = e.key;
+
+        if(key !== 'Enter') return;
+        await fetchSearchedArticles(query.value);
+    }
+
+    const handleClear = () => {
+        query.value = '';
+    }
+
+    watch(query, (newQuery) => {
+        if(timeout)
+            clearTimeout(timeout);
+
+        timeout = setTimeout(async () => {
+            await fetchSearchedArticles(newQuery);
+        }, 300);
+    }, {flush: 'post'});
+
+    watch(query, () => {
+       document.removeEventListener('keydown', handleEnter);
+       document.addEventListener('keydown', handleEnter);
+    }, {immediate: true});
+
+
+    onBeforeUnmount(() => {
+        document.removeEventListener('keydown', handleEnter);
+    })
 </script>
 
 <template>

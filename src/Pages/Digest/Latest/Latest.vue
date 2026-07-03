@@ -1,0 +1,54 @@
+<script setup lang="ts">
+    import {ref, onMounted} from 'vue';
+    import { Article as ArticleType } from '../../../Common/Types';
+    import Article from '../../../Common/Components/Article';
+
+    const articles = ref<Array<ArticleType>>([]);
+
+    onMounted(async () => {
+        try{
+            const response = await fetch('http://localhost:4000/get-latest-articles', 
+                {
+                    method: 'GET',
+                }
+            );
+
+            if(response.status === 200){
+                let result = await response.json();
+                result = result.map((article: Article) => {
+                    return {
+                        ...article,
+                        category: article.category.split(','),
+                    }
+                });
+                articles.value = result;
+            }
+            else{
+                const result = await response.text();
+                console.log(result);
+            }
+        }
+        catch(error: any){
+            const message = error.message;
+            console.log(message);
+        }
+    });
+</script>
+
+<template>
+    <section class="latest">
+        <Article v-for="(article) in articles" :article="article"/>
+    </section>
+</template>
+
+<style scoped>
+    .latest{
+        width: 100%;
+        height: calc(100vh - 70px);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+</style>
+

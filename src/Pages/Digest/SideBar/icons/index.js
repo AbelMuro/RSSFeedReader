@@ -4,4 +4,7 @@ import unselectedEye from './unselected-eye.svg';
 import selectedBookmark from './selected-bookmark.svg';
 import unselectedBookmark from './unselected-bookmark.svg';
 
-export default {selectedEye, unselectedEye, unselectedBookmark, selectedBookmark};
+import selectedClock from './selected-clock.svg';
+import unselectedClock from './unselected-clock.svg';
+
+export default {selectedEye, unselectedEye, unselectedBookmark, selectedBookmark, selectedClock, unselectedClock};

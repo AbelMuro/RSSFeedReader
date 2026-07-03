@@ -30,6 +30,11 @@
     <section class="sidebar">
         <ul class="links">
             <li>
+                <button class="link" @click="handleLink('latest')" :style="handleStyles('latest')">
+                    <img v-if="currentRoute.includes('latest')" :src="icons['selectedClock']"/>
+                    <img v-else :src="icons['unselectedClock']"/>
+                    Latest
+                </button>
                 <button class="link" @click="handleLink('most-viewed')" :style="handleStyles('most-viewed')">
                     <img v-if="currentRoute.includes('most-viewed')" :src="icons['selectedEye']"/>
                     <img v-else :src="icons['unselectedEye']"/>
@@ -40,6 +45,7 @@
                     <img v-else :src="icons['unselectedBookmark']"/>
                     Most Saved
                 </button>
+
             </li>
         </ul>
     </section>
