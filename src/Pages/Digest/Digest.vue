@@ -27,5 +27,11 @@
         line-height: var(--preset-text-3-line-height);
         letter-spacing: var(--preset-text-3-letter-spacing);
     }
+
+    @media(max-width: 915px){
+        .container{
+            grid-template-rows: 1fr auto;
+        }        
+    }
 </style>
 

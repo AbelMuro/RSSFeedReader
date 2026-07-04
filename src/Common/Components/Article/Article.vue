@@ -6,7 +6,6 @@
     import FetchUserPhoto from './FetchUserPhoto';
     import Categories from '../../Categories';
 
-
     type Article = {
         id: string;
         account_id: string;
@@ -18,7 +17,6 @@
 
     const route = useRoute();
     const {article} = defineProps<{article: Article}>();
-    console.log(Categories[article.category[0]], article.category)
     const layoutStore = useLayoutStore();
     const {layout} = storeToRefs(layoutStore);
     const router = useRouter();

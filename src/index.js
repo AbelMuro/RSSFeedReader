@@ -112,7 +112,13 @@ const router = createRouter({
             },
             {
                 path: 'latest',
-                component: Latest
+                component: Latest,
+                children: [
+                    {
+                        path: ':articleTitle',
+                        component: DisplayArticle,
+                    }
+                ]
             }
         ]},
         {path: '/discover', component: Discover},

@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import {ref, onMounted} from 'vue';
+    import {RouterView} from 'vue-router';
     import { Article as ArticleType } from '../../../Common/Types';
     import Article from '../../../Common/Components/Article';
 
@@ -36,19 +37,29 @@
 </script>
 
 <template>
-    <section class="latest">
-        <Article v-for="(article) in articles" :article="article"/>
-    </section>
+    <RouterView v-slot="{Component}">
+        <component :is="Component"/>
+        <section class="latest" v-if="!Component">
+            <Article v-for="(article) in articles" :article="article"/>
+        </section>
+    </RouterView>
 </template>
 
 <style scoped>
     .latest{
         width: 100%;
         height: calc(100vh - 70px);
-        padding: 25px;
+        padding: 25px 0px 0px 0px;
         display: flex;
         flex-direction: column;
         gap: 15px;
+    }
+
+
+    @media(max-width: 770px){
+        .container{
+            padding: 15px 0px 0px 0px;
+        }
     }
 </style>
 

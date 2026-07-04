@@ -40,7 +40,6 @@
             <component :is="Component"/>
             <DisplayArticle v-for="(article) of articles" :article="article" v-if="!Component"/>
         </RouterView>
-       
     </section>
 </template>
 
@@ -48,10 +47,16 @@
     .container{
         width: 100%;
         height: calc(100vh - 70px);
-        padding: 25px;
+        padding: 25px 0px 0px 0px;
         display: flex;
         flex-direction: column;
         gap: 15px;
         overflow: auto;
+    }
+
+    @media(max-width: 770px){
+        .container{
+            padding: 15px 0px 0px 0px;
+        }
     }
 </style>

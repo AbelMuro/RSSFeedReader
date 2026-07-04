@@ -43,7 +43,6 @@
             });
 
             const result = await response.text();
-            console.log(result);
             showToast(result);
 
             if(response.status === 200){
@@ -73,7 +72,6 @@
             );
 
             const results = await response.text();
-            console.log(results);
             showToast(results);
 
             if(response.status === 200){
@@ -138,12 +136,13 @@
         const date = new Date(Number(article.value.date_created));
         const day = date.getDate();
         const month = date.getMonth();
-        const fullyear = date.getFullYear();     
+        const fullyear = date.getFullYear();   
+        const year = `${fullyear}`.slice(2, 5);  
 
         if(!mobile.value)
             articleDate.value = `${day} ${months[month]} ${fullyear}`;
         else
-            articleDate.value = `${month + 1}/${day}/${fullyear}`        
+            articleDate.value = `${month + 1}/${day}/${year}`        
     });
 
     onMounted(async () => {
@@ -179,12 +178,10 @@
 
             if(response.status === 200){
                 const result = await response.json();
-                console.log(result);
                 isArticleSaved.value = result
             }
             else{
                 const result = await response.text();
-                console.log(result);
                 showToast(result);
             }
                
@@ -404,5 +401,25 @@
         .article_content{
             font-size: 1.2rem;
         }
+    }
+
+    @media(max-width: 500px){
+         .save_article_button, .unsave_article_button{
+            grid-row: 2/3;
+            grid-column: 1/2;
+            justify-self: start;
+         }
+
+         .article_title{
+            grid-row: 3/4;
+         }
+
+         .article_categories{
+            grid-row: 4/5;
+         }
+
+         .article_content{
+            grid-row: 5/6;
+         }
     }
 </style>

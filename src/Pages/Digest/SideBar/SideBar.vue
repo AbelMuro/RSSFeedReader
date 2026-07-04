@@ -1,54 +1,17 @@
 <script setup lang="ts">
-    import {ref, watch} from 'vue';
-    import {useRouter, useRoute} from 'vue-router';
-    import icons from './icons';
+    import {useMediaQuery} from '../../../Common/Hooks';
+    import MobileSideBar from './MobileSideBar';
+    import Links from './Links';
 
-    const currentRoute = ref<string>('most-viewed');
-    const router = useRouter();
-    const route = useRoute();
-
-    const handleLink = (route : string) => {  
-        router.push({
-            path: `/digest/${route}`,
-        })
-    };
-
-    const handleStyles = (route : string) => {
-        if(currentRoute.value?.includes(route))
-            return {backgroundColor: '#d8eafd80', color: '#001dc4'};
-        else
-            return {}
-    }
-
-    watch(() => route.path, (newRoute) => {
-        currentRoute.value = newRoute;
-    }, {immediate: true})
+    const mobile = useMediaQuery('(max-width: 915px)');
 
 </script>
 
 <template>
-    <section class="sidebar">
-        <ul class="links">
-            <li>
-                <button class="link" @click="handleLink('latest')" :style="handleStyles('latest')">
-                    <img v-if="currentRoute.includes('latest')" :src="icons['selectedClock']"/>
-                    <img v-else :src="icons['unselectedClock']"/>
-                    Latest
-                </button>
-                <button class="link" @click="handleLink('most-viewed')" :style="handleStyles('most-viewed')">
-                    <img v-if="currentRoute.includes('most-viewed')" :src="icons['selectedEye']"/>
-                    <img v-else :src="icons['unselectedEye']"/>
-                    Most Viewed
-                </button>
-                <button class="link" @click="handleLink('most-saved')" :style="handleStyles('most-saved')">
-                    <img v-if="currentRoute.includes('most-saved')" :src="icons['selectedBookmark']" @click="handleLink('relevant')" :style="handleStyles('relevant')"/>
-                    <img v-else :src="icons['unselectedBookmark']"/>
-                    Most Saved
-                </button>
-
-            </li>
-        </ul>
+    <section class="sidebar" v-if="!mobile">
+        <Links/>
     </section>
+    <MobileSideBar v-else/>
 </template>
 
 <style scoped>
