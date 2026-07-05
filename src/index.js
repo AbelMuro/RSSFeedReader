@@ -25,6 +25,8 @@ import MostSaved from './Pages/Digest/MostSaved';
 import MostViewed from './Pages/Digest/MostViewed';
 import Search from './Pages/Search';
 import Latest from './Pages/Digest/Latest';
+import ArticleCategory from './Pages/Discover/ArticleCategory';
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -121,7 +123,18 @@ const router = createRouter({
                 ]
             }
         ]},
-        {path: '/discover', component: Discover},
+        {path: '/discover', component: Discover, children: [
+            {
+                path: ':category',
+                component: ArticleCategory,
+                children: [
+                    {
+                        path: ':articleTitle',
+                        component: DisplayArticle,
+                    }
+                ]
+            }
+        ]},
         {path: '/select-category', component: SelectCategory},
         {path: '/search', component: Search, children: [
             {

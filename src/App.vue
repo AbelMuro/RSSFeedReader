@@ -4,7 +4,7 @@
     import Toast from './Common/Prompts/Toast';
 
     /*
-        this is where i left off, i need to start implementing the Discover page
+        this is where i left off, i need to fix the visual bug concerning the MobileSideBar component
         
     */
 </script>

@@ -60,7 +60,7 @@
                         </button>
                     </li>
                     <li>
-                        <button class="link" @click="handleRouter('/discover')">
+                        <button class="link" @click="handleRouter('/discover/Technology')">
                             Discover
                         </button>
                     </li>
