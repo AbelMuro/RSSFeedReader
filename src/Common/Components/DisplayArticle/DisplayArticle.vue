@@ -233,11 +233,12 @@
 <style scoped>
     .article{
         width: 100%;
-        height: calc(100vh - 80px - 70px);
+        height: calc(100vh - 70px);
         padding: 25px;
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 10px;
+        overflow: auto;
     }
 
     .save_article_button, .unsave_article_button{

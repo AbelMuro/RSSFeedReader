@@ -70,19 +70,4 @@
         width: 30px;
         object-fit: contain;
     }
-
-    @media(max-width: 915px){
-        .mobile_sidebar{
-            grid-row: 1/2;
-            height: calc(100vh - 70px - 80px);
-        }
-    }
-
-    @media(max-width: 625px){
-        .mobile_sidebar{
-            height: initial;
-            max-height: calc(100vh - 70px - 40px);
-            min-height: calc(100vh - 70px - 420px);
-        }
-    }
 </style>
